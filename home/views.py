@@ -9,6 +9,3 @@ class HomePageView(TemplateView):
 
 def ceramic_app(request):
     return render(request, "ceramic-app/index.html")
-
-def memoryapp(request):
-    pass
