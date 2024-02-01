@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-mo(&zi(59@72&aar-$-o&q7w%%!_om=ai(x3_daykmeqeu3jtt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ceramic.krissna.com"]
+ALLOWED_HOSTS = ["ceramic.krissna.com", "localhost"]
 
 
 # Application definition

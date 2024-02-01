@@ -1,0 +1,5 @@
+.ceramic-app-form-title-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
