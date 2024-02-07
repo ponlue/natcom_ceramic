@@ -11,10 +11,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
 		<!-- Title -->
-        <title>Mediplus - Free Medical and Doctor Directory HTML Template.</title>
+        <title>KCC Cambodia</title>
 		
 		<!-- Favicon -->
-        <link rel="icon" href="{% static 'img/favicon.png' %}">
+        {% comment %} <link rel="icon" href="{% static 'img/favicon.png' %}"> {% endcomment %}
 		
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
@@ -47,19 +47,19 @@
     <body>
 	
 		<!-- Preloader -->
-        <div class="preloader">
+ 		<div class="preloader">
             <div class="loader">
                 <div class="loader-outter"></div>
                 <div class="loader-inner"></div>
 
                 <div class="indicator"> 
-                    <svg width="16px" height="12px">
+                    {% comment %} <svg width="16px" height="12px">
                         <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
                         <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
-                    </svg>
+                    </svg> {% endcomment %}
                 </div>
             </div>
-        </div>
+        </div>       
         <!-- End Preloader -->
 		
 		<!-- Get Pro Button -->
@@ -114,7 +114,7 @@
 							<div class="col-lg-2 col-md-2 col-12">
 								<!-- Start Logo -->
 								<div class="logo">
-									<a href="index.html"><img src="{% static 'img/logo.png' %}" width="100" alt="#"></a>
+									<a href=""><img src="{% static 'img/logo.png' %}" width="100" alt="#"></a>
 								</div>
 								<!-- End Logo -->
 								<!-- Mobile Nav -->
@@ -141,7 +141,7 @@
 											<li>
 												<a href="#">Traditional Ceramic </a>
 												<ul class="dropdown">
-													<li><a href="">Kampot</a></li>
+													<li><a href="kampot">Kampot</a></li>
 													<li><a href="">Kampong Chhnang</a></li>
 													<li><a href="">Kampong Spue</a></li>
 													<li><a href="">Prey Veng</a></li>
@@ -157,8 +157,9 @@
 												</ul>
 											</li>
 											
-											<li><a href="contact.html">Contact</a></li>
-											<li><a href="contact.html">Login</a></li>
+											<li><a href="#">Contact</a></li>
+											<li><a href="ceramic-app">Form</a></li>
+											<li><a href="#">Login</a></li>
 										</ul>
 									</nav>
 								</div>
@@ -187,11 +188,11 @@
 							<div class="col-lg-7">
 								<div class="text">
 									<h1>Khmer Ceramics <span> Art Gallery</span> discover the finest of Cambodian Ceramics <span>Art!</span></h1>
-									<p>Visit our Art Gallery and our catalog of high-quality Art de la Table, crockery, ceramic decorations, handmade high-quality pieces, and unique art pieces. </p>
+									{% comment %} <p>Visit our Art Gallery and our catalog of high-quality Art de la Table, crockery, ceramic decorations, handmade high-quality pieces, and unique art pieces. </p>
 									<div class="button">
 										<a href="#" class="btn">Get Appointment</a>
 										<a href="#" class="btn primary">Learn More</a>
-									</div>
+									</div> {% endcomment %}
 								</div>
 							</div>
 						</div>
@@ -209,11 +210,11 @@
 							<div class="col-lg-7">
 								<div class="text">
 									<h1>Khmer Ceramics <span> Art Gallery</span> discover the finest of Cambodian Ceramics <span>Art!</span></h1>
-									<p>Visit our Art Gallery and our catalog of high-quality Art de la Table, crockery, ceramic decorations, handmade high-quality pieces, and unique art pieces. </p>
+									{% comment %} <p>Visit our Art Gallery and our catalog of high-quality Art de la Table, crockery, ceramic decorations, handmade high-quality pieces, and unique art pieces. </p>
 									<div class="button">
 										<a href="#" class="btn">Get Appointment</a>
 										<a href="#" class="btn primary">Learn More</a>
-									</div>
+									</div> {% endcomment %}
 								</div>
 							</div>
 						</div>
@@ -231,11 +232,11 @@
 							<div class="col-lg-7">
 								<div class="text">
 									<h1>Khmer Ceramics <span> Art Gallery</span> discover the finest of Cambodian Ceramics <span>Art!</span></h1>
-									<p>Visit our Art Gallery and our catalog of high-quality Art de la Table, crockery, ceramic decorations, handmade high-quality pieces, and unique art pieces. </p>
+									{% comment %} <p>Visit our Art Gallery and our catalog of high-quality Art de la Table, crockery, ceramic decorations, handmade high-quality pieces, and unique art pieces. </p>
 									<div class="button">
 										<a href="#" class="btn">Get Appointment</a>
 										<a href="#" class="btn primary">Learn More</a>
-									</div>
+									</div> {% endcomment %}
 								</div>
 							</div>
 						</div>
@@ -250,7 +251,7 @@
 		<!--/ End Slider Area -->
 		
 		<!-- Start Schedule Area -->
-		<section class="schedule">
+		{% comment %} <section class="schedule">
 			<div class="container">
 				<div class="schedule-inner">
 					<div class="row">
@@ -305,7 +306,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> {% endcomment %}
 		<!--/End Start schedule Area -->
 
 		<!-- Start Activities & Events Area 
@@ -374,18 +375,22 @@
 		</section>
 		 End Activities & Events Area -->
 		
-		<!-- Start External News Area -->
-			<section class="blog section" id="blog" style="margin-top: -100px !important;">
+		<!-- Start Internal News Area -->
+			<section 
+				class="blog section" 
+				id="blog" 
+				style="padding: 20px 0 !important;">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="section-title">
-								<h2>External News</h2>
+							<div class="section-title" style="margin-bottom: 10px !important;">
+								<h2 style="margin: 0px !important;">Internal News</h2>
 								<!--<img src="{% static 'img/g5.jpg' %}" alt="#">
 								<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>-->
 							</div>
 						</div>
 					</div>
+					<hr>
 					<div class="row">
 						<div class="col-lg-4 col-md-6 col-12">
 							<!-- Single Blog -->
@@ -438,6 +443,72 @@
 					</div>
 				</div>
 			</section>
+		<!-- End Internal News Area -->
+			<!-- Start External News Area -->
+				<section class="blog section" id="blog" style="padding: 20px 0 !important;">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="section-title" style="margin-bottom: 10px !important;">
+									<h2 style="margin: 0px !important;">External News</h2>
+									<!--<img src="{% static 'img/g5.jpg' %}" alt="#">
+									<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>-->
+								</div>
+							</div>
+						</div>
+					<hr>
+						<div class="row">
+							<div class="col-lg-4 col-md-6 col-12">
+								<!-- Single Blog -->
+								<div class="single-news">
+									<div class="news-head">
+										<img src="{% static 'img/s1.jpg' %}" alt="#">
+									</div>
+									<div class="news-body">
+										<div class="news-content">
+											<div class="date">22 Aug, 2020</div>
+											<h2><a href="blog-single.html">We have annnocuced our new product.</a></h2>
+											<p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
+										</div>
+									</div>
+								</div>
+								<!-- End Single Blog -->
+							</div>
+							<div class="col-lg-4 col-md-6 col-12">
+								<!-- Single Blog -->
+								<div class="single-news">
+									<div class="news-head">
+										<img src="{% static 'img/s2.jpg' %}" alt="#">
+									</div>
+									<div class="news-body">
+										<div class="news-content">
+											<div class="date">15 Jul, 2020</div>
+											<h2><a href="blog-single.html">Top five way for solving teeth problems.</a></h2>
+											<p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
+										</div>
+									</div>
+								</div>
+								<!-- End Single Blog -->
+							</div>
+							<div class="col-lg-4 col-md-6 col-12">
+								<!-- Single Blog -->
+								<div class="single-news">
+									<div class="news-head">
+										<img src="{% static 'img/s3.jpg' %}" alt="#">
+									</div>
+									<div class="news-body">
+										<div class="news-content">
+											<div class="date">05 Jan, 2020</div>
+											<h2><a href="blog-single.html">We provide highly business soliutions.</a></h2>
+											<p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
+										</div>
+									</div>
+								</div>
+								<!-- End Single Blog -->
+							</div>
+						</div>
+					</div>
+				</section>
 			<!-- End External News Area -->
 
 		<!-- Start Feautes
@@ -547,7 +618,7 @@
 		
 
 		<!-- Start Why choose -->
-		<section class="why-choose section" >
+		{% comment %} <section class="why-choose section" >
 			<div class="container">
 				<!--<div class="row">
 					<div class="col-lg-12">
@@ -604,7 +675,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> {% endcomment %}
 		<!--/ End Why choose -->
 		
 		<!-- Start Call to action 
@@ -647,17 +718,17 @@
 								<img src="{% static 'img/s1.jpg' %}" alt="#">
 								<a href="portfolio-details.html" class="btn">View Details</a>
 							</div>
-							<div class="single-pf img-thumbnail">
+							{% comment %} <div class="single-pf img-thumbnail">
 								<a href="portfolio-details.html" class="btn">View Details</a>
-							</div>
+							</div> {% endcomment %}
 							<div class="single-pf img-thumbnail">
 								<img src="{% static 'img/s3.jpg' %}" alt="#">
 								<a href="portfolio-details.html" class="btn">View Details</a>
 							</div>
-							<div class="single-pf img-thumbnail">
+							{% comment %} <div class="single-pf img-thumbnail">
 								<img src="{% static 'img/b1.jpg' %}" alt="#">
 								<a href="portfolio-details.html" class="btn">View Details</a>
-							</div>
+							</div> {% endcomment %}
 							<div class="single-pf img-thumbnail">
 								<img src="{% static 'img/g6.jpg' %}" alt="#">
 								<a href="portfolio-details.html" class="btn">View Details</a>
@@ -897,7 +968,7 @@
 	/Ens clients -->
 		
 		<!-- Start Appointment -->
-		<section class="appointment">
+		{% comment %} <section class="appointment">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -984,11 +1055,11 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> {% endcomment %}
 		<!-- End Appointment -->
 		
 		<!-- Start Newsletter Area -->
-		<section class="newsletter section">
+		{% comment %} <section class="newsletter section">
 			<div class="container">
 				<div class="row ">
 					<div class="col-lg-6  col-12">
@@ -1012,7 +1083,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</section> {% endcomment %}
 		<!-- /End Newsletter Area -->
 		
 		<!-- Footer Area -->
@@ -1093,7 +1164,7 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-12">
 							<div class="copyright-content">
-								<p>© Copyright 2018  |  All Rights Reserved by <a href="https://www.wpthemesgrid.com" target="_blank">wpthemesgrid.com</a> </p>
+								<p>© Copyright 2024  |  All Rights Reserved</p>
 							</div>
 						</div>
 					</div>

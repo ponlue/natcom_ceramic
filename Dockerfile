@@ -8,7 +8,7 @@ RUN pip install django==4.2
 RUN pip install djangoajax
 RUN apt update -y
 RUN apt install vim -y
-COPY . /ceramic
+COPY ./web /web/
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
