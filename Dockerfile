@@ -6,10 +6,10 @@ WORKDIR /ceramic
 RUN pip install --upgrade pip
 RUN pip install django==4.2
 RUN pip install djangoajax
-RUN pip install django-simple-captcha 
+RUN pip install  django-simple-captcha 
 RUN apt update -y
 RUN apt install vim -y
-COPY . /ceramic/
+COPY ./web /web/
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
