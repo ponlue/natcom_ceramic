@@ -9,7 +9,7 @@ RUN pip install djangoajax
 RUN pip install  django-simple-captcha 
 RUN apt update -y
 RUN apt install vim -y
-COPY ./web /web/
+COPY . /ceramic/
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
