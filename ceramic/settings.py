@@ -121,7 +121,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    "/home/natcom/natcom/natcom-django/ceramic/static/",
+    "/var/www/html/ceramic/static/",
 ]
 
 # Default primary key field type

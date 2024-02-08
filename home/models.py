@@ -24,9 +24,12 @@ class Village(models.Model):
     commune = models.ForeignKey(Commune, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=datetime.now)
 
+class Image(models.Model):
+    image_url = models.ImageField(upload_to = 'uploads/')
+
 class TypePottery(models.Model):
     title = models.CharField(max_length=25, unique=True, null=False, blank=False)
-    images = models.JSONField()
+    images = models.ManyToManyField(Image)
     diameter = models.DecimalField(max_digits=5, decimal_places=2)
     height = models.DecimalField(max_digits=5, decimal_places=2)
     thickness = models.DecimalField(max_digits=5, decimal_places=2)
@@ -34,13 +37,14 @@ class TypePottery(models.Model):
 
 class TechniqueMakingPottery(models.Model):
     title = models.CharField(max_length=25, unique=True, null=False, blank=False)
-    images = models.JSONField()
+    images = models.ManyToManyField(Image)
     description = models.TextField(blank=True)
 
 class ToolPottery(models.Model):
     title = models.CharField(max_length=25, unique=True, null=False, blank=False)
-    images = models.JSONField()
+    images = models.ManyToManyField(Image)
     description = models.TextField(blank=True)
+
 
 class Potter(models.Model):
     inventory_number = models.IntegerField(unique=True)
@@ -62,10 +66,5 @@ class Potter(models.Model):
     province_of_pob = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_pob')
     
     # Images of potter
-    images = models.JSONField()
+    images = models.ManyToManyField(Image)
 
-class Image(models.Model):
-    potter = models.ForeignKey(Potter, on_delete=models.CASCADE) # Image FK to Potter
-    type_of_pottery = models.ForeignKey(TypePottery, on_delete=models.CASCADE) # FK to TypeOfPottery table
-    tool_of_pottery = models.ForeignKey(ToolPottery, on_delete=models.CASCADE) # FK to ToolPottery table
-    image_url = models.URLField()

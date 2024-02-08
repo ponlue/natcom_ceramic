@@ -56,18 +56,27 @@
 
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ form.as_p }}
                 <div class="row mt-4">
                     <div class="col-md-3 mb-3">
                         <label 
                             id="inventory-number"
                         >លេខបញ្ជី / Inventory number</label>
-                        <input type="number" class="form-control">
+                        <input 
+                            type="number" 
+                            class="form-control"
+                            name="inventory_number"
+                        />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label>កាលបរិច្ឆេទនៃការចុះបញ្ជី / Date of Inventory</label>
-                        <input type="date" class="form-control">
+                        <input
+                            type="date" 
+                            class="form-control"
+                            name="date_of_inventory"
+                        />
                     </div>
                 </div>
                 <h3 class="mb-3 mt-4" style="font-weight: bold;">I. ព័ត៍មានទូទៅរបស់ស្មូន / General information</h3>
@@ -80,12 +89,13 @@
                                     type="text" 
                                     class="form-control" 
                                     placeholder="សូមវាយបញ្ចូលឈ្មោះ"
+                                    name="full_name"
                                     required
                                 />
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label>ភេទ / Gender</label>
-                                <select class="form-control">
+                                <select class="form-control" name="gender">
                                     <option selected>ជ្រើសរើស...</option>
                                     <option value="m">ប្រុស</option>
                                     <option value="f">ស្រី</option>
@@ -94,7 +104,11 @@
                            
                             <div class="col-md-3 mb-3">
                                 <label>ថ្ងៃ ខែ ឆ្នាំ កំណើត / Date of Birth</label>
-                                <input type="date" class="form-control">
+                                <input 
+                                    type="date" 
+                                    class="form-control" 
+                                    name="dob"
+                                />
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label>អាយុ / Age</label>
@@ -431,7 +445,7 @@
 
                 <!-- Captcha form -->
                 <div class="captcha_wrapper">
-                    {{ form }}
+                    <!-- {{ form }} -->
                 </div>
                 <!-- End Captcha form -->
                 
