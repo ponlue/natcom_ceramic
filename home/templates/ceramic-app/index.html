@@ -16,6 +16,9 @@
         <link rel="icon" href="img/favicon.png">
 		
         <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,400&display=swap" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&family=Nokora:wght@100;300;400;700;900&display=swap" rel="stylesheet">
@@ -30,7 +33,8 @@
             * {
                 /* font-family: 'Metal'; */
                 /* font-family: 'Hanuman', serif; */
-                font-family: 'Nokora';
+                /* font-family: 'Nokora'; */
+                font-family: 'Kantumruy Pro', sans-serif;
             }
         </style>
 
@@ -49,71 +53,54 @@
                 <h4 id="inventory-pottery-title" style="font-family: 'Moul', serif!important; text-align: center;">បញ្ជីសារពើភណ្ឌអ្នកផលិតកុលាលភាជន៍ក្នុងប្រទេសកម្ពុជា</h4>
                 <p 
                     style="
-                        font-size: 24px !important;
+                        font-size: 20px !important;
+                        text-align: center;
                     "
                 >Inventory of Pottery Maker in Cambodia</p>
             </div>
 
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <div class="row mt-4">
-                    <div class="col-md-3 mb-3">
-                        <label 
-                            id="inventory-number"
-                        >លេខបញ្ជី / Inventory number</label>
-                        <input 
-                            type="number" 
-                            class="form-control"
-                            name="inventory_number"
-                        />
-                    </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="{{ form.inventory_number.id_for_label }}" class="">{{ form.inventory_number.label }}</label>
+                    {{ form.inventory_number }}
+                    {{ form.inventory_number.errors }}
                 </div>
-                <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label>កាលបរិច្ឆេទនៃការចុះបញ្ជី / Date of Inventory</label>
-                        <input
-                            type="date" 
-                            class="form-control"
-                            name="date_of_inventory"
-                        />
-                    </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="{{ form.created_at.id_for_label }}" class="">{{ form.created_at.label }}</label>
+                    {{ form.created_at }}
+                    {{ form.created_at.errors }}
+
                 </div>
+
                 <h3 class="mb-3 mt-4" style="font-weight: bold;">I. ព័ត៍មានទូទៅរបស់ស្មូន / General information</h3>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <div class="row mb-3">
-                            <div class="col-md-3 mb-3">
-                                <label>ឈ្មោះ / Name</label>
-                                <input 
-                                    type="text" 
-                                    class="form-control" 
-                                    placeholder="សូមវាយបញ្ចូលឈ្មោះ"
-                                    name="full_name"
-                                    required
-                                />
+                            <div class="col-md-6 mb-3">
+
+                                <label for="{{ form.full_name.id_for_label }}" class="">{{ form.full_name.label }}</label>
+                                {{ form.full_name }}
+                                {{ form.full_name.errors }}
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label>ភេទ / Gender</label>
-                                <select class="form-control" name="gender">
-                                    <option selected>ជ្រើសរើស...</option>
-                                    <option value="m">ប្រុស</option>
-                                    <option value="f">ស្រី</option>
-                                </select>
+                                <label for="{{ form.gender.id_for_label }}">ភេទ / Gender</label>
+                                {{ form.gender }}
+                                <!-- Display error messages for gender field -->
+                                {{ form.gender.errors }}
                             </div>
                            
                             <div class="col-md-3 mb-3">
-                                <label>ថ្ងៃ ខែ ឆ្នាំ កំណើត / Date of Birth</label>
-                                <input 
-                                    type="date" 
-                                    class="form-control" 
-                                    name="dob"
-                                />
+                                <label for="{{ form.dob.id_for_label}}">{{ form.dob.label}}</label>
+                                {{ form.dob }}
+                                {{ form.dob.errors }}
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <!-- <div class="col-md-3 mb-3">
                                 <label>អាយុ / Age</label>
                                 <input type="text" class="form-control" readonly placeholder="មិនអាចវាយបញ្ចូល">
-                            </div>
+                            </div> -->
                         </div>
 
                         <!-- Place of Birth -->
@@ -162,30 +149,28 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label>រយៈពេលនៃការផលិតកុលាលភាជន៍ / Duration</label>
-                                <input type="number" class="form-control" placeholder="សូមវាយបញ្ចូល">
+                                <label for="{{ form.duration.id_for_label }}" class="">{{ form.duration.label }}</label>
+                                {{ form.duration }}
+                                {{ form.duration.errors }}
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label>ចំនួនស្មូនក្នុងគ្រួសារ / The amount of potter in family</label>
-                                <input type="number" class="form-control" placeholder="សូមវាយបញ្ចូល">
+                                <label for="{{ form.amount_of_pottery.id_for_label }}" class="">{{ form.amount_of_pottery.label }}</label>
+                                {{ form.amount_of_pottery }}
+                                {{ form.amount_of_pottery.errors }}
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6 mb-3">
-                                <label>ការបន្តចំណេះ / Inheritance</label>
-                                <input type="text" class="form-control" placeholder="សូមវាយបញ្ចូល">
+                                <!-- <label>ការបន្តចំណេះ / Inheritance</label>
+                                <input type="text" class="form-control" placeholder="សូមវាយបញ្ចូល"> -->
+                                <label for="{{ form.inheritance.id_for_label }}" class="">{{ form.inheritance.label }}</label>
+                                {{ form.inheritance }}
+                                {{ form.inheritance.errors }}
                             </div>
                             <div class="col-md-6">
-                                <label>ប្រភេទកុលាលភាជន៍ / Type of Pottery</label>
-                                    <div class="input-group mb-3">
-                                        <select class="form-control" >
-                                            <option selected>ជ្រើសរើស</option>
-                                            <option value="1">Type1</option>
-                                            <option value="2">Type2</option>
-                                            <option value="3">Type3</option>
-                                        </select>
-                                    </div>
+                                <label for="{{ form.type_of_pottery.id_for_label }}">{{ form.type_of_pottery.label }}                                </label>
+                                {{ form.type_of_pottery }}
                             </div>
                         </div>
                         <!-- Current Address -->

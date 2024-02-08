@@ -35,6 +35,11 @@ class TypePottery(models.Model):
     thickness = models.DecimalField(max_digits=5, decimal_places=2)
     color = models.CharField(max_length=20)
 
+    def __str__(self) -> str:
+        return self.title
+
+
+
 class TechniqueMakingPottery(models.Model):
     title = models.CharField(max_length=25, unique=True, null=False, blank=False)
     images = models.ManyToManyField(Image)
@@ -47,13 +52,23 @@ class ToolPottery(models.Model):
 
 
 class Potter(models.Model):
+
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    ]
+
     inventory_number = models.IntegerField(unique=True)
     created_at = models.DateTimeField(default=datetime.now)
     full_name = models.CharField(max_length=255)  
-    gender = models.CharField(max_length=2)
+    gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     dob = models.DateField()
     duration = models.PositiveIntegerField()
     amount_of_pottery = models.PositiveIntegerField()  # Use PositiveIntegerField for non-negative values
+    inheritance = models.CharField(max_length=255, blank=True)
+
+    type_of_pottery = models.ForeignKey(TypePottery, on_delete=models.CASCADE)
 
     village_of_address = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_address')
     commune_of_address = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_address')
@@ -67,4 +82,3 @@ class Potter(models.Model):
     
     # Images of potter
     images = models.ManyToManyField(Image)
-
