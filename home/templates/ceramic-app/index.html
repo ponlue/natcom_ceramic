@@ -10,7 +10,7 @@
 		<meta name='copyright' content=''>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Title -->
-        <title>Ceracmics Form</title>
+        <title>Inventory_of_pottery_maker</title>
 		
 		<!-- Favicon -->
         <link rel="icon" href="img/favicon.png">
@@ -94,11 +94,11 @@
                            
                             <div class="col-md-3 mb-3">
                                 <label>ថ្ងៃ ខែ ឆ្នាំ កំណើត / Date of Birth</label>
-                                <input type="date" class="form-control" placeholder="">
+                                <input type="date" class="form-control">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label>អាយុ / Age</label>
-                                <input type="text" class="form-control" readonly>
+                                <input type="text" class="form-control" readonly placeholder="មិនអាចវាយបញ្ចូល">
                             </div>
                         </div>
 
@@ -149,18 +149,18 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label>រយៈពេលនៃការផលិតកុលាលភាជន៍ / Duration</label>
-                                <input type="number" class="form-control" placeholder="">
+                                <input type="number" class="form-control" placeholder="សូមវាយបញ្ចូល">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>ចំនួនស្មូនក្នុងគ្រួសារ / The amount of potter in family</label>
-                                <input type="number" class="form-control" placeholder="">
+                                <input type="number" class="form-control" placeholder="សូមវាយបញ្ចូល">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6 mb-3">
                                 <label>ការបន្តចំណេះ / Inheritance</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" placeholder="សូមវាយបញ្ចូល">
                             </div>
                             <div class="col-md-6">
                                 <label>ប្រភេទកុលាលភាជន៍ / Type of Pottery</label>
@@ -223,14 +223,14 @@
                             <div class="col-md-6">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">X</span>
-                                    <input type="number" class="form-control" placeholder="" aria-describedby="addon-wrapping">
+                                    <input type="number" class="form-control" placeholder="សូមវាយបញ្ចូល" aria-describedby="addon-wrapping">
                                   </div>
                                   
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group flex-nowrap">
                                     <span class="input-group-text" id="addon-wrapping">Y</span>
-                                    <input type="number" class="form-control" placeholder=""aria-describedby="addon-wrapping">
+                                    <input type="number" class="form-control" placeholder="សូមវាយបញ្ចូល" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
                         </div>
@@ -238,7 +238,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label>តំណភ្ជាប់ / URL Google Map</label>
-                                <input type="url" class="form-control" placeholder="">
+                                <input type="url" class="form-control" placeholder="សូមវាយបញ្ចូល">
                             </div>
                         </div>
 
@@ -250,6 +250,7 @@
                                 <label>រូបថតទូទៅរបស់ស្មូន</label>
                                  <!-- Image Input 1 -->
                                 <img 
+                                    class="mb-2"
                                     id="imagePreview1" 
                                     src="#" 
                                     alt="" style="max-width: 254px; max-height: 300px; border: 1px solid #d7d7d7;"
@@ -272,6 +273,7 @@
                                 {% comment %} <input type="file" class="form-control-file border"> {% endcomment %}
                                 <!-- Image Input 2 -->
                                 <img id="imagePreview2" 
+                                    class="mb-2"
                                     src="{% if form.instance.image2 %}{{ form.instance.image2.url }}{% else %}{% static 'img/default_image1.png' %}{% endif %}" 
                                     alt="" style="display: none; max-width: 200px; max-height: 200px;">
                                 <input type="file" class="form-control" id="id_image2" name="image2" accept="image/*" onchange="previewImage('id_image2', 'imagePreview2')">
@@ -282,7 +284,8 @@
                             <div class="col">
                                 <label>រូបថតទូទៅនៃកុលាលភាជន៍</label>
                                 <!-- Image Input 3 -->
-                                <img id="imagePreview3" src="#" alt="Image Preview 3" style="display: none; max-width: 200px; max-height: 200px;">
+
+                                <img id="imagePreview3" class="mb-2" src="#" alt="Image Preview 3" style="display: none; max-width: 200px; max-height: 200px;">
                                 <input type="file" class="form-control"  id="id_image3" multiple name="image3" accept="image/*" onchange="previewImage('id_image3', 'imagePreview3')">
 
                               
@@ -299,25 +302,30 @@
                     <div class="col-md-12">
                         <h3 style="font-weight: bold;"> II. របៀបនៃការផលិត / Technique</h3>
                     </div>
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-success btn-sm">បន្ថែមទៀត / Add more</button>
+                    <div class="col-md-12 mb-4">
+                        <button type="button" class="btn btn-success btn-sm" onclick="addFields()">បន្ថែម / Add</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="removeFields()">លុប / Remove</button>
                     </div>
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col-md-4 mb-3">
-                        <label for="technique-title">ចំណងជើង / Title</label>
-                        <input type="text" name="" class="form-control" id="technique-title" placeholder="">
+                <!-- User click to add input data of making pottery -->
+                <div id="field-container">
+                    <!-- Initial set of input fields -->
+                    <div class="form-fields">
+                            <div class="col-md-12 mb-3">
+                                <label for="technique-title" style="font-weight: bold;">1. ចំណងជើង / Title</label>
+                                <input type="text" name="title[]" class="form-control" placeholder="សូមវាយបញ្ចូល">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="description">ពិពណ៌នា / Description</label>
+                                <textarea name="description[]" class="form-control" rows="5"></textarea>                
+                            </div>
+                            <div class="col-md-12 mb-5">
+                                <label for="photo">រូបថត / Photo</label>
+                                <input type="file" name="photo[]" class="form-control">
+                            </div>
+                            <hr>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="">ពិពណ៌នា / Description</label>
-                        <textarea class="form-control" id="" rows="5"></textarea>                
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="">រូបថត / Photo</label>
-                        <input type="file" class="form-control">
-                    </div>
-                    
                 </div>
 
                 <!-- <ol type="1" start="1">
@@ -457,6 +465,34 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
+
+            function addFields() {
+                const container = document.getElementById('field-container');
+                const clone = container.firstElementChild.cloneNode(true);
+                
+                // Increment the index for the new set of fields
+                const newIndex = container.childElementCount + 1;
+
+                // Update the label for the title field with the new index
+                const titleLabel = clone.querySelector('label[for="technique-title"]');
+                titleLabel.textContent = `${newIndex}. ចំណងជើង / Title `;
+
+                // Clear the input values in the cloned fields
+                const inputFields = clone.querySelectorAll('input, textarea');
+                inputFields.forEach(field => {
+                    field.value = '';
+                });
+                container.appendChild(clone);
+            }
+
+            function removeFields() {
+                const container = document.getElementById('field-container');
+                const forms = container.querySelectorAll('.form-fields');
+                if (forms.length > 1) {
+                    container.removeChild(forms[forms.length - 1]);
+                }
+            }
+
         </script>
 
         <!-- Bootstrap 5.0.2 JS -->
