@@ -25,12 +25,15 @@ SECRET_KEY = 'django-insecure-mo(&zi(59@72&aar-$-o&q7w%%!_om=ai(x3_daykmeqeu3jtt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ceramic.krissna.com", "localhost"]
+ALLOWED_HOSTS = ["ceramic.krissna.com", "localhost", 'cloudna.xyz']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    
+    'multi_captcha_admin',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +43,12 @@ INSTALLED_APPS = [
     'home',
     'captcha',
 ]
+
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+    # 'engine': 'recaptcha2',
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,3 +137,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# RECAPTCHA_PUBLIC_KEY = '6Lfvr2wpAAAAAFCbdkIMpRKLyU-H0_C8IzHNQA3W'
+# RECAPTCHA_PRIVATE_KEY = '6Lfvr2wpAAAAAPgkmItKv07kOvp_DeIfkebXtm83'
+# NOCAPTCHA = True

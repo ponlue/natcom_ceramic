@@ -2,8 +2,7 @@ from django.shortcuts import redirect, render
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from home.forms import CaptchaTestForm, PotterForm
-# Create your views here.
+from home.forms import PotterForm, SimpleCaptchaForm
 
 class HomePageView(TemplateView):
     template_name = "index.html"
@@ -11,7 +10,7 @@ class HomePageView(TemplateView):
 def inventory_of_pottery_making(request):
     form = PotterForm()
     if request.POST:
-        # form = CaptchaTestForm(request.POST)
+        captcha_form = SimpleCaptchaForm(request.POST)
         # Validate the form: the captcha field will automatically
         # check the input
         if form.is_valid():
@@ -29,10 +28,9 @@ def inventory_of_pottery_making(request):
             print(f"date_of_inventory: {created_at}")
 
     else:
-        # form = CaptchaTestForm()
+        captcha_form = SimpleCaptchaForm()
         form = PotterForm()
-
-    return render(request, "ceramic-app/index.html", {'form': form})
+    return render(request, "ceramic-app/index.html", {'form': form, 'captcha_form': captcha_form})
 
 def kampot_view(request):
     return render(request, "kampot/index.html")

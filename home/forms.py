@@ -2,7 +2,7 @@ from django import forms
 from captcha.fields import CaptchaField
 from .models import Potter, TypePottery
 
-class CaptchaTestForm(forms.Form):
+class SimpleCaptchaForm(forms.Form):
     captcha = CaptchaField()
 
 class PotterForm(forms.ModelForm):
