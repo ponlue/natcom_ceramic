@@ -58,3 +58,59 @@ function myMap() {
     };
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 }
+
+
+
+// Image preview
+function previewImages(input) {
+    var previewContainer = document.getElementById('preview-container');
+    previewContainer.innerHTML = '';
+
+    if (input.files) {
+        var filesAmount = input.files.length;
+
+        for (var i = 0; i < filesAmount; i++) {
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+                var container = document.createElement('div');
+                container.className = 'preview-image-container';
+
+                var img = document.createElement('img');
+                img.setAttribute('src', event.target.result);
+                img.className = 'preview-image';
+                img.onclick = function() {
+                    openLightbox(event.target.result);
+                };
+
+                var deleteIcon = document.createElement('span');
+                deleteIcon.innerHTML = '&#10060;';
+                deleteIcon.className = 'delete-icon';
+                deleteIcon.onclick = function() {
+                    container.remove();
+                };
+
+                container.appendChild(img);
+                container.appendChild(deleteIcon);
+
+                previewContainer.appendChild(container);
+            }
+
+            reader.readAsDataURL(input.files[i]);
+        }
+    }
+}
+
+function openLightbox(imageSrc) {
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImage = document.getElementById('lightbox-image');
+    lightboxImage.src = imageSrc;
+    lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+    var lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';
+}
+
+// End image preview

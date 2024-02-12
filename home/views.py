@@ -13,6 +13,7 @@ def inventory_of_pottery_making(request):
         captcha_form = SimpleCaptchaForm(request.POST)
         # Validate the form: the captcha field will automatically
         # check the input
+        
         if form.is_valid():
             # print('Form is valid')
             inventory_number = request.POST.get('inventory_number')

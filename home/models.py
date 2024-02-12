@@ -79,6 +79,9 @@ class Potter(models.Model):
     commune_of_pob = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_pob')
     district_of_pob = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_pob')
     province_of_pob = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_pob')
+
+    url_google_map = models.URLField(max_length=200)
+
     
     # Images of potter
     images = models.ManyToManyField(Image)
