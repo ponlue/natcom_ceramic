@@ -35,15 +35,7 @@
                 /* font-family: 'Hanuman', serif; */
                 /* font-family: 'Nokora'; */
                 font-family: 'Kantumruy Pro', sans-serif;
-            }
-
-            body {
-                padding: 20px;
-            }
-            .container {
-                box-shadow: 0 0 10px #ddd;
-                padding: 40px;
-            }
+            }            
             #preview-container {
                 display: flex;
                 flex-wrap: wrap;
@@ -111,258 +103,25 @@
                 >Inventory of Pottery Maker in Cambodia</p>
             </div>
 
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="inventory_of_pottery_maker" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-
-                <div class="col-md-4 mb-3">
-                    <label for="{{ form.inventory_number.id_for_label }}" class="">{{ form.inventory_number.label }}</label>
-                    {{ form.inventory_number }}
-                    {{ form.inventory_number.errors }}
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <label for="{{ form.created_at.id_for_label }}" class="">{{ form.created_at.label }}</label>
-                    {{ form.created_at }}
-                    {{ form.created_at.errors }}
-
-                </div>
-
-                <h3 class="mb-3 mt-4" style="font-weight: bold;">I. ព័ត៍មានទូទៅរបស់ស្មូន / General information</h3>
-                <div class="row mt-4">
-                    <div class="col-md-12">
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3">
-
-                                <label for="{{ form.full_name.id_for_label }}" class="">{{ form.full_name.label }}</label>
-                                {{ form.full_name }}
-                                {{ form.full_name.errors }}
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="{{ form.gender.id_for_label }}">ភេទ / Gender</label>
-                                {{ form.gender }}
-                                <!-- Display error messages for gender field -->
-                                {{ form.gender.errors }}
-                            </div>
-                           
-                            <div class="col-md-3 mb-3">
-                                <label for="{{ form.dob.id_for_label}}">{{ form.dob.label}}</label>
-                                {{ form.dob }}
-                                {{ form.dob.errors }}
-                            </div>
-                            <!-- <div class="col-md-3 mb-3">
-                                <label>អាយុ / Age</label>
-                                <input type="text" class="form-control" readonly placeholder="មិនអាចវាយបញ្ចូល">
-                            </div> -->
-                        </div>
-
-                        <!-- Place of Birth -->
-                        <div class="row">
-                            <p style="font-weight: bold;">ទីកន្លែងកំណើត / Place of Birth</p>
-                            <div class="col-md-3 mb-3">
-                                <label>ខេត្ត / Province</label>
-                                    <select class="form-control">
-                                        <option selected>ជ្រើសរើស...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                            </div>
-
-                            <div class="col-md-3 mb-3">
-                                <label>ស្រុក / District</label>
-                                    <select class="form-control">
-                                        <option selected>ជ្រើសរើស...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label>ឃុំ / Commune</label>
-                                    <select class="form-control">
-                                        <option selected>ជ្រើសរើស...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                            </div>
-
-                            <div class="col-md-3 mb-3">
-                                <label>ភូមិ / Village</label>
-                                    <select class="form-control">
-                                        <option selected>ជ្រើសរើស...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                            </div>
-                        </div>
-                        <!-- End POB -->
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.duration.id_for_label }}" class="">{{ form.duration.label }}</label>
-                                {{ form.duration }}
-                                {{ form.duration.errors }}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.amount_of_pottery.id_for_label }}" class="">{{ form.amount_of_pottery.label }}</label>
-                                {{ form.amount_of_pottery }}
-                                {{ form.amount_of_pottery.errors }}
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 mb-3">
-                                <!-- <label>ការបន្តចំណេះ / Inheritance</label>
-                                <input type="text" class="form-control" placeholder="សូមវាយបញ្ចូល"> -->
-                                <label for="{{ form.inheritance.id_for_label }}" class="">{{ form.inheritance.label }}</label>
-                                {{ form.inheritance }}
-                                {{ form.inheritance.errors }}
-                            </div>
-                            <div class="col-md-6">
-                                <label for="{{ form.type_of_pottery.id_for_label }}">{{ form.type_of_pottery.label }}                                </label>
-                                {{ form.type_of_pottery }}
-                            </div>
-                        </div>
-                        <!-- Current Address -->
-                        <div class="row">
-                            <p style="font-weight: bold;">
-                                ទីលំនៅបច្ចុប្បន្ន / Current Location
-                                </p>
-                            <div class="col-md-3 mb-3">
-                                <label>ខេត្ត / Province</label>
-                                    <select class="form-control">
-                                        <option selected>ជ្រើសរើស...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                            </div>
-
-                            <div class="col-md-3 mb-3">
-                                <label>ស្រុក / District</label>
-                                    <select class="form-control">
-                                        <option selected>ជ្រើសរើស...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label>ឃុំ / Commune</label>
-                                    <select class="form-control">
-                                        <option selected>ជ្រើសរើស...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                            </div>
-
-                            <div class="col-md-3 mb-3">
-                                <label>ភូមិ / Village</label>
-                                    <select class="form-control">
-                                        <option selected>ជ្រើសរើស...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label>និយាមការទីតាំងផ្ទះ / Coordinate</label>
-                            <div class="col-md-6">
-                                <div class="input-group flex-nowrap">
-                                    <span class="input-group-text" id="addon-wrapping">X</span>
-                                    <input type="number" class="form-control" placeholder="សូមវាយបញ្ចូល" aria-describedby="addon-wrapping">
-                                  </div>
-                                  
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-group flex-nowrap">
-                                    <span class="input-group-text" id="addon-wrapping">Y</span>
-                                    <input type="number" class="form-control" placeholder="សូមវាយបញ្ចូល" aria-describedby="addon-wrapping">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label>តំណភ្ជាប់ / URL Google Map</label>
-                                <input type="url" class="form-control" placeholder="សូមវាយបញ្ចូល">
-                            </div>
-                        </div>
-
+                <!-- {{ form.as_p }} -->
+                {% for field in forms %}
+                    <div class="row mb-3">
+                       <div class="col-md-12">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.errors %}
+                                <ul class="errorlist" style="color: rgb(207, 24, 24);">
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                       </div>
                     </div>
-                    <div class="col-md-6">
-                        <label style="font-weight: bold;">រូបភាព / Photo (អាចជ្រើសរើសបានច្រើន) *</label>
-                        <div class="row mb-3">
-                            {% comment %} <div class="col">
-                                <label>រូបថតទូទៅរបស់ស្មូន</label>
-                                 <!-- Image Input 1 -->
-                                <img 
-                                    class="mb-2"
-                                    id="imagePreview1" 
-                                    src="#" 
-                                    alt="" style="max-width: 254px; max-height: 300px; border: 1px solid #d7d7d7;"
-                                />
+                {% endfor %}
 
-                                <input 
-                                    type="file" 
-                                    id="id_image1" 
-                                    name="image1" 
-                                    class="form-control"
-                                    accept="image/*" 
-                                    onchange="previewImage('id_image1', 'imagePreview1')"
-                                /> 
-
-                            </div> {% endcomment %}
-
-                            <div class="col">
-                                <input 
-                                    type="file" name="image" accept="image/*" 
-                                    required multiple onchange="previewImages(this);"
-                                    class="form-control"
-                                />
-                                <div id="preview-container"></div>
-
-                                <div id="lightbox">
-                                    <span id="lightbox-close" onclick="closeLightbox()">&#10005;</span>
-                                    <img id="lightbox-image">
-                                </div>
-                            
-
-                            </div>
-                        </div>
-                        {% comment %} <div class="row mb-3">
-                            <div class="col">
-                                <label>រូបថតទូទៅនៃផ្ទះស្មូន</label>
-                                <!-- Image Input 2 -->
-                                <img id="imagePreview2" 
-                                    class="mb-2"
-                                    src="{% if form.instance.image2 %}{{ form.instance.image2.url }}{% else %}{% static 'img/default_image1.png' %}{% endif %}" 
-                                    alt="" style="display: none; max-width: 200px; max-height: 200px;">
-                                <input type="file" class="form-control" id="id_image2" name="image2" accept="image/*" onchange="previewImage('id_image2', 'imagePreview2')">
-
-                            </div>
-                        </div> {% endcomment %}
-                        {% comment %} <div class="row mb-3">
-                            <div class="col">
-                                <label>រូបថតទូទៅនៃកុលាលភាជន៍</label>
-                                <!-- Image Input 3 -->
-
-                                <img id="imagePreview3" class="mb-2" src="#" alt="Image Preview 3" style="display: none; max-width: 200px; max-height: 200px;">
-                                <input type="file" class="form-control"  id="id_image3" multiple name="image3" accept="image/*" onchange="previewImage('id_image3', 'imagePreview3')">
-
-                              
-                            </div>
-                        </div> {% endcomment %}
-        
-                    </div>
-
-                </div>
-        
-                <!-- Section II -->
 
                 <div class="row mt-4">
                     <div class="col-md-12">
@@ -375,130 +134,31 @@
                 </div>
 
                 <!-- User click to add input data of making pottery -->
-                <div id="field-container">
-                    <!-- Initial set of input fields -->
+                <!-- <div id="field-container">
                     <div class="form-fields">
                             <div class="col-md-12 mb-3">
                                 <label for="technique-title" style="font-weight: bold;">1. ចំណងជើង / Title</label>
-                                <input type="text" name="title[]" class="form-control" placeholder="សូមវាយបញ្ចូល">
+                                <input type="text" name="title" id="title-input" required class="form-control" placeholder="សូមវាយបញ្ចូល">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="description">ពិពណ៌នា / Description</label>
-                                <textarea name="description[]" class="form-control" rows="5"></textarea>                
+                                <textarea name="description" id="description-input" required class="form-control" rows="5"></textarea>                
                             </div>
                             <div class="col-md-12 mb-5">
                                 <label for="photo">រូបថត / Photo</label>
-                                <input type="file" name="photo[]" class="form-control">
+                                <input type="file" name="images" class="form-control" id="images-input" multiple accept="image/*" required>
                             </div>
+
                             <hr>
                     </div>
-                </div>
+                    <input type="hidden" name="data_list" id="data-list-field" required>
 
-                <!-- <ol type="1" start="1">
-                    <b><li>សម្ភារៈ / Tool</li></b>
-                </ol> -->
-
-                <!-- <div class="row mb-3">
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">ពិពណ៌នា / Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>                    
-                    </div>
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">រូបថត / Photo</label>
-                        <input type="file" class="form-control">
-                    </div>
-                </div> -->
-
-                <!-- <ol type="1" start="2">
-                    <b><li>ការលាយដី / Perparing of clay</li></b>
-                </ol>
-
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">ពិពណ៌នា / Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>                    
-                    </div>
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">រូបថត / Photo</label>
-                        <input type="file" class="form-control-file">
-                    </div>
-                </div>
-
-                {% comment %} បច្ចេកទេសនៃការផលិត {% endcomment %}
-
-                <ol type="1" start="3">
-                    <b><li>បច្ចេកទេសនៃការផលិត / Technique of making pottery</li></b>
-                </ol>
-
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">វិធីសាស្រ្តនៃការផលិត / Production method</label>
-                        <input type="text" class="form-control">        
-                    </div>
-                    {% comment %} <div class="col">
-                        <label for="exampleFormControlTextarea1">None</label>
-                        <input type="text" class="form-control">        
-                    </div> {% endcomment %}
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">ប្រភេទ / Type</label>
-                        <input type="text" class="form-control">        
-                    </div>
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">ទំហំ / Dimension</label>
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            placeholder="អង្កត់ផ្ចិត x កម្ពស់ x កម្រាស់ / Diameter x Height x Thickness">        
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">ពិពណ៌នា / Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>                    
-                    </div>
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">រូបថត / Photo</label>
-                        <input type="file" class="form-control-file">
-                    </div>
-                </div>
-                {% comment %} បច្ចេកទេសនៃការផលិត {% endcomment %}
-
-
-                <ol type="1" start="4">
-                    <b><li>ក្បាច់លម្អ / Decoration</li></b>
-                </ol>
-
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">ពិពណ៌នា / Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>                    
-                    </div>
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">រូបថត / Photo</label>
-                        <input type="file" class="form-control-file">
-                    </div>
-                </div>
-                <ol type="1" start="5">
-                    <b><li>ការដុត / Firing</li></b>
-                </ol>
-
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">ពិពណ៌នា / Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>                    
-                    </div>
-                    <div class="col">
-                        <label for="exampleFormControlTextarea1">រូបថត / Photo</label>
-                        <input type="file" class="form-control-file">
-                    </div>
                 </div> -->
 
                 <!-- Captcha form -->
-                <div class="captcha_wrapper">
-                    {{ captcha_form }}
-                </div>
+                <!-- <div class="captcha_wrapper">
+                    {{ captcha_form.as_p }}
+                </div> -->
                 <!-- End Captcha form -->
                 
                 <!-- Submit button -->
@@ -515,9 +175,32 @@
         </div>
 
         <!-- Custom scripts -->
-        <script src="{% static "js/custom.js" %}"></script>
+        <!-- <script src="{% static 'js/custom.js' %}"></script> -->
 
-        <script>
+        <!-- <script>
+            // Function to update JSON structure as the user selects images
+            function updateJson() {
+                var title = $('#title-input').val();
+                var description = $('#description-input').val();
+                var images = $('#images-input')[0].files;
+    
+                // Convert FileList to an array of file names
+                var imageNames = Array.from(images).map(file => file.name);
+    
+                var jsonData = {
+                    title: title,
+                    description: description,
+                    images: imageNames
+                };
+
+                $('#data-list-field').val(JSON.stringify(jsonData));
+            }
+    
+            // Attach the updateJson function to input events
+            $('#title-input, #description-input, #images-input').on('input change', updateJson);
+        </script> -->
+
+        <!-- <script>
 
             function addFields() {
                 const container = document.getElementById('field-container');
@@ -546,7 +229,7 @@
                 }
             }
 
-        </script>
+        </script> -->
 
         <!-- Bootstrap 5.0.2 JS -->
         <script 

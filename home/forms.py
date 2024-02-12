@@ -1,9 +1,11 @@
+from typing import Any
 from django import forms
 from captcha.fields import CaptchaField
-from .models import Potter, TypePottery
+from .models import Commune, Potter, TypePottery, Village
 
 class SimpleCaptchaForm(forms.Form):
-    captcha = CaptchaField()
+    # captcha = CaptchaField()
+    pass
 
 class PotterForm(forms.ModelForm):
 
@@ -19,7 +21,9 @@ class PotterForm(forms.ModelForm):
     gender = forms.ChoiceField(
         choices=GENDER_CHOICES, 
         widget=forms.Select(attrs={'class': 'form-control' }),
-        label="ភេទ / Gender"
+        label="ភេទ / Gender",
+        required=True,
+        error_messages={'required': 'Your custom error message'}
     )
     dob = forms.DateField(
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
@@ -31,6 +35,21 @@ class PotterForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-control'}),
         label='ជ្រើសរើសប្រភេទកុលាលភាជន៍ / Choose Type of Pottery '
     )
+
+    village_of_address = forms.ModelChoiceField(
+        queryset=Village.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='ជ្រើសរើសភូមិ / Choose Village '
+    )
+
+    commune_of_address = forms.ModelChoiceField(
+        queryset=Commune.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='ជ្រើសរើសឃុំ / Choose Commune '
+    )
+
+
+
 
     class Meta:
         model = Potter
@@ -44,10 +63,20 @@ class PotterForm(forms.ModelForm):
             'inheritance': 'ការបន្តចំណេះ / Inheritance',
         }
 
+        error_messages = {
+            'inventory_number': {
+                'required': 'Please provide a value for Field 1.',
+                'invalid': 'Invalid input for Field 1. Please enter a valid value.',
+                'max_length': 'Field 1 must be at most 50 characters long.',
+                'unique': 'លេខបញ្ជីមានរួចហើយ / Inventory number already exist!',
+
+            },
+        }
 
 
     def __init__(self, *args, **kwargs):
         super(PotterForm, self).__init__(*args, **kwargs)
+        # self.error_class = jQueryUiErrors
 
         # Customize the inventory_number field
         self.fields['inventory_number'].widget.attrs.update({

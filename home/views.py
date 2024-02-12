@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.shortcuts import render
 from django.views.generic import TemplateView
@@ -8,30 +9,42 @@ class HomePageView(TemplateView):
     template_name = "index.html"
 
 def inventory_of_pottery_making(request):
-    form = PotterForm()
-    if request.POST:
-        captcha_form = SimpleCaptchaForm(request.POST)
-        # Validate the form: the captcha field will automatically
-        # check the input
-        
-        if form.is_valid():
-            # print('Form is valid')
-            inventory_number = request.POST.get('inventory_number')
-            created_at = request.POST.get('date_of_inventory')
-            full_name = request.POST.get('full_name')
-            gender = request.POST.get('gender')
-            dob = request.POST.get('dob')
+    if request.method == 'POST':
+        forms = PotterForm(request.POST)
+        if forms.is_valid():
+      
+            print(f'inventory: {forms.cleaned_data['inventory_number']}')
+            print(f'full_name: {forms.cleaned_data['full_name']}')
+            print(f'gender: {forms.cleaned_data['gender']}')
+            print(f'dob: {forms.cleaned_data['dob']}')
+            print(f'duration: {forms.cleaned_data['duration']}')
+            print(f'amount_of_pottery: {forms.cleaned_data['amount_of_pottery']}')
+            print(f'inheritance: {forms.cleaned_data['inheritance']}')
+            print(f'type_of_pottery: {forms.cleaned_data['type_of_pottery']}')
 
-            print(f"invenory_number: {inventory_number}")
-            print(f"full_name: {full_name}")
-            print(f"gender: {gender}")
-            print(f"dob: {dob}")
-            print(f"date_of_inventory: {created_at}")
+            print('--Current address--')
+            print(f'village_of_address: {forms.cleaned_data['village_of_address']}')
+            print(f'commune_of_address: {forms.cleaned_data['commune_of_address']}')
+            print(f'district_of_address: {forms.cleaned_data['district_of_address']}')
+            print(f'province_of_address: {forms.cleaned_data['province_of_address']}')
 
+
+            print('--POB--')
+            print(f'village_of_pob: {forms.cleaned_data['village_of_pob']}')
+            print(f'commune_of_pob: {forms.cleaned_data['commune_of_pob']}')
+            print(f'district_of_pob: {forms.cleaned_data['district_of_address']}')
+            print(f'province_of_pob: {forms.cleaned_data['province_of_pob']}')
+            print(f'url_google_map: {forms.cleaned_data['url_google_map']}')
+
+
+            print(f'images: {forms.cleaned_data['images']}')
+            forms.save()
     else:
-        captcha_form = SimpleCaptchaForm()
-        form = PotterForm()
-    return render(request, "ceramic-app/index.html", {'form': form, 'captcha_form': captcha_form})
+        forms = PotterForm()
+    return render(request, "ceramic-app/index.html", {'forms': forms})
+
+
+
 
 def kampot_view(request):
     return render(request, "kampot/index.html")
