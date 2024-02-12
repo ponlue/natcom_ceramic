@@ -4,19 +4,16 @@ from datetime import datetime
 class Province(models.Model):
     name = models.CharField(max_length=255, unique=True, null=False, blank=False)
     code = models.CharField(max_length=50, unique=True, null=False, blank=False)
-    created_at = models.DateTimeField(default=datetime.now)
 
 class District(models.Model):
     name = models.CharField(max_length=255, unique=True, null=False, blank=False)
     code = models.CharField(max_length=50, unique=True, null=False, blank=False)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(default=datetime.now)
 
 class Commune(models.Model):
     name = models.CharField(max_length=255, unique=True, null=False, blank=False)
     code = models.CharField(max_length=50, unique=True, null=False, blank=False)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(default=datetime.now)
 
 class Village(models.Model):
     name = models.CharField(max_length=255, unique=True, null=False, blank=False)
@@ -41,14 +38,19 @@ class TypePottery(models.Model):
 
 
 class TechniqueMakingPottery(models.Model):
-    title = models.CharField(max_length=25, unique=True, null=False, blank=False)
-    images = models.ManyToManyField(Image)
-    description = models.TextField(blank=True)
+    # title = models.CharField(max_length=25, unique=True, null=False, blank=False)
+    # images = models.ManyToManyField(Image)
+    # description = models.TextField(blank=True)
+
+    # json_data = models.JSONField(default='{"null": "null"}')
+    json_data = models.JSONField(default=None, null=True)
+
 
 class ToolPottery(models.Model):
     title = models.CharField(max_length=25, unique=True, null=False, blank=False)
     images = models.ManyToManyField(Image)
     description = models.TextField(blank=True)
+
 
 
 class Potter(models.Model):
@@ -66,9 +68,9 @@ class Potter(models.Model):
     dob = models.DateField()
     duration = models.PositiveIntegerField()
     amount_of_pottery = models.PositiveIntegerField()  # Use PositiveIntegerField for non-negative values
-    inheritance = models.CharField(max_length=255, blank=True)
+    inheritance = models.CharField(max_length=255)
 
-    type_of_pottery = models.ForeignKey(TypePottery, on_delete=models.CASCADE)
+    type_of_pottery = models.ForeignKey(TypePottery, on_delete=models.CASCADE, default=1)
 
     village_of_address = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_address')
     commune_of_address = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_address')
@@ -80,7 +82,7 @@ class Potter(models.Model):
     district_of_pob = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_pob')
     province_of_pob = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_pob')
 
-    url_google_map = models.URLField(max_length=200)
+    # url_google_map = models.URLField()
 
     
     # Images of potter
