@@ -51,6 +51,7 @@ class TechniqueMakingPottery(models.Model):
 
 class Potter(models.Model):
 
+
     GENDER_CHOICES = [
         ('M', 'Male'),
         ('F', 'Female'),
@@ -79,7 +80,7 @@ class Potter(models.Model):
     village_of_pob = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_pob')
 
     url_google_map = models.URLField(default=None)
-    
+
     # Images of potter
     # images = models.ManyToManyField(Image)
 

@@ -24,45 +24,47 @@ def inventory_of_pottery_making(request):
     if request.method == 'POST':
         forms = PotterForm(request.POST)
         formset = ImageFormSet(request.POST, request.FILES, instance=Potter())
+        captcha_form = SimpleCaptchaForm(request.POST)
 
-        if forms.is_valid() and formset.is_valid():
+        if forms.is_valid() and formset.is_valid() and captcha_form.is_valid():
             person = forms.save()
             formset.instance = person
             formset.save()
         # if forms.is_valid() and formset.is_valid():
-        #     # print('Both form are valid.')
+            # print('Both form are valid.')
       
-        #     # print(f'inventory: {forms.cleaned_data['inventory_number']}')
-        #     # print(f'full_name: {forms.cleaned_data['full_name']}')
-        #     # print(f'gender: {forms.cleaned_data['gender']}')
-        #     # print(f'dob: {forms.cleaned_data['dob']}')
-        #     # print(f'duration: {forms.cleaned_data['duration']}')
-        #     # print(f'amount_of_pottery: {forms.cleaned_data['amount_of_pottery']}')
-        #     # print(f'inheritance: {forms.cleaned_data['inheritance']}')
-        #     # print(f'type_of_pottery: {forms.cleaned_data['type_of_pottery']}')
+            # print(f'inventory: {forms.cleaned_data['inventory_number']}')
+            # print(f'full_name: {forms.cleaned_data['full_name']}')
+            # print(f'gender: {forms.cleaned_data['gender']}')
+            # print(f'dob: {forms.cleaned_data['dob']}')
+            # print(f'duration: {forms.cleaned_data['duration']}')
+            # print(f'amount_of_pottery: {forms.cleaned_data['amount_of_pottery']}')
+            # print(f'inheritance: {forms.cleaned_data['inheritance']}')
+            # print(f'type_of_pottery: {forms.cleaned_data['type_of_pottery']}')
 
-        #     # print('--Current address--')
-        #     # print(f'village_of_address: {forms.cleaned_data['village_of_address']}')
-        #     # print(f'commune_of_address: {forms.cleaned_data['commune_of_address']}')
-        #     # print(f'district_of_address: {forms.cleaned_data['district_of_address']}')
-        #     # print(f'province_of_address: {forms.cleaned_data['province_of_address']}')
-
-
-        #     # print('--POB--')
-        #     # print(f'village_of_pob: {forms.cleaned_data['village_of_pob']}')
-        #     # print(f'commune_of_pob: {forms.cleaned_data['commune_of_pob']}')
-        #     # print(f'district_of_pob: {forms.cleaned_data['district_of_address']}')
-        #     # print(f'province_of_pob: {forms.cleaned_data['province_of_pob']}')
-        #     # print(f'url_google_map: {forms.cleaned_data['url_google_map']}')
+            # print('--Current address--')
+            # print(f'village_of_address: {forms.cleaned_data['village_of_address']}')
+            # print(f'commune_of_address: {forms.cleaned_data['commune_of_address']}')
+            # print(f'district_of_address: {forms.cleaned_data['district_of_address']}')
+            # print(f'province_of_address: {forms.cleaned_data['province_of_address']}')
 
 
-        #     # print(f'images: {forms.cleaned_data['images']}')
-        #     # forms.save()
+            # print('--POB--')
+            # print(f'village_of_pob: {forms.cleaned_data['village_of_pob']}')
+            # print(f'commune_of_pob: {forms.cleaned_data['commune_of_pob']}')
+            # print(f'district_of_pob: {forms.cleaned_data['district_of_address']}')
+            # print(f'province_of_pob: {forms.cleaned_data['province_of_pob']}')
+            # print(f'url_google_map: {forms.cleaned_data['url_google_map']}')
+
+
+            # print(f'images: {forms.cleaned_data['images']}')
+            # forms.save()
     else:
         forms = PotterForm()
         formset = ImageFormSet(instance=Potter())
+        captcha_form = SimpleCaptchaForm()
 
-    return render(request, "ceramic-app/index.html", {'forms': forms, 'formset': formset})
+    return render(request, "ceramic-app/index.html", {'forms': forms, 'formset': formset, 'captcha_form': captcha_form})
 
 
 

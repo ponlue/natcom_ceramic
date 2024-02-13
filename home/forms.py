@@ -4,8 +4,7 @@ from captcha.fields import CaptchaField
 from .models import Commune, District, Image, Potter, Province, TypePottery, Village
 
 class SimpleCaptchaForm(forms.Form):
-    # captcha = CaptchaField()
-    pass
+    captcha = CaptchaField()
 
 class PotterForm(forms.ModelForm):
 
@@ -22,8 +21,6 @@ class PotterForm(forms.ModelForm):
         choices=GENDER_CHOICES, 
         widget=forms.Select(attrs={'class': 'form-control' }),
         label="ភេទ / Gender",
-        required=True,
-        error_messages={'required': 'Your custom error message'}
     )
     dob = forms.DateField(
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
@@ -110,10 +107,23 @@ class PotterForm(forms.ModelForm):
 
         error_messages = {
             'inventory_number': {
-                # 'required': 'Please provide a value for Field 1.',
-                # 'invalid': 'Invalid input for Field 1. Please enter a valid value.',
+                'required': 'សូមបញ្ចូលលេខបញ្ជី / Pleas input inventory number',
+                'invalid': 'សូមបញ្ចូលលេខបញ្ជីឲ្យបានត្រឹមត្រូវ',
                 # 'max_length': 'Field 1 must be at most 50 characters long.',
                 'unique': 'លេខបញ្ជីមានរួចហើយ / Inventory number already exist!',
+            },
+
+            'full_name': {
+                # 'required': 'សូមបញ្ចូលលេខបញ្ជី / Pleas input inventory number',
+                # 'invalid': 'Invalid input for Field 1. Please enter a valid value.',
+                'max_length': 'សូមបញ្ចូលឈ្មោះឲ្យតិចជាង ២៥៥ តួអក្សរ / Max length 255',
+            },
+
+            'url_google_map': {
+                'required': 'សូមបញ្ចូលលេខបញ្ជី / Pleas input inventory number',
+                # 'invalid': 'Invalid input for Field 1. Please enter a valid value.',
+                # 'max_length': 'Field 1 must be at most 50 characters long.',
+                'unique': 'សូមបញ្ចូលតំណភ្ជាប់ឲ្យបានត្រឹមត្រូវ / Please input correct link or url',
             },
         }
 

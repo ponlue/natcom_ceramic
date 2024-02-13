@@ -4,12 +4,35 @@ from .models import *
 
 admin.site.site_header = 'Adminstration'
 
+
+class ImageAdmin(admin.ModelAdmin):
+    list_display = (
+        'potter',
+        'image'
+    )
+class PotterAdmin(admin.ModelAdmin):
+    list_display = (
+        'inventory_number', 
+        'full_name',
+        'gender', 
+        'dob', 
+        'amount_of_pottery',
+        'inheritance',
+        'type_of_pottery',
+        'province_of_address',
+        'province_of_pob',
+        'url_google_map',
+        'created_at',
+
+    )
+
+admin.site.register(Potter, PotterAdmin)
+admin.site.register(Image, ImageAdmin)
+
 admin.site.register(TypePottery)
-admin.site.register(Potter)
 admin.site.register(Province)
 admin.site.register(District)
 admin.site.register(Commune)
 admin.site.register(Village)
 admin.site.register(TechniqueMakingPottery)
 admin.site.register(ToolPottery)
-admin.site.register(Image)
