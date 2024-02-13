@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,12 +26,15 @@ SECRET_KEY = 'django-insecure-mo(&zi(59@72&aar-$-o&q7w%%!_om=ai(x3_daykmeqeu3jtt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ceramic.krissna.com", "localhost"]
+ALLOWED_HOSTS = ["ceramic.krissna.com", "localhost", 'cloudna.xyz']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    
+    'multi_captcha_admin',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,11 +42,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+<<<<<<< HEAD
     'ckeditor',
     'ckeditor_uploader'
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+=======
+    'captcha',
+]
+
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+    # 'engine': 'recaptcha2',
+}
+
+>>>>>>> 3957ef5c1cc96c05061adacb9b009e3e7e7ff47d
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,7 +75,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         #'DIRS': [],
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [BASE_DIR / "templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,6 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+<<<<<<< HEAD
 # STATIC_ROOT = 'static/'
 
 
@@ -132,8 +148,21 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     "/home/natcom/natcom/natcom-django/ceramic/static/",
 ]
+=======
+STATICFILES_DIRS = [ BASE_DIR / "static"]
+
+
+MEDIA_URL = '/media/'  # URL to serve media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # Absolute filesystem path to the media directory
+
+>>>>>>> 3957ef5c1cc96c05061adacb9b009e3e7e7ff47d
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# RECAPTCHA_PUBLIC_KEY = '6Lfvr2wpAAAAAFCbdkIMpRKLyU-H0_C8IzHNQA3W'
+# RECAPTCHA_PRIVATE_KEY = '6Lfvr2wpAAAAAPgkmItKv07kOvp_DeIfkebXtm83'
+# NOCAPTCHA = True
