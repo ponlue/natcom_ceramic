@@ -30,12 +30,11 @@ class Village(models.Model):
     def __str__(self):
         return self.name    
 
-class Image(models.Model):
-    image_url = models.ImageField(upload_to = 'uploads/')
 
+    
 class TypePottery(models.Model):
     title = models.CharField(max_length=25, unique=True)
-    images = models.ManyToManyField(Image)
+    # images = models.ManyToManyField(Image)
     diameter = models.DecimalField(max_digits=5, decimal_places=2)
     height = models.DecimalField(max_digits=5, decimal_places=2)
     thickness = models.DecimalField(max_digits=5, decimal_places=2)
@@ -48,13 +47,6 @@ class TypePottery(models.Model):
 
 class TechniqueMakingPottery(models.Model):
     json_data = models.JSONField(default=None, null=True)
-
-
-class ToolPottery(models.Model):
-    title = models.CharField(max_length=25, unique=True, null=False, blank=False)
-    images = models.ManyToManyField(Image)
-    description = models.TextField(blank=True)
-
 
 
 class Potter(models.Model):
@@ -76,17 +68,29 @@ class Potter(models.Model):
 
     type_of_pottery = models.ForeignKey(TypePottery, on_delete=models.CASCADE, default=1)
 
-    village_of_address = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_address')
-    commune_of_address = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_address')
-    district_of_address = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_address')
     province_of_address = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_address')
-    
-    village_of_pob = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_pob')
-    commune_of_pob = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_pob')
-    district_of_pob = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_pob')
+    district_of_address = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_address')
+    commune_of_address = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_address')
+    village_of_address = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_address')
+
     province_of_pob = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_pob')
+    district_of_pob = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_pob')
+    commune_of_pob = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_pob')
+    village_of_pob = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_pob')
 
     url_google_map = models.URLField(default=None)
     
     # Images of potter
+    # images = models.ManyToManyField(Image)
+
+class Image(models.Model):
+    potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None)
+    image = models.ImageField(upload_to = 'uploads/')
+    # def __str__(self):
+    #     return str(self.image)
+    
+
+class ToolPottery(models.Model):
+    title = models.CharField(max_length=25, unique=True, null=False, blank=False)
     images = models.ManyToManyField(Image)
+    description = models.TextField(blank=True)

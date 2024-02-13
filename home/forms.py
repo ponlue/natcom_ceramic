@@ -1,7 +1,7 @@
 from typing import Any
 from django import forms
 from captcha.fields import CaptchaField
-from .models import Commune, Potter, TypePottery, Village
+from .models import Commune, District, Image, Potter, Province, TypePottery, Village
 
 class SimpleCaptchaForm(forms.Form):
     # captcha = CaptchaField()
@@ -36,20 +36,64 @@ class PotterForm(forms.ModelForm):
         label='ជ្រើសរើសប្រភេទកុលាលភាជន៍ / Choose Type of Pottery '
     )
 
+
+    # Current address form field customization
+
+    province_of_address = forms.ModelChoiceField(
+        queryset=Province.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='ជ្រើសរើសខេត្ត / Choose Province '
+    )
+    district_of_address = forms.ModelChoiceField(
+        queryset=District.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='ជ្រើសរើសស្រុក / Choose District '
+    )
+    commune_of_address = forms.ModelChoiceField(
+        queryset=Commune.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='ជ្រើសរើសឃុំ / Choose Commune '
+    )
     village_of_address = forms.ModelChoiceField(
         queryset=Village.objects.all(),
         widget=forms.Select(attrs={'class': 'form-control'}),
         label='ជ្រើសរើសភូមិ / Choose Village '
     )
 
-    commune_of_address = forms.ModelChoiceField(
+    # End current address form field customization
+
+
+    # POB form field customization
+
+    province_of_pob = forms.ModelChoiceField(
+        queryset=Province.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='ជ្រើសរើសខេត្ត / Choose Province POB'
+    )
+    district_of_pob = forms.ModelChoiceField(
+        queryset=District.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='ជ្រើសរើសស្រុក / Choose District POB'
+    )
+    commune_of_pob = forms.ModelChoiceField(
         queryset=Commune.objects.all(),
         widget=forms.Select(attrs={'class': 'form-control'}),
-        label='ជ្រើសរើសឃុំ / Choose Commune '
+        label='ជ្រើសរើសឃុំ / Choose Commune POB'
+    )
+    village_of_pob = forms.ModelChoiceField(
+        queryset=Village.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label='ជ្រើសរើសភូមិ / Choose Village POB'
     )
 
+    # POB form field customization
 
 
+    # images = forms.ModelChoiceField(
+    #     queryset=Image.objects.all(),
+    #     widget=forms.Select(attrs={'class': 'form-control'}),
+    #     label='រូបភាព / Photo'
+    # )
 
     class Meta:
         model = Potter
@@ -61,17 +105,19 @@ class PotterForm(forms.ModelForm):
             'duration': 'រយៈពេលនៃការផលិតកុលាលភាជន៍ / Duration',
             'amount_of_pottery': 'ចំនួនស្មូនក្នុងគ្រួសារ / Amount of pottery',
             'inheritance': 'ការបន្តចំណេះ / Inheritance',
+            'url_google_map': 'តំណភ្ជាប់ / Links'
         }
 
         error_messages = {
             'inventory_number': {
-                'required': 'Please provide a value for Field 1.',
-                'invalid': 'Invalid input for Field 1. Please enter a valid value.',
-                'max_length': 'Field 1 must be at most 50 characters long.',
+                # 'required': 'Please provide a value for Field 1.',
+                # 'invalid': 'Invalid input for Field 1. Please enter a valid value.',
+                # 'max_length': 'Field 1 must be at most 50 characters long.',
                 'unique': 'លេខបញ្ជីមានរួចហើយ / Inventory number already exist!',
-
             },
         }
+
+
 
 
     def __init__(self, *args, **kwargs):
@@ -109,6 +155,16 @@ class PotterForm(forms.ModelForm):
             'class': 'form-control',
         })
         
+        self.fields['url_google_map'].widget.attrs.update({
+            'placeholder': '​សូមវាយបញ្ចូល or Copy & Paste',
+            'class': 'form-control',
+        })
 
 
-
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ['image']
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
