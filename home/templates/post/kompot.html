@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    {% include 'header/header.html' %}
+</head>
+<body>
+    <header class="header">
+        {% include 'menu/navbar.html' %}
+    </header>
+
+    <section class="slider">
+        {% include 'menu/slidekompot.html' %}
+    </section>
+
+    <div class="container-fluid bg-secondary p-0">
+        
+        <div class="row g-0">
+            <div class="col-lg-1 py-3 px-2"></div>
+            <div class="col-lg-8 py-3 px-2">
+                {% block bodydetail %}
+                <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active text-natocm-title" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info" type="button" role="tab" aria-controls="nav-info" aria-selected="true">ព័ត៌មាន</button>
+                    <button class="nav-link text-natocm-title" id="nav-image-tab" data-bs-toggle="tab" data-bs-target="#nav-image" type="button" role="tab" aria-controls="nav-image" aria-selected="false">រូបភាព</button>
+                    <button class="nav-link text-natocm-title" id="nav-video-tab" data-bs-toggle="tab" data-bs-target="#nav-video" type="button" role="tab" aria-controls="nav-video" aria-selected="false">វីដេអូ</button>
+                    <button class="nav-link text-natocm-title" id="nav-document-tab" data-bs-toggle="tab" data-bs-target="#nav-document" type="button" role="tab" aria-controls="nav-document" aria-selected="false">ឯកសារ</button>
+                  </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="p-3 my-4 bg-success text-white text-natocm-title display-6">
+                        រមណីយដ្ឋានប្រាសាទកោះកេរ
+                    </div>
+
+                    <div class="tab-pane fade show active text-natcom-primary" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+
+                        <p class="text-natocm-title">
+                            រមណីយដ្ឋានប្រាសាទកោះកេរ ជាអតីតរាជធានីខ្មែរក្នុងសតវត្សទី១០ ក្នុងរាជ្យព្រះបាទជ័យវរ្ម័នទី៤ (ចន្លោះឆ្នាំ៩២៨-៩៤១)។ រាជធានីនេះមានឈ្មោះជាភាសាខ្មែរបុរាណ ”ឆោកគ៌គ្យរ” (មានន័យថាស្រះគគីរ) ឬឈ្មោះជាភាសាសំស្រ្តឹត “លិង្គបុរៈ” ដែលមានបុរាណដ្ឋានសរុបចំនួន១៦៩ ក្នុងនោះមានប្រាសាទចំនួន៧៦ ទីតាំងមនុស្សរស់នៅ ហេដ្ឋារចនាសម្ព័ន្ធបុរាណដូចជា ប្រព័ន្ធផ្លូវថ្នល់ ប្រព័ន្ធធារាសាស្ត្រ ស្រះ ត្រពាំង និងទំនប់ទឹក ។ល។ ក្នុងចំណោមនោះ ប្រាសាទប្រាង្គ (រាងថ្នាក់ៗជាពីរ៉ាមីត) ជាប្រាសាទរាជ្យតម្កល់លិង្គព្រះឥសូរឈ្មោះ “ត្រីភូវនេស្វរ” មានកម្ពស់៤ម៉ែត្រ ហើយសព្វថ្ងៃគឺជាសំណង់ស្ថាបត្យកម្មលេចធ្លោជាងគេនៅក្នុងរមណីយដ្ឋាននេះ។ ចំណែកប្រាសាទផ្សេងៗទៀតកសាងសម្រាប់តម្កល់លិង្គព្រះឥសូរ និងបដិមាសំខាន់ៗមានរូបរាងធំៗប្រកបដោយសោភ័ណភាព មានចលនារស់រវើកមានដូចជា បដិមាព្រះឥសូរាំ បដិមាព្រះព្រហ្ម បដិមាព្រះនារាយណ៍ និងចម្លាក់បដិមាប្រយុទ្ធគ្នារវាងវង្សក្សត្របាណ្ឌព និងវង្សកៅរពនៃរឿងមហាភារត និងចម្លាក់ទាក់ទងរឿងរាមកេរ្តិ៍ផងដែរ។ 
+                        </p>
+
+                        <p class="text-natocm-title">
+                            អ្នកសិក្សាស្រាវជ្រាវសិល្បៈខ្មែរយល់ឃើញថា ភាពលេចធ្លោនៃរមណីយដ្ឋានប្រាសាទកោះកេរ ដែលមានលក្ខណៈពិសេស និងខុសប្លែកពីសម័យកាលមុនៗនោះមានពីរចំណុចសំខាន់គឺ ការរៀបចំក្រុង និងបដិមាសាស្ត្រ។ ការៀបចំក្រុងនៅកោះកេរ ផ្តោលើចំណុចសំខាន់៣គឺ (១) ការរៀបចំប្លង់ប្រាសាទសម្រាប់រាជ្យ ស្ថិតនៅចំកណ្តាលនៃរាជធានី។ (២) ការរៀបចំប្លង់ជារាងត្រីមូត៌ិ ដោយសង់ជាប្រាសាទទោលដាច់ៗពីគ្នា ដូចជាប្រាសាទប្រាង្គសម្រាប់តម្កល់សិវៈលិង្គ ប្រាសាទបន្ទាយពីរជាន់ សម្រាប់តម្កល់ព្រះព្រហ្ម និងប្រាសាទបន្ទាយពីរជាន់សម្រាប់តម្កល់ព្រះនារាយណ៍ និង (៣) ការរៀបចំប្រព័ន្ធប្រើប្រាស់ទឹកឲ្យក្លាយជាទឹកពិសិទ្ធ។
+                        </p>
+
+                        <div class="container-fluid p-3">
+                            <img class="img-thumbnail" src="" alt="Angkor Wat">
+                        </div>
+
+                        <p class="text-natocm-title">
+                            ដោយឡែក ចំពោះផ្នែកបដិមាសាស្ត្រនៅតំបន់ប្រាសាទកោះកេរក៏មានលក្ខណៈពិសេស និងខុសប្លែកដែលគួរឲ្យកត់សម្គាល់ចំនួន៣ចំណុចគឺ (១) ការឆ្លាក់បដិមានៅក្នុងរចនាបថនេះមានទំហំធំៗ បើធៀបជាមួយនឹងរចនាបថមុនៗ។ (២)  ការយកខ្សែរឿងទេពកថា មកឆ្លាក់ជាចម្លាក់ទោល និង (៣) ការឆ្លាក់ជាសាច់រឿងដែលបង្ហាញពីវីរភាពរបស់ព្រះមហាក្សត្រ ដូចជារឿងរាមកេរ្ត៍ និងរឿងមហាភារតជាដើម ដែលរឿងទាំងពីរនេះសុទ្ធសឹងតែបានបង្ហាញពីវីរភាពរបស់ព្រះមហាក្សត្រ។ 
+                        </p>
+
+                        <div class="container-fluid p-3">
+                            <img class="img-thumbnail" src="" alt="Angkor Wat"> 
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab">
+                        <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0">
+                        <img style="width:100%;" src="" />
+                        </div>
+                        <hr />
+                        <iframe style=" height: 100vh; width:100%;" src="https://www.google.com/maps/d/u/0/embed?mid=17M0yYoWL4JUIxjxwOsr0N7xFn2NUTY0&ehbc=2E312F&noprof=1" width="640" height="480"></iframe> -->
+                        <p>...</p>
+                    </div>    
+
+                    <div class="tab-pane fade" id="nav-image" role="tabpanel" aria-labelledby="nav-image-tab">
+                        <!-- <div class="row">
+                            {% for img in imgs %}
+                            <div class="col-md-3">
+                                <img class="img-thumbnail " src="{{img}}" alt="ប្រាសាទព្រះវិហារ">
+                            </div>
+                            {% endfor %}
+                        </div> -->
+                        <p>...</p>
+                    </div>
+
+                    <div class="tab-pane fade text-natcom-primary" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">
+                        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/dsUVbzvwMXc?si=l3bGRMJsmC77KlGP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+                        <p>...</p>
+                    </div>
+                  
+                    <div class="tab-pane fade" id="nav-document" role="tabpanel" aria-labelledby="nav-document-tab">
+                        <!-- <img class="img-thumbnail" src="" /> -->
+                        <p>...</p>
+                    </div>
+
+                </div>
+
+            {% endblock %}
+            </div>
+            
+            <div class="col-lg-1 py-3 px-2"></div>
+        </div>
+    </div>
+    {% include 'footer/jsimport.html' %}
+</body>
+</html>
