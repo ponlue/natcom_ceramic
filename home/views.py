@@ -1,9 +1,8 @@
-<<<<<<< HEAD
-=======
+
 from django.forms import inlineformset_factory
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
->>>>>>> 3957ef5c1cc96c05061adacb9b009e3e7e7ff47d
+
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
@@ -13,9 +12,9 @@ from home.models import Potter, Image
 class HomePageView(TemplateView):
     template_name = "index.html"
 
-def inventory_of_pottery_making(request):
+# def inventory_of_pottery_making(request):
 
-<<<<<<< HEAD
+
 def BlogPageView(request):
     return render(request, "blog-single.html")
 
@@ -25,7 +24,6 @@ def KompotPageView(request):
 
 def memoryapp(request):
     pass
-=======
     # Allows user to upload multitple
     ImageFormSet = inlineformset_factory(
         Potter, 
@@ -85,4 +83,3 @@ def memoryapp(request):
 
 def kampot_view(request):
     return render(request, "kampot/index.html")
->>>>>>> 3957ef5c1cc96c05061adacb9b009e3e7e7ff47d

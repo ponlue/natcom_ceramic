@@ -42,22 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-<<<<<<< HEAD
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    'captcha',
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-=======
-    'captcha',
-]
+    
 
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'simple-captcha',
     # 'engine': 'recaptcha2',
 }
 
->>>>>>> 3957ef5c1cc96c05061adacb9b009e3e7e7ff47d
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,7 +134,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-<<<<<<< HEAD
 # STATIC_ROOT = 'static/'
 
 
@@ -148,14 +144,12 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     "/home/natcom/natcom/natcom-django/ceramic/static/",
 ]
-=======
 STATICFILES_DIRS = [ BASE_DIR / "static"]
 
 
 MEDIA_URL = '/media/'  # URL to serve media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # Absolute filesystem path to the media directory
 
->>>>>>> 3957ef5c1cc96c05061adacb9b009e3e7e7ff47d
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
