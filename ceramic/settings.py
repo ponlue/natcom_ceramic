@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ["ceramic.krissna.com", "localhost", 'cloudna.xyz']
 INSTALLED_APPS = [
     
     'multi_captcha_admin',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,11 +43,9 @@ INSTALLED_APPS = [
     'home',
     'ckeditor',
     'ckeditor_uploader',
-    'captcha',
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-    
 
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'simple-captcha',

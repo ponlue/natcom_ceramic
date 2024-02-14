@@ -33,7 +33,6 @@ class PotterAdmin(admin.ModelAdmin):
         'province_of_pob',
         'url_google_map',
         'created_at',
-
     )
 
 admin.site.register(Potter, PotterAdmin)

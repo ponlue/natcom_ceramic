@@ -83,3 +83,6 @@ def memoryapp(request):
 
 def kampot_view(request):
     return render(request, "kampot/index.html")
+
+def ceramic_app(request):
+    return render(request, "ceramic-app/index.html")
