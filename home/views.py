@@ -26,10 +26,15 @@ def inventory_of_pottery_making(request):
         formset = ImageFormSet(request.POST, request.FILES, instance=Potter())
         captcha_form = SimpleCaptchaForm(request.POST)
 
+        print(f'data list {request.POST}')
+
+
         if forms.is_valid() and formset.is_valid() and captcha_form.is_valid():
-            person = forms.save()
-            formset.instance = person
-            formset.save()
+            # person = forms.save()
+            # formset.instance = person
+            # formset.save()
+            data_list = request.POST
+            print(f'data list {data_list}')
         else:
             # Form is not valid, re-render the form with errors
             return render(request, "ceramic-app/index.html", {'forms': forms, 'formset': formset, 'captcha_form': captcha_form})

@@ -122,7 +122,7 @@
                         {{ form.as_p }}
                         </div>
                     {% endfor %} -->
-                    {% for field in forms %}
+                    <!-- {% for field in forms %}
                         <div class="row mb-4">
                            <div class="col-md-12">
                                 {{ field.label_tag }}
@@ -164,22 +164,20 @@
                         </div>
                     {% endfor %}
     
-                    <!-- Image Formset Management Form -->
                     <div class="mb-3">
                         {{ formset.management_form }}
                     </div>
     
-                    <!-- Image Forms -->
                     {% for form in formset %}
                         <div class="mb-3">
                         {{ form.as_table }}
                         </div>
-                    {% endfor %}
+                    {% endfor %} -->
     
     
                     <div class="row mt-4">
                         <div class="col-md-12">
-                            <h3 style="font-weight: bold;"> II. របៀបនៃការផលិត / Technique</h3>
+                            <h5 class="" style="font-weight: 600; color: #333"> II. របៀបនៃការផលិត / Technique</h5>
                         </div>
                         <div class="col-md-12 mb-4">
                             <button type="button" class="btn btn-success btn-sm" onclick="addFields()">បន្ថែម / Add</button>
@@ -205,8 +203,6 @@
     
                                 <hr>
                         </div>
-                        <input type="hidden" name="data_list" id="data-list-field" required>
-    
                     </div>
     
                     <!-- Captcha form -->
