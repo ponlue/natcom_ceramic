@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
-<<<<<<< HEAD
 class showCategory(admin.ModelAdmin):
     fields = ('title', 'description', 'create_at')
     list_display = ('title', 'description', 'create_at')
@@ -13,7 +12,6 @@ class showPost(admin.ModelAdmin):
 
 admin.site.register(Category, showCategory)
 admin.site.register(Post, showPost)
-=======
 admin.site.site_header = 'Adminstration'
 
 
@@ -48,4 +46,3 @@ admin.site.register(Commune)
 admin.site.register(Village)
 admin.site.register(TechniqueMakingPottery)
 admin.site.register(ToolPottery)
->>>>>>> 3957ef5c1cc96c05061adacb9b009e3e7e7ff47d
