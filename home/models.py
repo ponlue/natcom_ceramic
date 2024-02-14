@@ -1,6 +1,5 @@
 from datetime import datetime
 from django.db import models
-<<<<<<< HEAD
 # from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
@@ -17,8 +16,6 @@ class Post(models.Model):
     post_body = RichTextUploadingField(blank=True, null=True)
     images = models.ImageField(blank=True, null=True)
     create_at = models.DateTimeField(blank=True, null=True)
-=======
-from datetime import datetime
 
 class Province(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -114,4 +111,3 @@ class ToolPottery(models.Model):
     title = models.CharField(max_length=25, unique=True, null=False, blank=False)
     images = models.ManyToManyField(Image)
     description = models.TextField(blank=True)
->>>>>>> 3957ef5c1cc96c05061adacb9b009e3e7e7ff47d
