@@ -63,26 +63,31 @@ class Potter(models.Model):
     full_name = models.CharField(max_length=255)  
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     dob = models.DateField()
-    duration = models.PositiveIntegerField()
+    duration = models.PositiveIntegerField(blank=False, null=True)
     amount_of_pottery = models.PositiveIntegerField()  # Use PositiveIntegerField for non-negative values
-    inheritance = models.CharField(max_length=255)
+    inheritance = models.CharField(max_length=255, blank=False, null=True)
 
     type_of_pottery = models.ForeignKey(TypePottery, on_delete=models.CASCADE, default=1)
-
-    province_of_address = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_address')
-    district_of_address = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_address')
-    commune_of_address = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_address')
-    village_of_address = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_address')
 
     province_of_pob = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_pob')
     district_of_pob = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_pob')
     commune_of_pob = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_pob')
     village_of_pob = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_pob')
 
-    url_google_map = models.URLField(default=None)
 
-    # Images of potter
-    # images = models.ManyToManyField(Image)
+    province_of_address = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_address')
+    district_of_address = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_address')
+    commune_of_address = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_address')
+    village_of_address = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_address')
+
+
+    x_coordinate = models.CharField(max_length=255, default=None, blank=True, null=True)
+    y_coordinate = models.CharField(max_length=255, default=None, blank=True, null=True) 
+
+    url_google_map = models.URLField(default=None, blank=False, null=True)
+    youtube_url = models.URLField(default=None, blank=False, null=True)
+
+    description = models.TextField(default=None, blank=True, null=True)
 
 class Image(models.Model):
     potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None)

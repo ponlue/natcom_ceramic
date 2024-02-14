@@ -10,10 +10,10 @@
 		<meta name='copyright' content=''>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Title -->
-        <title>Inventory_of_pottery_maker</title>
+        <title>KCC | Potter Inventory</title>
 		
 		<!-- Favicon -->
-        <link rel="icon" href="img/favicon.png">
+        <link rel="icon" href="{% static 'img/favicon.ico' %}">
 		
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -104,25 +104,10 @@
                     "
                 >Inventory of Pottery Maker in Cambodia</p>
             </div>
-            <div class="container" style="max-width: 750px; margin: 0 auto;">
+            <div class="container" style="max-width: 650px; margin: 0 auto;">
                 <form action="potter-inventory" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-    
-                    <!-- {{ forms.as_p }} -->
-                    <!-- {{ image_form.as_p }} -->
-    
-                    <!-- Image Formset Management Form -->
-                    <!-- <div class="mb-3">
-                        {{ formset.management_form }}
-                    </div> -->
-    
-                    <!-- Image Forms -->
-                    <!-- {% for form in formset %}
-                        <div class="mb-3">
-                        {{ form.as_p }}
-                        </div>
-                    {% endfor %} -->
-                    <!-- {% for field in forms %}
+                    {% for field in forms %}
                         <div class="row mb-4">
                            <div class="col-md-12">
                                 {{ field.label_tag }}
@@ -142,24 +127,34 @@
                                 {% endif %}
                                 {% if field.name == 'type_of_pottery' %}
                                     <div class="mt-5">
-                                        <b style="color: #333;">លំនៅឋានបច្ចុបន្ន / Current Address *</b>
+                                        <b style="color: #333;">ទីកន្លែងកំណើត / Place of Birth *</b>
                                         <hr>
                                     </div>
                                 {% endif %}
     
-                                {% if field.name == 'village_of_address' %}
+                                {% if field.name == 'village_of_pob' %}
                                     <div class="mt-5">
-                                        <b style="color: #333">ទីកន្លែងកំណើត / Place of Birth *</b>
+                                        <b style="color: #333">លំនៅឋានបច្ចុបន្ន / Current Address *</b>
                                         <hr>
                                     </div>
                                 {% endif %}
+
+                                {% if field.name == 'village_of_address' %}
+                                <div class="mt-5">
+                                    <b style="color: #333">និយាមការផ្ទះ / Coordinate</b>
+                                    <hr>
+                                </div>
+                                {% endif %}
+
+
+
     
-                                {% if field.name == 'url_google_map' %}
+                                {% if field.name == 'description' %}
                                 <div class="mt-5">
                                     <b style="color: #333">រូបភាព / Photos</b>
                                     <hr>
                                 </div>
-                            {% endif %}
+                                {% endif %}
                            </div>
                         </div>
                     {% endfor %}
@@ -172,10 +167,10 @@
                         <div class="mb-3">
                         {{ form.as_table }}
                         </div>
-                    {% endfor %} -->
+                    {% endfor %}
     
     
-                    <div class="row mt-4">
+                    <!-- <div class="row mt-4">
                         <div class="col-md-12">
                             <h5 class="" style="font-weight: 600; color: #333"> II. របៀបនៃការផលិត / Technique</h5>
                         </div>
@@ -185,7 +180,6 @@
                         </div>
                     </div>
     
-                    <!-- User click to add input data of making pottery -->
                     <div id="field-container">
                         <div class="form-fields">
                                 <div class="col-md-12 mb-3">
@@ -203,16 +197,16 @@
     
                                 <hr>
                         </div>
-                    </div>
+                    </div> -->
     
                     <!-- Captcha form -->
-                    <div class="captcha_wrapper">
+                    <div class="captcha_wrapper mt-5">
                         {{ captcha_form.as_p }}
                     </div>
                     <!-- End Captcha form -->
                     
                     <!-- Submit button -->
-                     <div class="row mb-3 mt-4">
+                     <div class="row mb-3 mt-5">
                         <div class="col">
                             <input type="submit" class="btn btn-primary" value="Submit / បញ្ជូន">
                         </div>

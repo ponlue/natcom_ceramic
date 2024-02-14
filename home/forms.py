@@ -102,7 +102,12 @@ class PotterForm(forms.ModelForm):
             'duration': 'រយៈពេលនៃការផលិតកុលាលភាជន៍ / Duration',
             'amount_of_pottery': 'ចំនួនស្មូនក្នុងគ្រួសារ / Amount of pottery',
             'inheritance': 'ការបន្តចំណេះ / Inheritance',
-            'url_google_map': 'តំណភ្ជាប់ / Links'
+            'url_google_map': 'តំណភ្ជាប់ / Google Map',
+            'youtube_url': 'តំណភ្ជាប់ / YouTube Link',
+            'description': 'ពិពណ៍នា / Description',
+            # 'x_coordinate': 'X',
+            # 'y_coordinate': 'Y'
+
         }
 
         error_messages = {
@@ -139,7 +144,6 @@ class PotterForm(forms.ModelForm):
             'class': 'form-control',
         })
 
-        # self.fields['inventory_number'].required = False
 
         # Customize the created_at field
         self.fields['created_at'].widget.attrs.update({
@@ -167,9 +171,39 @@ class PotterForm(forms.ModelForm):
         })
         
         self.fields['url_google_map'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល or Copy & Paste',
+            'placeholder': '​សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
+
+        self.fields['youtube_url'].widget.attrs.update({
+            'placeholder': '​សូមវាយបញ្ចូល',
+            'class': 'form-control',
+        })
+        self.fields['description'].widget.attrs.update({
+            'placeholder': '​សូមវាយបញ្ចូល',
+            'class': 'form-control',
+        })
+
+        self.fields['x_coordinate'].widget.attrs.update({
+            'placeholder': '​សូមវាយបញ្ចូល X',
+            'class': 'form-control',
+        })
+        self.fields['y_coordinate'].widget.attrs.update({
+            'placeholder': '​សូមវាយបញ្ចូល Y',
+            'class': 'form-control',
+        })
+
+        self.fields['x_coordinate'].required = False
+        self.fields['y_coordinate'].required = False
+        self.fields['duration'].required = False
+        self.fields['inheritance'].required = False
+        self.fields['description'].required = False
+
+
+
+
+        
+
 
 
 class ImageForm(forms.ModelForm):

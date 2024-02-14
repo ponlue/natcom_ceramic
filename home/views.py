@@ -17,7 +17,7 @@ def inventory_of_pottery_making(request):
         Potter, 
         Image, 
         form=ImageForm, 
-        extra=2, # Specific 2 or 3 of input fields
+        extra=5, # Specific 2 or 3 of input fields
         can_delete=False,
     )
 
