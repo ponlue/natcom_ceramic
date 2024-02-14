@@ -177,7 +177,6 @@
                     {% endfor %}
     
     
-    <!-- 
                     <div class="row mt-4">
                         <div class="col-md-12">
                             <h3 style="font-weight: bold;"> II. របៀបនៃការផលិត / Technique</h3>
@@ -186,10 +185,10 @@
                             <button type="button" class="btn btn-success btn-sm" onclick="addFields()">បន្ថែម / Add</button>
                             <button type="button" class="btn btn-danger btn-sm" onclick="removeFields()">លុប / Remove</button>
                         </div>
-                    </div> -->
+                    </div>
     
                     <!-- User click to add input data of making pottery -->
-                    <!-- <div id="field-container">
+                    <div id="field-container">
                         <div class="form-fields">
                                 <div class="col-md-12 mb-3">
                                     <label for="technique-title" style="font-weight: bold;">1. ចំណងជើង / Title</label>
@@ -208,7 +207,7 @@
                         </div>
                         <input type="hidden" name="data_list" id="data-list-field" required>
     
-                    </div> -->
+                    </div>
     
                     <!-- Captcha form -->
                     <div class="captcha_wrapper">
@@ -235,30 +234,9 @@
         <!-- Custom scripts -->
         <!-- <script src="{% static 'js/custom.js' %}"></script> -->
 
-        <!-- <script>
-            // Function to update JSON structure as the user selects images
-            function updateJson() {
-                var title = $('#title-input').val();
-                var description = $('#description-input').val();
-                var images = $('#images-input')[0].files;
-    
-                // Convert FileList to an array of file names
-                var imageNames = Array.from(images).map(file => file.name);
-    
-                var jsonData = {
-                    title: title,
-                    description: description,
-                    images: imageNames
-                };
+        
 
-                $('#data-list-field').val(JSON.stringify(jsonData));
-            }
-    
-            // Attach the updateJson function to input events
-            $('#title-input, #description-input, #images-input').on('input change', updateJson);
-        </script> -->
-
-        <!-- <script>
+        <script>
 
             function addFields() {
                 const container = document.getElementById('field-container');
@@ -287,7 +265,7 @@
                 }
             }
 
-        </script> -->
+        </script>
 
         <!-- Bootstrap 5.0.2 JS -->
         <script 

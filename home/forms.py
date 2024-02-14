@@ -109,7 +109,6 @@ class PotterForm(forms.ModelForm):
             'inventory_number': {
                 'required': 'សូមបញ្ចូលលេខបញ្ជី / Pleas input inventory number',
                 'invalid': 'សូមបញ្ចូលលេខបញ្ជីឲ្យបានត្រឹមត្រូវ',
-                # 'max_length': 'Field 1 must be at most 50 characters long.',
                 'unique': 'លេខបញ្ជីមានរួចហើយ / Inventory number already exist!',
             },
 
@@ -139,6 +138,8 @@ class PotterForm(forms.ModelForm):
             'placeholder': 'លេខបញ្ជី / Inventory number',
             'class': 'form-control',
         })
+
+        # self.fields['inventory_number'].required = False
 
         # Customize the created_at field
         self.fields['created_at'].widget.attrs.update({

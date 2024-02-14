@@ -30,6 +30,10 @@ def inventory_of_pottery_making(request):
             person = forms.save()
             formset.instance = person
             formset.save()
+        else:
+            # Form is not valid, re-render the form with errors
+            return render(request, "ceramic-app/index.html", {'forms': forms, 'formset': formset, 'captcha_form': captcha_form})
+
         # if forms.is_valid() and formset.is_valid():
             # print('Both form are valid.')
       
