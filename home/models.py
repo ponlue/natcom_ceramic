@@ -1,13 +1,34 @@
 from django.db import models
 from datetime import datetime
 
+
+class TypePottery(models.Model):
+    title = models.CharField(max_length=25, unique=True)
+    # images = models.ManyToManyField(Image)
+    diameter = models.DecimalField(max_digits=5, decimal_places=2)
+    height = models.DecimalField(max_digits=5, decimal_places=2)
+    thickness = models.DecimalField(max_digits=5, decimal_places=2)
+    color = models.CharField(max_length=20)
+
+    def __str__(self) -> str:
+        return self.title
+
+class TechniqueMakingPottery(models.Model):
+    json_data = models.JSONField(default=None, null=True)
+
+
+
+
+
+
 class Province(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=50, unique=True)
+    google_map_url = models.URLField(default=None, blank=False, null=True)
+    youtube_url = models.URLField(default=None, blank=False, null=True)
 
     def __str__(self):
         return self.name
-
 class District(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=50, unique=True)
@@ -29,28 +50,16 @@ class Village(models.Model):
     commune = models.ForeignKey(Commune, on_delete=models.CASCADE)
     def __str__(self):
         return self.name    
-
-
     
-class TypePottery(models.Model):
-    title = models.CharField(max_length=25, unique=True)
-    # images = models.ManyToManyField(Image)
-    diameter = models.DecimalField(max_digits=5, decimal_places=2)
-    height = models.DecimalField(max_digits=5, decimal_places=2)
-    thickness = models.DecimalField(max_digits=5, decimal_places=2)
-    color = models.CharField(max_length=20)
 
-    def __str__(self) -> str:
-        return self.title
-
-
-
-class TechniqueMakingPottery(models.Model):
-    json_data = models.JSONField(default=None, null=True)
+# Store images of Province
+class ProvinceImage(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    image = models.ImageField(upload_to = 'province_images/', null=True, blank=True)
+    
 
 
 class Potter(models.Model):
-
 
     GENDER_CHOICES = [
         ('M', 'Male'),
@@ -89,12 +98,12 @@ class Potter(models.Model):
 
     description = models.TextField(default=None, blank=True, null=True)
 
+
+
 class Image(models.Model):
     potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None)
     image = models.ImageField(upload_to = 'uploads/')
-    # def __str__(self):
-    #     return str(self.image)
-    
+
 
 class ToolPottery(models.Model):
     title = models.CharField(max_length=25, unique=True, null=False, blank=False)
