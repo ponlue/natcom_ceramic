@@ -15,7 +15,7 @@ class ProvinceAdmin(admin.ModelAdmin):
     def display_images(self, obj):
         first_image = obj.provinceimage_set.first()
         if first_image:
-            return mark_safe(f'<img src="{first_image.image.url}" width="50" height="50" />')
+            return mark_safe(f'<img src="{first_image.image.url}" width="80" height="80" />')
         return "No Image"
 
     display_images.short_description = 'Images'
