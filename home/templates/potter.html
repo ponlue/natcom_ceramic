@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head/header.html' %}
+</head>
+<body>
+    <header class="header">
+        {% include 'menu/navbar.html' with province_list=province_list %}
+    </header>
+
+    <section class="slider">
+        {% include 'menu/slide.html' with img_list=img_list %}
+    </section>
+
+    <footer id="footer" class="footer ">
+        {% include 'footer/footer.html' %}
+    </footer>
+    {% include 'footer/load-js.html' %}
+</body>
+</html>

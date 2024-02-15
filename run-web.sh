@@ -7,8 +7,8 @@
 # sudo cp -r static web
 # sudo chown natcom:natcom_sothatna -R web
 
-sudo docker container stop sothatna-webapp-container
-sudo docker container rm sothatna-webapp-container
-sudo docker image rm sothatna-img-app:2024
-sudo docker build . -t="sothatna-img-app:2024"
-sudo docker run -it -d -p 5063:8000 --name sothatna-webapp-container --mount type=bind,source="$(pwd)",target=/web sothatna-img-app:2024
+docker container stop meng-webapp-container
+docker container rm meng-webapp-container
+docker image rm meng-img-app:2024
+docker build . -t="meng-img-app:2024"
+docker run -it -d -p 5555:8000 --name meng-webapp-container --mount type=bind,source="$(pwd)",target=/web meng-img-app:2024

@@ -5,10 +5,28 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
-from home.models import Potter, Image
+from home.models import Potter, Image, Province
 
-class HomePageView(TemplateView):
-    template_name = "index.html"
+
+
+def HomePageView(request):
+    province_list = Province.objects.all()
+    potter_list = Potter.objects.all()
+    img_list = Image.objects.all()
+    return render(request, "index.html", {'province_list':province_list,'img_list':img_list,'potter_list':potter_list})
+
+
+def all_province(request):
+    province_list = Province.objects.all()
+    potter_list = Potter.objects.all()
+    img_list = Image.objects.all()
+    return render(request, "menu/navbar.html", {'province_list':province_list,'img_list':img_list,'potter_list':potter_list})
+
+def all_Potter(request):
+    province_list = Province.objects.all()
+    potter_list = Potter.objects.all()
+    img_list = Image.objects.all()
+    return render(request, "potter.html",{'province_list':province_list,'img_list':img_list,'potter_list':potter_list})
 
 def inventory_of_pottery_making(request):
 
@@ -76,7 +94,3 @@ def inventory_of_pottery_making(request):
     return render(request, "ceramic-app/index.html", {'forms': forms, 'formset': formset, 'captcha_form': captcha_form})
 
 
-
-
-def kampot_view(request):
-    return render(request, "kampot/index.html")

@@ -8,6 +8,7 @@ RUN pip install django==4.2
 RUN pip install djangoajax
 RUN pip install  django-simple-captcha 
 RUN pip install django-multi-captcha-admin
+RUN pip install django-ckeditor
 RUN apt update -y
 RUN apt install vim -y
 COPY . /ceramic/
