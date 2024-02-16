@@ -1,11 +1,13 @@
+import json
+from django.core.files.storage import FileSystemStorage
 from django.forms import inlineformset_factory
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
-from home.models import Potter, Image
+from home.models import Potter, Image, TechniqueMakingPottery
 
 class HomePageView(TemplateView):
     template_name = "index.html"
@@ -22,22 +24,53 @@ def inventory_of_pottery_making(request):
     )
 
     if request.method == 'POST':
+
         forms = PotterForm(request.POST)
         formset = ImageFormSet(request.POST, request.FILES, instance=Potter())
         captcha_form = SimpleCaptchaForm(request.POST)
 
-        print(f'data list {request.POST}')
+        # print(f'Data info: {request.POST}') // Logs what we will get data after send request form user
+
+        titles = request.POST.getlist('title[]')
+        descriptions = request.POST.getlist('description[]')
+        images = request.FILES.getlist('image[]')
 
 
-        if forms.is_valid() and formset.is_valid() and captcha_form.is_valid():
-            # person = forms.save()
-            # formset.instance = person
-            # formset.save()
-            data_list = request.POST
-            print(f'data list {data_list}')
-        else:
-            # Form is not valid, re-render the form with errors
-            return render(request, "ceramic-app/index.html", {'forms': forms, 'formset': formset, 'captcha_form': captcha_form})
+        # Create a folder to store the uploaded images
+        fs = FileSystemStorage(location='media/tecniqueofmaking/')
+
+
+        data_list = []
+        for title, description, image in zip(titles, descriptions, images):
+            # Create a unique filename for each image, for example, using the title
+            filename = fs.save("tecniqueofmaking_" + title + ".png", image)
+
+            # Get the URL of the saved file
+            file_url = fs.url(filename)
+
+            # Create a dictionary with the data including the file path
+            data_dict = {'title': title, 'description': description, 'image_url': file_url}
+            data_list.append(data_dict)
+
+        technique_list = TechniqueMakingPottery(json_data= data_dict)
+        technique_list.save()
+
+        print(data_list)
+
+        return HttpResponse('Data received, images saved, and converted to JSON successfully!')
+
+
+        # if forms.is_valid() and formset.is_valid() and captcha_form.is_valid():
+        #     # person = forms.save()
+        #     # formset.instance = person
+        #     # formset.save()
+        #     data_list = request.POST
+  
+        #     print(f'data list {data_list}')
+
+        # else:
+        #     # Form is not valid, re-render the form with errors
+        #     return render(request, "ceramic-app/index.html", {'forms': forms, 'formset': formset, 'captcha_form': captcha_form})
 
         # if forms.is_valid() and formset.is_valid():
             # print('Both form are valid.')

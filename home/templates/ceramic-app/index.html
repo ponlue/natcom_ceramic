@@ -107,7 +107,7 @@
             <div class="container" style="max-width: 650px; margin: 0 auto;">
                 <form action="potter-inventory" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% for field in forms %}
+                    <!-- {% for field in forms %}
                         <div class="row mb-4">
                            <div class="col-md-12">
                                 {{ field.label_tag }}
@@ -168,14 +168,17 @@
                         {{ form.as_table }}
                         </div>
                     {% endfor %}
+
+                    <hr> -->
     
     
-                    <!-- <div class="row mt-4">
-                        <div class="col-md-12">
+                    <div class="row mt-5">
+                        <div class="col-md-6">
                             <h5 class="" style="font-weight: 600; color: #333"> II. របៀបនៃការផលិត / Technique</h5>
+                            <hr>
                         </div>
-                        <div class="col-md-12 mb-4">
-                            <button type="button" class="btn btn-success btn-sm" onclick="addFields()">បន្ថែម / Add</button>
+                        <div class="col-md-6 mb-4">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="addFields()">បន្ថែម / Add</button>
                             <button type="button" class="btn btn-danger btn-sm" onclick="removeFields()">លុប / Remove</button>
                         </div>
                     </div>
@@ -184,24 +187,25 @@
                         <div class="form-fields">
                                 <div class="col-md-12 mb-3">
                                     <label for="technique-title" style="font-weight: bold;">1. ចំណងជើង / Title</label>
-                                    <input type="text" name="title" id="title-input" required class="form-control" placeholder="សូមវាយបញ្ចូល">
+                                    <input type="text" name="title[]" id="title-input" required class="form-control" placeholder="សូមវាយបញ្ចូល">
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="description">ពិពណ៌នា / Description</label>
-                                    <textarea name="description" id="description-input" required class="form-control" rows="5"></textarea>                
+                                    <textarea name="description[]" id="description-input" required class="form-control" rows="5"></textarea>                
                                 </div>
                                 <div class="col-md-12 mb-5">
                                     <label for="photo">រូបថត / Photo</label>
-                                    <input type="file" name="images" class="form-control" id="images-input" multiple accept="image/*" required>
+                                    <input type="file" name="image[]" class="form-control" id="images-input" multiple accept="" required>
                                 </div>
     
                                 <hr>
                         </div>
-                    </div> -->
+                    </div>
     
                     <!-- Captcha form -->
                     <div class="captcha_wrapper mt-5">
-                        {{ captcha_form.as_p }}
+                        <!-- {{ captcha_form.as_p }} -->
+                        <!-- <p style="color: rgba(119, 102, 16, 0.642);">Important: សូមវាយបញ្ចូល captcha ឲ្យបានត្រឹមត្រូវ</p> -->
                     </div>
                     <!-- End Captcha form -->
                     

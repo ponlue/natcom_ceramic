@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 from datetime import datetime
 
@@ -15,10 +16,6 @@ class TypePottery(models.Model):
 
 class TechniqueMakingPottery(models.Model):
     json_data = models.JSONField(default=None, null=True)
-
-
-
-
 
 
 class Province(models.Model):
