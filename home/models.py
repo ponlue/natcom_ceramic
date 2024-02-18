@@ -1,7 +1,7 @@
 from typing import Any
 from django.db import models
 from datetime import datetime
-
+from django_ckeditor_5.fields import CKEditor5Field
 
 class TypePottery(models.Model):
     title = models.CharField(max_length=25, unique=True)
@@ -55,7 +55,6 @@ class ProvinceImage(models.Model):
     image = models.ImageField(upload_to = 'province_images/', null=True, blank=True)
     
 
-
 class Potter(models.Model):
 
     GENDER_CHOICES = [
@@ -93,7 +92,7 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
 
-    description = models.TextField(default=None, blank=True, null=True)
+    description = CKEditor5Field('description', config_name='default')
 
 
 
