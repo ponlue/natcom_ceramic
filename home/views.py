@@ -1,11 +1,12 @@
 from django.forms import inlineformset_factory
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.http import HttpResponse
 
 from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
-from home.models import Potter, Image, Province
+from home.models import Potter, Image, Province, Post, Category
 
 
 
@@ -13,20 +14,51 @@ def HomePageView(request):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
     img_list = Image.objects.all()
-    return render(request, "index.html", {'province_list':province_list,'img_list':img_list,'potter_list':potter_list})
-
+    internal_list = Post.objects.all().filter(category=1)
+    external_list = Post.objects.filter(category=2).all()
+    return render(request, "index.html", {
+        'province_list':province_list,
+        'img_list':img_list,
+        'potter_list':potter_list,
+        'internal_list':internal_list,
+        'external_list':external_list,
+        })
+    
 
 def all_province(request):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
     img_list = Image.objects.all()
-    return render(request, "menu/navbar.html", {'province_list':province_list,'img_list':img_list,'potter_list':potter_list})
+    return render(request, "menu/navbar.html", {
+        'province_list':province_list,
+        'img_list':img_list,
+        'potter_list':potter_list})
 
 def all_Potter(request):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
     img_list = Image.objects.all()
-    return render(request, "potter.html",{'province_list':province_list,'img_list':img_list,'potter_list':potter_list})
+    return render(request, "potter.html",{
+        'province_list':province_list,
+        'img_list':img_list,
+        'potter_list':potter_list
+        })
+
+def all_post(request, id):
+    province_list = Province.objects.all()
+    potter_list = Potter.objects.all()
+    img_list = Image.objects.all()
+    internal_list = Post.objects.all().filter(category=1)
+    external_list = Post.objects.all().filter(category=2)
+    post_list = get_object_or_404(Post, id=id)
+    return render(request, "post/postbody.html", {
+        'province_list':province_list,
+        'img_list':img_list,
+        'potter_list':potter_list,
+        'internal_list':internal_list,
+        'external_list':external_list,
+        'post_list':post_list,
+        })
 
 def inventory_of_pottery_making(request):
 

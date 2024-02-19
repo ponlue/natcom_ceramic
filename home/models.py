@@ -1,5 +1,26 @@
 from django.db import models
 from datetime import datetime
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.safestring import mark_safe
+
+class Category(models.Model):
+    title = models.CharField(max_length=50, unique=True)
+    create_at = models.DateTimeField(default=datetime.now)
+    description = models.CharField(max_length=300)
+
+class Post(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50, unique=True)
+    body = RichTextUploadingField(blank=True, null=True)
+    image = models.ImageField(upload_to='static/img/uploads')
+    create_at = models.DateTimeField(default=datetime.now)
+    description = models.CharField(null=True, blank=True, max_length=500)
+    def post_photo(self):
+        return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
+    post_photo.short_description = 'image'
+    post_photo.allow_tags = True
+    
+    
 
 class Province(models.Model):
     name = models.CharField(max_length=255, unique=True)

@@ -20,7 +20,7 @@
                         <nav class="navigation">
                             <ul class="nav menu">
                                 <li >
-                                    <a href="home">Home</a>
+                                    <a href="/">Home</a>
                                 </li>
                                 <li>
                                     <a href="#">Ancient Ceramic </a>
@@ -35,7 +35,7 @@
                                     <a href="#">Traditional Ceramic </a>
                                     <ul class="dropdown">
                                         {% for province in province_list %}
-                                        <li><a href="potter?id_pro={{ province }}">{{ province }}</a></li>
+                                        <li><a href="potter?id_pro={{ province.id }}">{{ province }}</a></li>
                                         <!-- <li><a href="">Kampong Chhnang</a></li>
                                         <li><a href="">Kampong Spue</a></li>
                                         <li><a href="">Prey Veng</a></li>

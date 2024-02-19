@@ -5,6 +5,7 @@ from .models import *
 admin.site.site_header = 'Adminstration'
 
 
+
 class ImageAdmin(admin.ModelAdmin):
     list_display = (
         'potter',
@@ -26,9 +27,21 @@ class PotterAdmin(admin.ModelAdmin):
 
     )
 
+class showCategoryAdmin(admin.ModelAdmin):
+    fields = ['title','create_at','description']
+    list_display=('title', 'create_at', 'description')
+
+class showPostAdmin(admin.ModelAdmin):
+    fields = ('category','title','description','body','image','post_photo','create_at')
+    list_display=('category_name','title', 'image','post_photo', 'create_at')
+    readonly_fields = ['post_photo']
+    def category_name(self, instance):
+        return instance.category.title
+
+admin.site.register(Category, showCategoryAdmin)
+admin.site.register(Post, showPostAdmin)
 admin.site.register(Potter, PotterAdmin)
 admin.site.register(Image, ImageAdmin)
-
 admin.site.register(TypePottery)
 admin.site.register(Province)
 admin.site.register(District)
