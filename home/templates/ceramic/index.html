@@ -83,6 +83,10 @@
                 font-size: 24px;
             }
 
+            .captcha {
+                width: 130px;
+            }
+
 
             
         </style>
@@ -108,7 +112,7 @@
                 >Inventory of Pottery Maker in Cambodia</p>
             </div>
             <div class="container" style="max-width: 650px; margin: 0 auto;">
-                <form action="potter-inventory" method="POST" enctype="multipart/form-data">
+                <form action="potter" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ forms.media }}
 
@@ -206,7 +210,7 @@
                     <!-- Captcha form -->
                     <div class="captcha_wrapper mt-5">
                         {{ captcha_form.as_p }}
-                        <p style="color: rgba(119, 102, 16, 0.642);">Important: សូមវាយបញ្ចូល captcha ឲ្យបានត្រឹមត្រូវ</p>
+                        <!-- <p style="color: rgba(119, 102, 16, 0.642);">Important: សូមវាយបញ្ចូល captcha ឲ្យបានត្រឹមត្រូវ</p> -->
                     </div>
                     <!-- End Captcha form -->
                     

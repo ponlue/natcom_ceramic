@@ -145,6 +145,27 @@ class PotterForm(forms.ModelForm):
         self.fields['description'].required = False
 
 
+        self.fields['province_of_pob'].required = False
+
+        self.fields['district_of_pob'].required = False
+
+        self.fields['commune_of_pob'].required = False
+
+        self.fields['village_of_pob'].required = False
+
+
+
+        self.fields['province_of_address'].required = False
+
+        self.fields['district_of_address'].required = False
+
+        self.fields['commune_of_address'].required = False
+
+        self.fields['village_of_address'].required = False
+
+
+
+
 
 
 
@@ -197,6 +218,9 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ['image']
+        labels = {
+            'image': 'រូបថតទូទៅរបស់ស្មូន',
+        }
         widgets = {
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }

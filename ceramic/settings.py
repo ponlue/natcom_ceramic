@@ -87,17 +87,19 @@ WSGI_APPLICATION = 'ceramic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        
-        # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'savimexp_db_ceramic_test',
-        # 'USER': 'savimexp_user_ceramic',
-        # 'PASSWORD': 'C#293()239#@AbB',
-        # 'HOST': 'database.krissna.com',
-        # 'PORT': '3306',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'db_ceramic_testing',
+        'USER': 'db_user_ceramic',
+        'PASSWORD': 'C#293()239#@AbB',
+        'HOST': 'database.krissna.com',
+        'PORT': '211',
+
     }
 }
+
 
 
 # Password validation

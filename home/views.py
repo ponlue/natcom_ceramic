@@ -1,8 +1,9 @@
 import json
 from django.core.files.storage import FileSystemStorage
+from django.core.serializers import serialize
 from django.forms import inlineformset_factory
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect, render
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
@@ -12,13 +13,13 @@ from home.models import Potter, Image, TechniqueMakingPottery
 class HomePageView(TemplateView):
     template_name = "index.html"
 
-def potter_inventory(request):
-    # Allows user to upload multitple
+def potter(request):
+
     ImageFormSet = inlineformset_factory(
         Potter, 
         Image, 
         form=ImageForm, 
-        extra=5, # Specific 2 or 3 of input fields
+        extra=3, # Specific 2 or 3 of input fields
         can_delete=False,
     )
 
@@ -33,22 +34,21 @@ def potter_inventory(request):
             images = request.FILES.getlist('image[]')
 
             # Create a folder to store the uploaded images
-            fs = FileSystemStorage(location='media/tecniqueofmaking/')
+            fs = FileSystemStorage(location='media/')
 
-            data_list = []
-            for i, title, description, image in zip(titles, descriptions, images):
+            for title, description, image in zip(titles, descriptions, images):
 
                 # Create a unique filename for each image
-                filename = fs.save("tecniqueofmaking_" + i + ".png", image)
+                filename = fs.save(title + ".png", image)
 
                 # Get the URL of the saved file
                 file_url = fs.url(filename)
 
                 # Create a dictionary with the data including the file path
                 data_dict = {'title': title, 'description': description, 'image_url': file_url}
-                data_list.append(data_dict)
+                # data_list.append(data_dict)
 
-            technique_list = TechniqueMakingPottery(json_data=data_list)
+            technique_list = TechniqueMakingPottery(json_data=data_dict)
             potter = forms.save()
             formset.instance = potter
             formset.save()
@@ -56,11 +56,11 @@ def potter_inventory(request):
             technique_list.save()
 
             print(f'Status code: {HttpResponse.status_code}')
+            if HttpResponse.status_code == 200:
+                return HttpResponse('Data received, images saved, and converted to JSON successfully!')
+            else:
+                return HttpResponse('An errors occurred while upload!')
 
-            # print(data_list)
-
-            # if HttpResponse.status_code == 200:
-            #     return HttpResponse('Data received, images saved, and converted to JSON successfully!')
 
 
     else:
@@ -68,4 +68,20 @@ def potter_inventory(request):
         formset = ImageFormSet(instance=Potter())
         captcha_form = SimpleCaptchaForm()
 
-    return render(request, "ceramic/index.html", {'forms': forms, 'formset': formset, 'captcha_form': captcha_form})
+    context = {
+        'forms': forms, 
+        'formset': formset, 
+        'captcha_form': captcha_form
+    }
+
+    return render(request, "ceramic/index.html", context)
+
+
+def techniquemakingpotter(req):
+    queryset = TechniqueMakingPottery.objects.all()
+    serialized_data = json.loads(serialize('json', queryset))
+
+    context = {
+        'json_data': serialized_data,
+    }
+    return render(req, 'ceramic/technique.html', context)

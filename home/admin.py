@@ -40,11 +40,13 @@ class ImageAdmin(admin.ModelAdmin):
     )
 
 class PotterAdmin(admin.ModelAdmin):
+
     list_display = (
         'inventory_number', 
         'full_name',
         'gender', 
         'dob', 
+        'duration',
         'amount_of_pottery',
         'inheritance',
         'type_of_pottery',
