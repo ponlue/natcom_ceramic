@@ -4,8 +4,10 @@ from captcha.fields import CaptchaField
 from .models import Commune, District, Image, Potter, Province, TypePottery, Village
 from django_ckeditor_5.fields import CKEditor5Widget
 
+
 class SimpleCaptchaForm(forms.Form):
     captcha = CaptchaField()
+
 
 class PotterForm(forms.ModelForm):
     GENDER_CHOICES = [
@@ -73,12 +75,8 @@ class PotterForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-control'}),
         label='ជ្រើសរើសភូមិ / Choose Village POB'
     )
-
     # POB form field customization
-
-
     description = forms.CharField(widget=CKEditor5Widget())
-
 
     def __init__(self, *args, **kwargs):
         super(PotterForm, self).__init__(*args, **kwargs)
@@ -89,52 +87,51 @@ class PotterForm(forms.ModelForm):
             'class': 'form-control',
         })
 
-
         # Customize the created_at field
         self.fields['created_at'].widget.attrs.update({
             'class': 'form-control',
         })
 
         self.fields['full_name'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល',
+            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['duration'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល',
+            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['amount_of_pottery'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល',
+            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['inheritance'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល',
+            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
         
         self.fields['url_google_map'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល',
+            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['youtube_url'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល',
+            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
         self.fields['description'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល',
+            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['x_coordinate'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល X',
+            'placeholder': 'សូមវាយបញ្ចូល X',
             'class': 'form-control',
         })
         self.fields['y_coordinate'].widget.attrs.update({
-            'placeholder': '​សូមវាយបញ្ចូល Y',
+            'placeholder': 'សូមវាយបញ្ចូល Y',
             'class': 'form-control',
         })
 
@@ -144,30 +141,15 @@ class PotterForm(forms.ModelForm):
         self.fields['inheritance'].required = False
         self.fields['description'].required = False
 
-
         self.fields['province_of_pob'].required = False
-
         self.fields['district_of_pob'].required = False
-
         self.fields['commune_of_pob'].required = False
-
         self.fields['village_of_pob'].required = False
 
-
-
         self.fields['province_of_address'].required = False
-
         self.fields['district_of_address'].required = False
-
         self.fields['commune_of_address'].required = False
-
         self.fields['village_of_address'].required = False
-
-
-
-
-
-
 
     class Meta:
         model = Potter
@@ -210,8 +192,6 @@ class PotterForm(forms.ModelForm):
                 'unique': 'សូមបញ្ចូលតំណភ្ជាប់ឲ្យបានត្រឹមត្រូវ / Please input correct link or url',
             },
         }
-
-
 
 
 class ImageForm(forms.ModelForm):

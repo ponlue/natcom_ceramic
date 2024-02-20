@@ -1,7 +1,9 @@
-from typing import Any
 from django.db import models
 from datetime import datetime
+
+from django.db.models import CharField
 from django_ckeditor_5.fields import CKEditor5Field
+
 
 class TypePottery(models.Model):
     title = models.CharField(max_length=25, unique=True)
@@ -11,10 +13,12 @@ class TypePottery(models.Model):
     thickness = models.DecimalField(max_digits=5, decimal_places=2)
     color = models.CharField(max_length=20)
 
-    def __str__(self) -> str:
+    def __str__(self) -> CharField:
         return self.title
 
+
 class TechniqueMakingPottery(models.Model):
+    objects = None
     json_data = models.JSONField(default=None, null=True)
 
 
@@ -26,12 +30,16 @@ class Province(models.Model):
 
     def __str__(self):
         return self.name
+
+
 class District(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=50, unique=True)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name
+
 
 class Commune(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -41,10 +49,12 @@ class Commune(models.Model):
     def __str__(self):
         return self.name
 
+
 class Village(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=50, unique=True)
     commune = models.ForeignKey(Commune, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name    
     
@@ -68,23 +78,21 @@ class Potter(models.Model):
     full_name = models.CharField(max_length=255)  
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     dob = models.DateField()
-    duration = models.PositiveIntegerField(blank=False, null=True)
-    amount_of_pottery = models.PositiveIntegerField()  # Use PositiveIntegerField for non-negative values
+    duration = models.CharField(max_length=255, blank=False, null=True)
+    amount_of_pottery = models.PositiveIntegerField()
     inheritance = models.CharField(max_length=255, blank=False, null=True)
 
     type_of_pottery = models.ForeignKey(TypePottery, on_delete=models.CASCADE, default=1)
 
-    province_of_pob = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_pob')
-    district_of_pob = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_pob')
-    commune_of_pob = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_pob')
-    village_of_pob = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_pob')
+    province_of_pob = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_pob', null=True, blank=True)
+    district_of_pob = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_pob', null=True, blank=True)
+    commune_of_pob = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_pob', null=True, blank=True)
+    village_of_pob = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_pob', null=True, blank=True)
 
-
-    province_of_address = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_address')
-    district_of_address = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_address')
-    commune_of_address = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_address')
-    village_of_address = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_address')
-
+    province_of_address = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_address', null=True, blank=True)
+    district_of_address = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_address', null=True, blank=True)
+    commune_of_address = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='commune_of_address', null=True, blank=True)
+    village_of_address = models.ForeignKey(Village, on_delete=models.CASCADE, related_name='village_of_address', null=True, blank=True)
 
     x_coordinate = models.CharField(max_length=255, default=None, blank=True, null=True)
     y_coordinate = models.CharField(max_length=255, default=None, blank=True, null=True) 
@@ -93,7 +101,6 @@ class Potter(models.Model):
     youtube_url = models.URLField(default=None, blank=False, null=True)
 
     description = CKEditor5Field('description', config_name='default')
-
 
 
 class Image(models.Model):

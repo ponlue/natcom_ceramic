@@ -1,11 +1,8 @@
 from django.urls import include, path
-from .views import *
 from . import views
 
-app_name = "home"
 urlpatterns = [
-    path("", HomePageView.as_view(), name="home"),# url homepage
-    path("potter", views.potter, name="Potter application"), # ceramic app
-    path("howto", views.techniquemakingpotter, name="howto"), # ceramic app
-
+    path("", views.home, name="home"),  # homepage
+    path("potter", views.potter, name="Potter application"),  # ceramic app
+    path("howto", views.technique_making_potter_list, name="technique making potter list"),  # test technique_making_potter
 ]

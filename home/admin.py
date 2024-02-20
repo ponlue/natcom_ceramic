@@ -59,6 +59,9 @@ class PotterAdmin(admin.ModelAdmin):
         # 'description'
     )
 
+    search_fields = ("inventory_number",)
+
+
 admin.site.register(TechniqueMakingPottery)
 admin.site.register(Province, ProvinceAdmin)
 admin.site.register(Potter, PotterAdmin)

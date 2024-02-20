@@ -27,7 +27,7 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'css/app.css' %}">
-        
+
         <style> 
             * {
                 margin: 0;
@@ -82,12 +82,6 @@
                 color: #fff;
                 font-size: 24px;
             }
-
-            .captcha {
-                width: 130px;
-            }
-
-
             
         </style>
 
@@ -210,7 +204,7 @@
                     <!-- Captcha form -->
                     <div class="captcha_wrapper mt-5">
                         {{ captcha_form.as_p }}
-                        <!-- <p style="color: rgba(119, 102, 16, 0.642);">Important: សូមវាយបញ្ចូល captcha ឲ្យបានត្រឹមត្រូវ</p> -->
+                        <p style="color: rgba(17, 67, 4, 0.642);">Note: Captcha មានចំនួន ៤ តួរអក្សរ!</p>
                     </div>
                     <!-- End Captcha form -->
                     
@@ -228,6 +222,8 @@
             </div>
 
         </div>
+
+        
 
         <script>
             function addFields() {
@@ -255,6 +251,7 @@
                     container.removeChild(forms[forms.length - 1]);
                 }
             }
+
         </script>
 
         <!-- Bootstrap 5.0.2 JS -->
