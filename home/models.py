@@ -17,11 +17,6 @@ class TypePottery(models.Model):
         return self.title
 
 
-class TechniqueMakingPottery(models.Model):
-    objects = None
-    json_data = models.JSONField(default=None, null=True)
-
-
 class Province(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=50, unique=True)
@@ -101,6 +96,12 @@ class Potter(models.Model):
     youtube_url = models.URLField(default=None, blank=False, null=True)
 
     description = CKEditor5Field('description', config_name='default')
+
+
+class TechniqueMakingPottery(models.Model):
+    objects = None
+    json_data = models.JSONField(default=None, null=True, blank=True)
+    potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None, blank=True, null=True)
 
 
 class Image(models.Model):
