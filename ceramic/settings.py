@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'ceramic_db',
         'USER': 'nadotdev',
         'PASSWORD': 'Tana@321',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }

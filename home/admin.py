@@ -3,10 +3,12 @@ from django.contrib import admin
 from .models import *
 from django.utils.safestring import mark_safe
 
-admin.site.site_header = 'Ceramic Web Adminstration'
+admin.site.site_header = 'Ceramic Administration'
+
 
 class ProvinceImageInline(admin.TabularInline):
     model = ProvinceImage
+
 
 class ProvinceAdmin(admin.ModelAdmin):
     inlines = [ProvinceImageInline]
@@ -27,11 +29,13 @@ class ProvinceAdmin(admin.ModelAdmin):
         'youtube_url',
     )
 
+
 class ProvinceImageAdmin(admin.ModelAdmin):
     list_display = (
         'province',
         'image',
     )
+
 
 class ImageAdmin(admin.ModelAdmin):
     list_display = (
@@ -39,9 +43,11 @@ class ImageAdmin(admin.ModelAdmin):
         'image'
     )
 
+
 class PotterAdmin(admin.ModelAdmin):
 
     list_display = (
+        'id',
         'inventory_number', 
         'full_name',
         'gender', 
@@ -59,10 +65,19 @@ class PotterAdmin(admin.ModelAdmin):
         # 'description'
     )
 
-    search_fields = ("inventory_number",)
+    search_fields = ("inventory_number", "full_name")
 
 
-admin.site.register(TechniqueMakingPottery)
+class TechniqueMakingPotteryAdmin(admin.ModelAdmin):
+    list_display = ('potter_name', 'json_data')
+    list_display_links = ('potter_name', 'json_data')
+
+    def potter_name(self, potter_object):
+        return potter_object.potter.full_name
+    potter_name.short_description = 'Potter fullname'
+
+
+admin.site.register(TechniqueMakingPottery, TechniqueMakingPotteryAdmin)
 admin.site.register(Province, ProvinceAdmin)
 admin.site.register(Potter, PotterAdmin)
 admin.site.register(Image)

@@ -24,45 +24,44 @@ def potter(request):
         forms = PotterForm(request.POST)
         formset = image_formset(request.POST, request.FILES, instance=Potter())
         captcha_form = SimpleCaptchaForm(request.POST)
-        try:
-            if forms.is_valid() and formset.is_valid() and captcha_form.is_valid():
-                # Getting technique of making pottery as list
-                titles = request.POST.getlist('title[]')
-                descriptions = request.POST.getlist('description[]')
-                images = request.FILES.getlist('image[]')
+        if forms.is_valid() and formset.is_valid():
+            # Getting technique of making pottery as list
+            titles = request.POST.getlist('title[]')
+            descriptions = request.POST.getlist('description[]')
+            images = request.FILES.getlist('image[]')
 
-                # Create a folder to store the uploaded images
-                fs = FileSystemStorage(location='media/')
+            # Create a folder to store the uploaded images
+            fs = FileSystemStorage(location='media/')
 
-                data_dict = {}
-                for title, description, image in zip(titles, descriptions, images):
-                    # Create a unique filename for each image
-                    filename = fs.save(title + ".png", image)
+            data_dict = {}
+            for title, description, image in zip(titles, descriptions, images):
+                # Create a unique filename for each image
+                filename = fs.save(title + ".png", image)
 
-                    # Get the URL of the saved file
-                    file_url = fs.url(filename)
+                # Get the URL of the saved file
+                file_url = fs.url(filename)
 
-                    # Create a dictionary with the data including the file path
-                    data_dict = {
-                        'title': title,
-                        'description': description,
-                        'image_url': file_url
-                    }
+                # Create a dictionary with the data including the file path
+                data_dict = {
+                    'title': title,
+                    'description': description,
+                    'image_url': file_url
+                }
 
-                technique_list = TechniqueMakingPottery(json_data=data_dict)
-                formset.instance = forms.save()
-                formset.save()
-                technique_list.save()
+            """
+                Getting potter id what TechniqueMakingPottery is belong to potter.
+            """
+            formset.instance = forms.save()
+            formset.save()
+            technique_instance = TechniqueMakingPottery(json_data=data_dict, potter=forms.instance)
+            technique_instance.save()
 
-                print(f'Status code: {HttpResponse.status_code}')
-                if HttpResponse.status_code == 200:
-                    return HttpResponse('Data received, images saved, and converted to JSON successfully!')
-                else:
-                    return HttpResponse('An errors occurred while upload!')
+            if HttpResponse.status_code == 200:
+                return HttpResponse('Data received, images saved, and converted to JSON successfully!')
             else:
-                return HttpResponse('Form invalid!')
-        except Exception as e:
-            return HttpResponseServerError("Oops! Something went wrong.")
+                return HttpResponse('An errors occurred while upload!')
+        # else:
+        #     return HttpResponse('Form invalid!')
     else:
         forms = PotterForm()
         formset = image_formset(instance=Potter())

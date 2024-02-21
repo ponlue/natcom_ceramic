@@ -2,7 +2,7 @@ from typing import Any
 from django import forms
 from captcha.fields import CaptchaField
 from .models import Commune, District, Image, Potter, Province, TypePottery, Village
-from django_ckeditor_5.fields import CKEditor5Widget
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 
 class SimpleCaptchaForm(forms.Form):
@@ -76,7 +76,12 @@ class PotterForm(forms.ModelForm):
         label='ជ្រើសរើសភូមិ / Choose Village POB'
     )
     # POB form field customization
-    description = forms.CharField(widget=CKEditor5Widget())
+    describe = forms.CharField(
+        label='ពិពណ៍នា / Description',
+        widget=CKEditor5Widget(
+            config_name='default',
+        )
+    )
 
     def __init__(self, *args, **kwargs):
         super(PotterForm, self).__init__(*args, **kwargs)
@@ -121,10 +126,6 @@ class PotterForm(forms.ModelForm):
             'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
-        self.fields['description'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល',
-            'class': 'form-control',
-        })
 
         self.fields['x_coordinate'].widget.attrs.update({
             'placeholder': 'សូមវាយបញ្ចូល X',
@@ -139,7 +140,7 @@ class PotterForm(forms.ModelForm):
         self.fields['y_coordinate'].required = False
         self.fields['duration'].required = False
         self.fields['inheritance'].required = False
-        self.fields['description'].required = False
+        self.fields['describe'].required = False
 
         self.fields['province_of_pob'].required = False
         self.fields['district_of_pob'].required = False
@@ -154,9 +155,6 @@ class PotterForm(forms.ModelForm):
     class Meta:
         model = Potter
         fields = '__all__'
-        widgets = {
-            'description': CKEditor5Widget(),
-        }
         labels = {
             'inventory_number': 'លេខបញ្ជី / Inventory number',
             'created_at': ' កាលបរិច្ឆេទនៃការចុះបញ្ជី / Date of Inventory ',
@@ -166,10 +164,6 @@ class PotterForm(forms.ModelForm):
             'inheritance': 'ការបន្តចំណេះ / Inheritance',
             'url_google_map': 'តំណភ្ជាប់ / Google Map',
             'youtube_url': 'តំណភ្ជាប់ / YouTube Link',
-            # 'description': 'ពិពណ៍នា / Description',
-            # 'x_coordinate': 'X',
-            # 'y_coordinate': 'Y'
-
         }
         
         error_messages = {

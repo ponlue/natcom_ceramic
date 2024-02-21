@@ -70,7 +70,7 @@ class Potter(models.Model):
 
     inventory_number = models.IntegerField(unique=True)
     created_at = models.DateTimeField(default=datetime.now)
-    full_name = models.CharField(max_length=255)  
+    full_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     dob = models.DateField()
     duration = models.CharField(max_length=255, blank=False, null=True)
@@ -95,18 +95,21 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
 
-    description = CKEditor5Field('description', config_name='default')
+    describe = CKEditor5Field('Potter Description', config_name='default', default=None)
 
 
 class TechniqueMakingPottery(models.Model):
     objects = None
     json_data = models.JSONField(default=None, null=True, blank=True)
-    potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="potter")
+
+    def __str__(self):
+        return str('របៀបផលិតរបស់: ' + self.potter.full_name)
 
 
 class Image(models.Model):
     potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None)
-    image = models.ImageField(upload_to = 'uploads/')
+    image = models.ImageField(upload_to='uploads/')
 
 
 class ToolPottery(models.Model):
