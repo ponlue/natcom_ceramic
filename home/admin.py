@@ -38,6 +38,8 @@ class showPostAdmin(admin.ModelAdmin):
     def category_name(self, instance):
         return instance.category.title
 
+
+
 admin.site.register(Category, showCategoryAdmin)
 admin.site.register(Post, showPostAdmin)
 admin.site.register(Potter, PotterAdmin)

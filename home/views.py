@@ -23,22 +23,22 @@ def HomePageView(request):
         'internal_list':internal_list,
         'external_list':external_list,
         })
-    
 
-def all_province(request):
+def all_province(request, id):
     province_list = Province.objects.all()
-    potter_list = Potter.objects.all()
+    potter_list = Potter.objects.all().filter(province=1)
     img_list = Image.objects.all()
     return render(request, "menu/navbar.html", {
         'province_list':province_list,
         'img_list':img_list,
-        'potter_list':potter_list})
+        'potter_list':potter_list
+        })
 
-def all_Potter(request):
-    province_list = Province.objects.all()
-    potter_list = Potter.objects.all()
+def all_Potter(request, id):
+    province_list = Province.objects.get(pk=id)
+    potter_list = Potter.objects.filter(province_of_address = province_list)
     img_list = Image.objects.all()
-    return render(request, "potter.html",{
+    return render(request, "potter/potter.html",{
         'province_list':province_list,
         'img_list':img_list,
         'potter_list':potter_list
