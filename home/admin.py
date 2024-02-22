@@ -64,8 +64,8 @@ class PotterAdmin(admin.ModelAdmin):
         'created_at',
         # 'description'
     )
-
     search_fields = ("inventory_number", "full_name")
+    list_display_links = ('id', 'inventory_number', 'full_name')
 
 
 class TechniqueMakingPotteryAdmin(admin.ModelAdmin):
