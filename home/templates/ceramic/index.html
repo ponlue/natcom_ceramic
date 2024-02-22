@@ -114,13 +114,15 @@
                            <div class="col-md-12">
                                 {{ field.label_tag }}
                                 {{ field }}
-                                {% if field.errors %}
-                                    <ul class="errorlist" style="color: rgba(196, 71, 71, 0.855);">
-                                        {% for error in field.errors %}
+
+                               {% if form.errors %}
+                                    {% for error in field.errors %}
+                                        <ul class="errorlist" style="color: rgba(196, 71, 71, 0.855);">
                                             <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
+                                        </ul>
+                                    {% endfor %}
+                               {% endif %}
+
                                 {% if field.name == 'created_at' %}
                                     <div class="mt-5">
                                         <h5 class="" style="font-weight: 600; color: #333">I. ព័ត៍មានទូទៅរបស់ស្មូន / General information</h5>
@@ -148,7 +150,7 @@
                                 </div>
                                 {% endif %}
     
-                                {% if field.name == 'description' %}
+                                {% if field.name == 'describe' %}
                                 <div class="mt-5">
                                     <b style="color: #333">រូបភាព / Photos</b>
                                     <hr>
