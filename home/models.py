@@ -1,5 +1,26 @@
 from django.db import models
 from datetime import datetime
+from django.utils.safestring import mark_safe
+from django_ckeditor_5.fields import CKEditor5Field
+
+class Category(models.Model):
+    title = models.CharField(max_length=50, unique=True)
+    create_at = models.DateTimeField(default=datetime.now)
+    description = models.CharField(max_length=300)
+
+class Post(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50, unique=True)
+    body = CKEditor5Field(blank=True, null=True)
+    image = models.ImageField(upload_to='static/img/uploads')
+    create_at = models.DateTimeField(default=datetime.now)
+    description = models.CharField(null=True, blank=True, max_length=500)
+    def post_photo(self):
+        return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
+    post_photo.short_description = 'image'
+    post_photo.allow_tags = True
+    
+    
 
 from django.db.models import CharField
 from django_ckeditor_5.fields import CKEditor5Field
@@ -110,7 +131,6 @@ class TechniqueMakingPottery(models.Model):
 class Image(models.Model):
     potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None)
     image = models.ImageField(upload_to='uploads/')
-
 
 class ToolPottery(models.Model):
     title = models.CharField(max_length=25, unique=True, null=False, blank=False)

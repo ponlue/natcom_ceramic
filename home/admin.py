@@ -37,6 +37,7 @@ class ProvinceImageAdmin(admin.ModelAdmin):
     )
 
 
+
 class ImageAdmin(admin.ModelAdmin):
     list_display = (
         'potter',
@@ -79,8 +80,21 @@ class TechniqueMakingPotteryAdmin(admin.ModelAdmin):
 
 admin.site.register(TechniqueMakingPottery, TechniqueMakingPotteryAdmin)
 admin.site.register(Province, ProvinceAdmin)
+class showCategoryAdmin(admin.ModelAdmin):
+    fields = ['title','create_at','description']
+    list_display=('title', 'create_at', 'description')
+
+class showPostAdmin(admin.ModelAdmin):
+    fields = ('category','title','description','body','image','post_photo','create_at')
+    list_display=('category_name','title', 'image','post_photo', 'create_at')
+    readonly_fields = ['post_photo']
+    def category_name(self, instance):
+        return instance.category.title
+
+admin.site.register(Category, showCategoryAdmin)
+admin.site.register(Post, showPostAdmin)
 admin.site.register(Potter, PotterAdmin)
-admin.site.register(Image)
+admin.site.register(Image, ImageAdmin)
 admin.site.register(TypePottery)
 admin.site.register(ProvinceImage, ProvinceImageAdmin)
 admin.site.register(District)

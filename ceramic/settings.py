@@ -18,16 +18,13 @@ ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com']
 
 # Application definition
 INSTALLED_APPS = [
-    
     'multi_captcha_admin',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'home',
     'captcha',
     'django_ckeditor_5',
@@ -53,7 +50,8 @@ ROOT_URLCONF = 'ceramic.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / "templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,8 +72,8 @@ WSGI_APPLICATION = 'ceramic.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
 
         'ENGINE': 'mysql.connector.django',
         'NAME': 'db_ceramic_testing',
