@@ -12,7 +12,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, unique=True)
     body = CKEditor5Field(blank=True, null=True)
-    image = models.ImageField(upload_to='static/img/uploads')
+    image = models.ImageField(upload_to='uploads/')
     create_at = models.DateTimeField(default=datetime.now)
     description = models.CharField(null=True, blank=True, max_length=500)
     def post_photo(self):
