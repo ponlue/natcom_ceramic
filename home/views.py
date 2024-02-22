@@ -24,6 +24,12 @@ def HomePageView(request):
         'external_list':external_list,
         })
     
+class ContactPageView(TemplateView):
+    template_name="contact.html"
+    
+    
+    
+    
 
 def all_province(request):
     province_list = Province.objects.all()

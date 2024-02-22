@@ -9,4 +9,6 @@ urlpatterns = [
     path("province", views.all_province, name="province"),
     path("potter", views.all_Potter, name="potter"),
     path('post/<int:id>/', views.all_post, name='post'),
+    path("contact" , ContactPageView.as_view(), name="home")
 ]
+
