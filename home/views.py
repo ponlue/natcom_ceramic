@@ -49,7 +49,7 @@ def potter(request):
                 # Create unique filename with the unique identifier
                 unique_filename = f"{unique_id}.{file_extension}"
 
-                fs = FileSystemStorage(location='media/technique/')
+                fs = FileSystemStorage(location='media/')
 
                 # Save the image with the unique filename
                 filename = fs.save(unique_filename, image)
@@ -116,5 +116,5 @@ def technique_making_potter_list(req):
     # return render(req, 'ceramic/technique.html')
     
     # return JsonResponse({'data': data})    
-    
+
     return HttpResponse(qs_json, content_type='application/json')
