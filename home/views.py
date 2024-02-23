@@ -1,4 +1,5 @@
 import json
+import uuid
 from django.core.files.storage import FileSystemStorage
 from django.core.serializers import serialize
 from django.forms import inlineformset_factory
@@ -21,22 +22,35 @@ def potter(request):
         can_delete=False,
     )
     if request.method == 'POST':
-        forms = PotterForm(request.POST)
+        potter_form = PotterForm(request.POST)
         formset = image_formset(request.POST, request.FILES, instance=Potter())
         captcha_form = SimpleCaptchaForm(request.POST)
-        if forms.is_valid() and formset.is_valid():
-            # Getting technique of making pottery as list
-            titles = request.POST.getlist('title[]')
-            descriptions = request.POST.getlist('description[]')
-            images = request.FILES.getlist('image[]')
 
-            # Create a folder to store the uploaded images
-            fs = FileSystemStorage(location='media/')
+        """
+            Getting technique of making pottery as list
+
+        """
+        titles = request.POST.getlist('title[]')
+        descriptions = request.POST.getlist('description[]')
+        images = request.FILES.getlist('image[]')
+
+        if potter_form.is_valid() and formset.is_valid():
 
             data_dict = {}
             for title, description, image in zip(titles, descriptions, images):
-                # Create a unique filename for each image
-                filename = fs.save(title + ".png", image)
+                # Generate a unique identifier
+                unique_id = uuid.uuid4().hex
+
+                # Extract file extension
+                file_extension = image.name.split('.')[-1]
+
+                # Create unique filename with the unique identifier
+                unique_filename = f"{unique_id}.{file_extension}"
+
+                fs = FileSystemStorage(location='media/technique/')
+
+                # Save the image with the unique filename
+                filename = fs.save(unique_filename, image)
 
                 # Get the URL of the saved file
                 file_url = fs.url(filename)
@@ -51,9 +65,15 @@ def potter(request):
             """
                 Getting potter id what TechniqueMakingPottery is belong to potter.
             """
-            formset.instance = forms.save()
+
+            # Save Potter form data
+            potter_instance = potter_form.save()
+
+            # Save the formset with the Potter instance
+            formset.instance = potter_instance
             formset.save()
-            technique_instance = TechniqueMakingPottery(json_data=data_dict, potter=forms.instance)
+
+            technique_instance = TechniqueMakingPottery(json_data=data_dict, potter=potter_instance)
             technique_instance.save()
 
             if HttpResponse.status_code == 200:
@@ -63,12 +83,12 @@ def potter(request):
         # else:
         #     return HttpResponse('Form invalid!')
     else:
-        forms = PotterForm()
+        potter_form = PotterForm()
         formset = image_formset(instance=Potter())
         captcha_form = SimpleCaptchaForm()
 
     context = {
-        'forms': forms,
+        'potter_form': potter_form,
         'formset': formset,
         'captcha_form': captcha_form
     }

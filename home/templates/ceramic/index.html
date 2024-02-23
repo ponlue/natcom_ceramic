@@ -107,15 +107,15 @@
             <div class="container" style="max-width: 650px; margin: 0 auto;">
                 <form action="potter" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ forms.media }}
+                    {{ potter_form.media }}
 
-                    {% for field in forms %}
+                    {% for field in potter_form %}
                         <div class="row mb-4">
                            <div class="col-md-12">
                                 {{ field.label_tag }}
                                 {{ field }}
 
-                               {% if form.errors %}
+                               {% if potter_form.errors %}
                                     {% for error in field.errors %}
                                         <ul class="errorlist" style="color: rgba(196, 71, 71, 0.855);">
                                             <li>{{ error }}</li>
@@ -186,8 +186,8 @@
                     <div id="field-container">
                         <div class="form-fields">
                                 <div class="col-md-12 mb-3">
-                                    <label for="technique-title" style="font-weight: bold;">1. ចំណងជើង / Title</label>
-                                    <input type="text" name="title[]" id="title-input" required class="form-control" placeholder="សូមវាយបញ្ចូល">
+                                    <label for="technique-title" >1. ចំណងជើង / Title</label>
+                                    <input type="text" name="title[]" id="title-input" required class="form-control" placeholder="">
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="description">ពិពណ៌នា / Description</label>
@@ -204,8 +204,8 @@
     
                     <!-- Captcha form -->
                     <div class="captcha_wrapper mt-5">
-<!--                        {{ captcha_form.as_p }}-->
-<!--                        <p style="color: rgba(17, 67, 4, 0.642);">Note: Captcha មានចំនួន ៤ តួរអក្សរ!</p>-->
+                       {{ captcha_form.as_p }}
+                        <p style="color: rgba(17, 67, 4, 0.642);">Warning: Captcha មានចំនួន ៤ តួរអក្សរ!</p>
                     </div>
                     <!-- End Captcha form -->
                     
