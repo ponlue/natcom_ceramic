@@ -1,9 +1,9 @@
 import json
 import uuid
+from django.core import serializers
 from django.core.files.storage import FileSystemStorage
-from django.core.serializers import serialize
 from django.forms import inlineformset_factory
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
 from home.models import Potter, Image, TechniqueMakingPottery
@@ -99,10 +99,22 @@ def potter(request):
 
 
 def technique_making_potter_list(req):
-    queryset = TechniqueMakingPottery.objects.all()
-    serialized_data = json.loads(serialize('json', queryset))
+    # data = list(TechniqueMakingPottery.objects.all().values())
+    # print(data)
 
-    context = {
-        'json_data': serialized_data,
-    }
-    return render(req, 'ceramic/technique.html', context)
+    query_set = TechniqueMakingPottery.objects.all()
+    qs_json = serializers.serialize('json', query_set)
+
+
+    # json_data = json.dumps(data_object)
+    # print(len(json_data))
+    # # serialized_data = json.loads(serialize('json', queryset))
+
+    # context = {
+    #     # 'json_data': serialized_data,
+    # }
+    # return render(req, 'ceramic/technique.html')
+    
+    # return JsonResponse({'data': data})    
+    
+    return HttpResponse(qs_json, content_type='application/json')
