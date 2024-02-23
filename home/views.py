@@ -34,11 +34,13 @@ def potter(request):
         descriptions = request.POST.getlist('description[]')
         images = request.FILES.getlist('image[]')
 
-        if potter_form.is_valid() and formset.is_valid():
+        if potter_form.is_valid() and formset.is_valid() and captcha_form.is_valid():
 
-            data_dict = {}
+            # Create empty dict for store technique data
+            technique_list = []
+
             for title, description, image in zip(titles, descriptions, images):
-                # Generate a unique identifier
+                # Generate a unique identifier for technique image 
                 unique_id = uuid.uuid4().hex
 
                 # Extract file extension
@@ -56,11 +58,11 @@ def potter(request):
                 file_url = fs.url(filename)
 
                 # Create a dictionary with the data including the file path
-                data_dict = {
+                technique_list.append({
                     'title': title,
                     'description': description,
                     'image_url': file_url
-                }
+                })
 
             """
                 Getting potter id what TechniqueMakingPottery is belong to potter.
@@ -73,7 +75,7 @@ def potter(request):
             formset.instance = potter_instance
             formset.save()
 
-            technique_instance = TechniqueMakingPottery(json_data=data_dict, potter=potter_instance)
+            technique_instance = TechniqueMakingPottery(json_data=technique_list, potter=potter_instance)
             technique_instance.save()
 
             if HttpResponse.status_code == 200:
