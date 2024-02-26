@@ -1,5 +1,5 @@
 {% load static %}
-<!doctype html>
+<!Doctype html>
 <html class="no-js" lang="zxx">
     <head>
         <!-- Meta Tags -->
@@ -178,8 +178,8 @@
                             <hr>
                         </div>
                         <div class="col-md-6 mb-4">
-                            <button type="button" class="btn btn-primary btn-sm" onclick="addFields()">បន្ថែម / Add</button>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="removeFields()">លុប / Remove</button>
+                            <button type="button" class="btn btn-outline-success btn-sm" onclick="addFields()">បន្ថែម / Add</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeFields()">លុប / Remove</button>
                         </div>
                     </div>
     
@@ -204,15 +204,15 @@
     
                     <!-- Captcha form -->
                     <div class="captcha_wrapper mt-5">
+                        <p><span style="color: red;">*</span> Verify Captcha before submit.</p>
                        {{ captcha_form.as_p }}
-                        <p style="color: rgba(17, 67, 4, 0.642);">Warning: Captcha មានចំនួន ៤ តួរអក្សរ!</p>
                     </div>
                     <!-- End Captcha form -->
                     
                     <!-- Submit button -->
                      <div class="row mb-3 mt-5">
                         <div class="col">
-                            <input type="submit" class="btn btn-primary" value="Submit / បញ្ជូន">
+                            <input type="submit" class="btn btn-outline-primary" value="Submit / បញ្ជូន">
                         </div>
                         <div class="col">
                         </div> 
@@ -223,8 +223,6 @@
             </div>
 
         </div>
-
-        
 
         <script>
             function addFields() {
@@ -260,7 +258,6 @@
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
             crossorigin="anonymous"></script>
-
     </body>
     
 </html>
