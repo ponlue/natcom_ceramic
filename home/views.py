@@ -4,7 +4,7 @@ from django.core import serializers
 from django.core.files.storage import FileSystemStorage
 from django.forms import inlineformset_factory
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
 from home.models import Potter, Image, TechniqueMakingPottery
 
@@ -79,7 +79,8 @@ def potter(request):
             technique_instance.save()
 
             if HttpResponse.status_code == 200:
-                return HttpResponse('Data received, images saved, and converted to JSON successfully!')
+                # return HttpResponse('Data received, images saved, and converted to JSON successfully!')
+                return redirect('/success-submitted')
             else:
                 return HttpResponse('An errors occurred while upload!')
         # else:
@@ -118,3 +119,9 @@ def technique_making_potter_list(req):
     # return JsonResponse({'data': data})    
 
     return HttpResponse(qs_json, content_type='application/json')
+
+
+
+
+def success_submitted_potter_form(request):
+    return render(request, 'ceramic/success.html')
