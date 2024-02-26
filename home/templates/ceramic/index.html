@@ -1,0 +1,266 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <!-- Meta Tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="keywords" content="Site keywords here">
+		<meta name="description" content="">
+		<meta name='copyright' content=''>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Title -->
+        <title>KCC | Potter Inventory</title>
+		
+		<!-- Favicon -->
+        <link rel="icon" href="{% static 'img/favicon.ico' %}">
+		
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <script src="{% static 'django_ckeditor_5/app.js' %}"></script>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+        <style> 
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                /* font-family: 'Metal'; */
+                /* font-family: 'Hanuman', serif; */
+                /* font-family: 'Nokora'; */
+                font-family: 'Kantumruy Pro', sans-serif;
+            }            
+            #preview-container {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .preview-image-container {
+                position: relative;
+                margin: 5px;
+            }
+            .preview-image {
+                max-width: 100px;
+                max-height: 100px;
+                cursor: pointer;
+            }
+            .delete-icon {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                cursor: pointer;
+                color: red;
+                font-size: 18px;
+            }
+            #lightbox {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                justify-content: center;
+                align-items: center;
+            }
+            #lightbox img {
+                max-width: 80%;
+                max-height: 80%;
+            }
+            #lightbox-close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                color: #fff;
+                font-size: 24px;
+            }
+            
+        </style>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="mb-3 mt-4 ceramic-app-form-title-header">
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <a href="/"><img src="{% static 'img/logo-2.png' %}" width="100" alt="#"></a>
+                        <a href="/"><img src="{% static 'img/logo-7.png' %}" width="150" alt="#"></a>
+                        <a href="/"><img src="{% static 'img/waseda_logo.jpeg' %}" width="150" alt="#"></a>
+                        <a href="/"><img src="{% static 'img/rufa_logo.png' %}" width="80" alt="#"></a>
+                    </div>
+                </div>
+                <h4 id="inventory-pottery-title" style="font-family: 'Moul', serif!important; text-align: center;">បញ្ជីសារពើភណ្ឌអ្នកផលិតកុលាលភាជន៍ក្នុងប្រទេសកម្ពុជា</h4>
+                <p 
+                    style="
+                        font-size: 20px !important;
+                        text-align: center;
+                    "
+                >Inventory of Pottery Maker in Cambodia</p>
+            </div>
+            <div class="container" style="max-width: 650px; margin: 0 auto;">
+                <form action="potter" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ forms.media }}
+
+                    {% for field in forms %}
+                        <div class="row mb-4">
+                           <div class="col-md-12">
+                                {{ field.label_tag }}
+                                {{ field }}
+
+                               {% if form.errors %}
+                                    {% for error in field.errors %}
+                                        <ul class="errorlist" style="color: rgba(196, 71, 71, 0.855);">
+                                            <li>{{ error }}</li>
+                                        </ul>
+                                    {% endfor %}
+                               {% endif %}
+
+                                {% if field.name == 'created_at' %}
+                                    <div class="mt-5">
+                                        <h5 class="" style="font-weight: 600; color: #333">I. ព័ត៍មានទូទៅរបស់ស្មូន / General information</h5>
+                                        <hr>
+                                    </div>
+                                {% endif %}
+                                {% if field.name == 'type_of_pottery' %}
+                                    <div class="mt-5">
+                                        <b style="color: #333;">ទីកន្លែងកំណើត / Place of Birth *</b>
+                                        <hr>
+                                    </div>
+                                {% endif %}
+    
+                                {% if field.name == 'village_of_pob' %}
+                                    <div class="mt-5">
+                                        <b style="color: #333">លំនៅឋានបច្ចុបន្ន / Current Address *</b>
+                                        <hr>
+                                    </div>
+                                {% endif %}
+
+                                {% if field.name == 'village_of_address' %}
+                                <div class="mt-5">
+                                    <b style="color: #333">និយាមការផ្ទះ / Coordinate</b>
+                                    <hr>
+                                </div>
+                                {% endif %}
+    
+                                {% if field.name == 'describe' %}
+                                <div class="mt-5">
+                                    <b style="color: #333">រូបភាព / Photos</b>
+                                    <hr>
+                                </div>
+                                {% endif %}
+                           </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="mb-3">
+                        {{ formset.management_form }}
+                    </div>
+    
+                    {% for form in formset %}
+                        <div class="mb-3">
+                        {{ form.as_table }}
+                        </div>
+                    {% endfor %}
+
+                    <hr>
+    
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <h5 class="" style="font-weight: 600; color: #333"> II. របៀបនៃការផលិត / Technique</h5>
+                            <hr>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="addFields()">បន្ថែម / Add</button>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="removeFields()">លុប / Remove</button>
+                        </div>
+                    </div>
+    
+                    <div id="field-container">
+                        <div class="form-fields">
+                                <div class="col-md-12 mb-3">
+                                    <label for="technique-title" style="font-weight: bold;">1. ចំណងជើង / Title</label>
+                                    <input type="text" name="title[]" id="title-input" required class="form-control" placeholder="សូមវាយបញ្ចូល">
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="description">ពិពណ៌នា / Description</label>
+                                    <textarea name="description[]" id="description-input" required class="form-control" rows="5"></textarea>                
+                                </div>
+                                <div class="col-md-12 mb-5">
+                                    <label for="photo">រូបថត / Photo</label>
+                                    <input type="file" name="image[]" class="form-control" id="images-input" multiple accept="" required>
+                                </div>
+    
+                                <hr>
+                        </div>
+                    </div>
+    
+                    <!-- Captcha form -->
+                    <div class="captcha_wrapper mt-5">
+<!--                        {{ captcha_form.as_p }}-->
+<!--                        <p style="color: rgba(17, 67, 4, 0.642);">Note: Captcha មានចំនួន ៤ តួរអក្សរ!</p>-->
+                    </div>
+                    <!-- End Captcha form -->
+                    
+                    <!-- Submit button -->
+                     <div class="row mb-3 mt-5">
+                        <div class="col">
+                            <input type="submit" class="btn btn-primary" value="Submit / បញ្ជូន">
+                        </div>
+                        <div class="col">
+                        </div> 
+                    </div>
+                    <!-- End submit button -->
+    
+                </form>
+            </div>
+
+        </div>
+
+        
+
+        <script>
+            function addFields() {
+                const container = document.getElementById('field-container');
+                const clone = container.firstElementChild.cloneNode(true);
+                
+                // Increment the index for the new set of fields
+                const newIndex = container.childElementCount + 1;
+
+                // Update the label for the title field with the new index
+                const titleLabel = clone.querySelector('label[for="technique-title"]');
+                titleLabel.textContent = `${newIndex}. ចំណងជើង / Title `;
+
+                // Clear the input values in the cloned fields
+                const inputFields = clone.querySelectorAll('input, textarea');
+                inputFields.forEach(field => {
+                    field.value = '';
+                });
+                container.appendChild(clone);
+            }
+            function removeFields() {
+                const container = document.getElementById('field-container');
+                const forms = container.querySelectorAll('.form-fields');
+                if (forms.length > 1) {
+                    container.removeChild(forms[forms.length - 1]);
+                }
+            }
+
+        </script>
+
+        <!-- Bootstrap 5.0.2 JS -->
+        <script 
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+            crossorigin="anonymous"></script>
+
+    </body>
+    
+</html>
