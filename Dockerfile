@@ -13,6 +13,8 @@ RUN pip install django-multi-captcha-admin
 RUN pip install django-ckeditor-5
 RUN apt-get update -y
 RUN apt install vim -y
-COPY . /ceramic/
+COPY . .
 EXPOSE 9999
+CMD ["python", "manage.py", "makemigrations"]
+CMD ["python","manage.py","migrate"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:9999"]
