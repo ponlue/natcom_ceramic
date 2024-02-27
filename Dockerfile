@@ -14,5 +14,5 @@ RUN pip install django-ckeditor-5
 RUN apt-get update -y
 RUN apt install vim -y
 COPY . /ceramic/
-EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+EXPOSE 9999
+CMD ["python", "manage.py", "runserver", "0.0.0.0:9999"]
