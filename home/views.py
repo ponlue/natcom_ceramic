@@ -42,9 +42,9 @@ def all_province(request):
         'img_list':img_list,
         'potter_list':potter_list})
 
-def all_Potter(request):
+def all_Potter(request, id):
     province_list = Province.objects.all()
-    potter_list = Potter.objects.all()
+    potter_list = Potter.objects.filter(province_of_address=id).all()
     img_list = Image.objects.all()
     return render(request, "potter.html",{
         'province_list':province_list,

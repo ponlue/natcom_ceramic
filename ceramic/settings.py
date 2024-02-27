@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'captcha',
-    'django_ckeditor_5',
+    # 'django_ckeditor_5',
+    'ckeditor',
 ]
 
 MULTI_CAPTCHA_ADMIN = {
@@ -72,8 +73,8 @@ WSGI_APPLICATION = 'ceramic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
 
         'ENGINE': 'mysql.connector.django',
         'NAME': 'db_ceramic_testing',
@@ -81,6 +82,13 @@ DATABASES = {
         'PASSWORD': 'C#293()239#@AbB',
         'HOST': 'database.krissna.com',
         'PORT': '211',
+
+        # 'ENGINE': 'mysql.connector.django',
+        # 'NAME': 'db_ceramic_testing',
+        # 'USER': 'db_user_ceramic',
+        # 'PASSWORD': 'C#293()239#@AbB',
+        # 'HOST': 'database.krissna.com',
+        # 'PORT': '211',
 
         # 'ENGINE': 'mysql.connector.django',
         # 'NAME': 'ceramic_db',

@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.utils.safestring import mark_safe
-from django_ckeditor_5.fields import CKEditor5Field
+from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     title = models.CharField(max_length=50, unique=True)
@@ -11,7 +11,7 @@ class Category(models.Model):
 class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, unique=True)
-    body = CKEditor5Field(blank=True, null=True)
+    body = RichTextField(blank=True, null=True)
     image = models.ImageField(upload_to='uploads/')
     create_at = models.DateTimeField(default=datetime.now)
     description = models.CharField(null=True, blank=True, max_length=500)
@@ -23,7 +23,6 @@ class Post(models.Model):
     
 
 from django.db.models import CharField
-from django_ckeditor_5.fields import CKEditor5Field
 
 
 class TypePottery(models.Model):
@@ -116,7 +115,7 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
 
-    describe = CKEditor5Field('Potter Description', config_name='extends', default=None)
+    describe = RichTextField('Potter Description', config_name='extends', default=None)
 
 
 class TechniqueMakingPottery(models.Model):
