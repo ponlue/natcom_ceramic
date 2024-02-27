@@ -35,7 +35,6 @@ def potter(request):
         images = request.FILES.getlist('image[]')
 
         if potter_form.is_valid() and formset.is_valid() and captcha_form.is_valid():
-
             # Create empty dict for store technique data
             technique_list = []
 
@@ -82,9 +81,18 @@ def potter(request):
                 # return HttpResponse('Data received, images saved, and converted to JSON successfully!')
                 return redirect('/success-submitted')
             else:
-                return HttpResponse('An errors occurred while upload!')
-        # else:
-        #     return HttpResponse('Form invalid!')
+                return HttpResponse('An errors occurred while submit!')
+        else:
+            potter_form = PotterForm(request.POST)
+            formset = image_formset(request.POST, request.FILES, instance=Potter())
+            captcha_form = SimpleCaptchaForm(request.POST)
+            context_old = {
+                'potter_form': potter_form,
+                'formset': formset,
+                'captcha_form': captcha_form
+            }
+            return render(request, "ceramic/index.html", context_old)
+
     else:
         potter_form = PotterForm()
         formset = image_formset(instance=Potter())
