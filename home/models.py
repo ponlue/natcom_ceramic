@@ -68,7 +68,7 @@ class Potter(models.Model):
         ('O', 'Other'),
     ]
 
-    inventory_number = models.IntegerField(unique=True)
+    inventory_number = models.CharField(max_length=255, unique=True)
     created_at = models.DateTimeField(default=datetime.now)
     full_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
