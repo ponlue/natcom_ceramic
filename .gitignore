@@ -1,7 +1,4 @@
 # Ignore compiled files
-<<<<<<< HEAD
 *.pyc
 
-=======
-*.pyc
->>>>>>> 0b2fda0afa95eaec1a410295a4babed927e69695
+
