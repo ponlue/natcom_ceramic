@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-mo(&zi(59@72&aar-$-o&q7w%%!_om=ai(x3_daykmeqeu3jtt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com']
+ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com','natcom.krissna.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'captcha',
-    # 'django_ckeditor_5',
+    'django_ckeditor_5',
     'ckeditor',
 ]
 
