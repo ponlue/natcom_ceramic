@@ -27,6 +27,7 @@ class ProvinceAdmin(admin.ModelAdmin):
         'display_images',
         'google_map_url',
         'youtube_url',
+        'description'
     )
 
 
