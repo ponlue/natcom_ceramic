@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 # Ignore compiled files
 *.pyc
 
 
+=======
+<<<<<<< HEAD
+# Ignore compiled files
+*.pyc
+
+=======
+*.pyc
+>>>>>>> 471294ed258e03b8887b8fbe5117e26b488eb1b9
+>>>>>>> testing-v1

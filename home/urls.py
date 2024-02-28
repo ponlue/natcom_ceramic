@@ -8,4 +8,5 @@ urlpatterns = [
     path("province/<int:id>/", views.all_province, name="province"),
     path("potter/<int:id>/", views.all_Potter, name="potter"),
     path('post/<int:id>/', views.all_post, name='post'),
+    path('success-submitted', views.success_submitted_potter_form)
 ]

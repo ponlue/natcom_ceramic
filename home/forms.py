@@ -88,7 +88,6 @@ class PotterForm(forms.ModelForm):
 
         # Customize the inventory_number field
         self.fields['inventory_number'].widget.attrs.update({
-            'placeholder': 'លេខបញ្ជី / Inventory number',
             'class': 'form-control',
         })
 
@@ -98,41 +97,33 @@ class PotterForm(forms.ModelForm):
         })
 
         self.fields['full_name'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['duration'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['amount_of_pottery'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['inheritance'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
         
         self.fields['url_google_map'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['youtube_url'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល',
             'class': 'form-control',
         })
 
         self.fields['x_coordinate'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល X',
             'class': 'form-control',
         })
         self.fields['y_coordinate'].widget.attrs.update({
-            'placeholder': 'សូមវាយបញ្ចូល Y',
             'class': 'form-control',
         })
 

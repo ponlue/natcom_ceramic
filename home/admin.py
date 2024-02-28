@@ -4,7 +4,7 @@ from .models import *
 from django.utils.safestring import mark_safe
 
 admin.site.site_header = 'Ceramic Administration'
-
+admin.site.index_title = 'Ceramic Features'
 
 class ProvinceImageInline(admin.TabularInline):
     model = ProvinceImage

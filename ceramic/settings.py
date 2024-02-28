@@ -77,14 +77,20 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
 
         'ENGINE': 'mysql.connector.django',
+<<<<<<< HEAD
         #'NAME': 'db_ceramic_testing',
         'NAME':'db_ceramic_production',
+=======
+        # 'NAME': 'db_ceramic_testing',
+        'NAME': 'db_ceramic_production',
+>>>>>>> testing-v1
         'USER': 'db_user_ceramic',
         'PASSWORD': 'C#293()239#@AbB',
         'HOST': 'database.krissna.com',
         'PORT': '211',
 
         # 'ENGINE': 'mysql.connector.django',
+<<<<<<< HEAD
         # 'NAME': 'db_ceramic_testing',
         # 'USER': 'db_user_ceramic',
         # 'PASSWORD': 'C#293()239#@AbB',
@@ -92,6 +98,8 @@ DATABASES = {
         # 'PORT': '211',
 
         # 'ENGINE': 'mysql.connector.django',
+=======
+>>>>>>> testing-v1
         # 'NAME': 'ceramic_db',
         # 'USER': 'nadotdev',
         # 'PASSWORD': 'Tana@321',
