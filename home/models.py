@@ -96,7 +96,7 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
 
-    describe = CKEditor5Field('Potter Description', config_name='extends', default=None)
+    describe = CKEditor5Field('Potter Description', config_name='extends', default='')
 
 
 class TechniqueMakingPottery(models.Model):
