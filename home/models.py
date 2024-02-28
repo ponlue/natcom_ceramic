@@ -23,6 +23,7 @@ class Province(models.Model):
     google_map_url = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
     description = CKEditor5Field('Province Description', config_name='default', default=None)
+    # testing
 
     def __str__(self):
         return self.name
