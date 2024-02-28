@@ -22,6 +22,8 @@ class Province(models.Model):
     code = models.CharField(max_length=50, unique=True)
     google_map_url = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
+    description = CKEditor5Field('Province Description', config_name='default', default=None)
+    # testing
 
     def __str__(self):
         return self.name
@@ -68,7 +70,7 @@ class Potter(models.Model):
         ('O', 'Other'),
     ]
 
-    inventory_number = models.IntegerField(unique=True)
+    inventory_number = models.CharField(max_length=255, unique=True)
     created_at = models.DateTimeField(default=datetime.now)
     full_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
@@ -95,7 +97,7 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
 
-    describe = CKEditor5Field('Potter Description', config_name='extends', default=None)
+    describe = CKEditor5Field('Potter Description', config_name='extends', default='')
 
 
 class TechniqueMakingPottery(models.Model):
