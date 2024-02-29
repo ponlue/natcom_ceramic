@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head/header.html' %}
+</head>
+<body>
+
+    <!-- Preloader -->
+ 		<div class="preloader">
+            <div class="loader">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+
+                <div class="indicator"> 
+                    {% comment %} <svg width="16px" height="12px">
+                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg> {% endcomment %}
+                </div>
+            </div>
+        </div>       
+        <!-- End Preloader -->
+
+        <header class="header">
+            {% include 'menu/navbar.html' with province_list=province_list %}
+        </header>
+
+        <div class="container">
+            <div>
+                <h2>{{ potterbody.full_name }}</h2>
+            </div>
+            <div>
+                <p>
+                    {{ potterbody.describe | safe }}
+                </p>
+            </div>
+        </div>
+        
+
+        <!-- Footer Area -->
+		<footer id="footer" class="footer ">
+			{% include 'footer/footer.html' %}
+		</footer>
+		<!--/ End Footer Area -->
+		
+		{% include 'footer/load-js.html' %}
+</body>
+</html>

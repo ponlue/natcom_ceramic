@@ -1,2 +1,4 @@
 # Ignore compiled files
 *.pyc
+home/migrate
+migrations

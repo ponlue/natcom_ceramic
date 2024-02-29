@@ -1,0 +1,22 @@
+.slideshow-card {
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    margin: 50px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.slides-card {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+}
+.slide-card {
+    width: 100%;
+    flex-shrink: 0;
+}
+.slide-card .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
