@@ -115,7 +115,19 @@
                 >Inventory of Pottery Maker in Cambodia</p>
             </div>
             <div class="container" style="max-width: 650px; margin: 0 auto;">
-                <form action="potter" method="POST" enctype="multipart/form-data">
+
+                {% if messages %}
+                    <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+                        <ul class="messages" style="list-style: none; margin-bottom: 0 !important; margin-left: -30px !important;">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <form id="potter_form" action="potter" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ potter_form.media }}
 
@@ -127,7 +139,7 @@
 
                                {% if potter_form.errors %}
                                     {% for error in field.errors %}
-                                        <ul class="errorlist" style="color: rgba(196, 71, 71, 0.855);">
+                                        <ul class="errorlist mt-3" style="color: rgba(196, 71, 71, 0.855);">
                                             <li>{{ error }}</li>
                                         </ul>
                                     {% endfor %}
@@ -175,17 +187,14 @@
                     </div>
     
                     {% for form in formset %}
-                        <div class="mb-3">
+                        <div class="mb-4">
                         {{ form.as_table }}
                         </div>
                     {% endfor %}
 
-                    <hr>
-    
                     <div class="row mt-5">
                         <div class="col-md-6">
                             <h5 class="" style="font-weight: 600; color: #333"> II. របៀបនៃការផលិត / Technique</h5>
-                            <hr>
                         </div>
                         <div class="col-md-6 mb-4" style="display: flex;
                         justify-content: end;">
@@ -193,7 +202,6 @@
                             <button type="button" style="margin-left: 10px;" class="btn btn-outline-danger btn-sm" onclick="removeFields()">លុប / Remove</button>
                         </div>
                     </div>
-    
                     <div id="field-container">
                         <div class="form-fields">
                                 <div class="col-md-12 mb-3">
@@ -209,26 +217,14 @@
                                     <input type="file" name="image[]" class="form-control" id="images-input" multiple accept="" required>
                                 </div>
     
-                                <hr>
                         </div>
                     </div>
-    
-                    <!-- Captcha form -->
-                    <div class="captcha_wrapper mt-5" style="border: 1px solid #ddd;
-                    padding: 20px;
-                    border-radius: 5px;">
-                        <p><span style="color: red;">*</span> Verify Captcha | ប្រសិនបើមើលអក្សរមិនច្បាស់ សូមចុចប៊ូតុង Refresh ខាងក្រោម</p>
-                       {{ captcha_form.as_div }}
-                    </div>
-                    <!-- End Captcha form -->
-                    
+
                     <!-- Submit button -->
                      <div class="row mb-3 mt-5">
-                        <div class="col">
+                        <div class="col" style="display: flex; justify-content: center;">
                             <input type="submit" class="btn btn-outline-primary" value="Submit / បញ្ជូន">
                         </div>
-                        <div class="col">
-                        </div> 
                     </div>
                     <!-- End submit button -->
     
@@ -266,7 +262,6 @@
 
         </script>
 
-
         <!-- Bootstrap 5.0.2 JS -->
         <script 
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
@@ -283,7 +278,7 @@
 
                 $('legend').remove()
                 $('#id_captcha_1').addClass('form-control form-control-sm')
-                $('#id_captcha_1').attr('placeholder', 'សូមវាយអក្សរ៤ខ្ទង់ខាងលើឲ្យបានត្រឹមត្រូវ ដើម្បីការពារបាត់បង់ទិន្នន័យ!')
+                $('#id_captcha_1').attr('placeholder', 'សូមវាយអក្សរ៤ខ្ទង់ ខាងលើឲ្យបានត្រឹមត្រូវ')
                 // Click-handler for the refresh-link
                 $('.captcha-refresh').click(function(){
                     var $form = $(this).parents('form');
