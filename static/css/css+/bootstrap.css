@@ -1,0 +1,14 @@
+
+.h2{
+  font-family: "Noto Sans Khmer", sans-serif;
+  font-weight: 50;
+  font-style: normal;
+  text-align: center;
+  background: #027461;
+  padding: 4px;
+  color: white;
+}
+
+.text{
+  background: none;
+}

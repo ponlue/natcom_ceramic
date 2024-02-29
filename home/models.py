@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.utils.safestring import mark_safe
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Category(models.Model):
     title = models.CharField(max_length=50, unique=True)
@@ -42,7 +43,7 @@ class Province(models.Model):
     code = models.CharField(max_length=50, unique=True)
     google_map_url = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
-
+    description = RichTextUploadingField(default=None, blank=False, null=True)
     def __str__(self):
         return self.name
 
@@ -115,8 +116,8 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
 
-    describe = RichTextField('Potter Description', config_name='extends', default=None)
-
+    describe = RichTextUploadingField('Potter Description', config_name='extends', default=None)
+    short_description = models.CharField(max_length=255, default=None, null=True, blank=True)
 
 class TechniqueMakingPottery(models.Model):
     objects = None

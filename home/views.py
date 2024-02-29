@@ -14,14 +14,14 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 
 from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
-from home.models import Potter, Image, Province, Post, Category
+from home.models import Potter, Image, Province, Post, ProvinceImage
 
 
 
 def HomePageView(request):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
-    img_list = Image.objects.all()
+    img_list = Post.objects.all()
     internal_list = Post.objects.all().filter(category=1)
     external_list = Post.objects.filter(category=2).all()
     return render(request, "index.html", {
@@ -30,6 +30,14 @@ def HomePageView(request):
         'potter_list':potter_list,
         'internal_list':internal_list,
         'external_list':external_list,
+        })
+
+def PotterdetailView(request, id):
+    province_list = Province.objects.all()
+    potterbody = get_object_or_404(Potter, id=id)
+    return render(request,"potter/potterdetail.html", {
+        'potterbody':potterbody,
+        'province_list':province_list,
         })
     
 
@@ -40,22 +48,31 @@ def all_province(request):
     return render(request, "menu/navbar.html", {
         'province_list':province_list,
         'img_list':img_list,
-        'potter_list':potter_list})
+        'potter_list':potter_list,
+        })
 
-def all_Potter(request, id):
+def all_Potter(request, id ):
     province_list = Province.objects.all()
-    potter_list = Potter.objects.filter(province_of_address=id).all()
-    img_list = Image.objects.all()
-    return render(request, "potter.html",{
+    pro_text = Province.objects.all().filter(id=id)
+    potter_list = Potter.objects.all().filter(province_of_address=id)
+    img_list = ProvinceImage.objects.all().filter(province=id).all().order_by('-id')[:3]
+    imgpotter = Image.objects.filter(potter=id).order_by('-id')[:3]
+    potter_b =Potter.objects.all().filter(id=id)
+    province_image = ProvinceImage.objects.all().filter(province=id)
+    return render(request, "potter/potter.html",{
         'province_list':province_list,
         'img_list':img_list,
-        'potter_list':potter_list
+        'potter_list':potter_list,
+        'imgpotter':imgpotter,
+        'potter_b':potter_b,
+        'pro_text':pro_text,
+        'province_image':province_image,
         })
 
 def all_post(request, id):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
-    img_list = Image.objects.all()
+    img_list = Image.objects.all().order_by('-id')[:3]
     internal_list = Post.objects.all().filter(category=1)
     external_list = Post.objects.all().filter(category=2)
     post_list = get_object_or_404(Post, id=id)

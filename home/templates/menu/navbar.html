@@ -18,12 +18,12 @@
                     <!-- Main Menu -->
                     <div class="main-menu">
                         <nav class="navigation">
-                            <ul class="nav menu">
+                            <ul class="nav menu" >
                                 <li >
-                                    <a href="/">Home</a>
+                                    <a href="/" class="text-decoration-none">Home</a>
                                 </li>
                                 <li>
-                                    <a href="#">Ancient Ceramic </a>
+                                    <a href="#" class="text-decoration-none">Ancient Ceramic </a>
                                     <ul class="dropdown">
                                         <li><a href="">Pre-History</a></li>
                                         <li><a href="">Post-Angkor</a></li>
@@ -32,10 +32,10 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Traditional Ceramic </a>
-                                    <ul class="dropdown">
+                                    <a href="#" class="text-decoration-none">Traditional Ceramic </a>
+                                    <ul class="dropdown" >
                                         {% for province in province_list %}
-                                        <li><a href="/potter/{{ province.id }}">{{ province }}</a></li>
+                                        <li><a href="/potter/{{ province.id }}" class="text-decoration-none">{{ province }}</a></li>
                                         <!-- <li><a href="">Kampong Chhnang</a></li>
                                         <li><a href="">Kampong Spue</a></li>
                                         <li><a href="">Prey Veng</a></li>
@@ -45,18 +45,16 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Project & Events <i class="icofont-rounded-down"></i>
+                                    <a href="#" class="text-decoration-none">Project & Events <i class="icofont-rounded-down"></i>
                                     </a>
                                 
                                     <ul class="dropdown">
-                                        <li><a href="potter-inventory">Invetories</a></li>
-
-                                        
+                                        <li><a href="/potter">Invetories</a></li>
                                     </ul>
                                 </li>
                                 
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">Login</a></li>
+                                <li><a href="#" class="text-decoration-none">Contact</a></li>
+                                <li><a href="#" class="text-decoration-none">Login</a></li>
                             </ul>
                         </nav>
                     </div>

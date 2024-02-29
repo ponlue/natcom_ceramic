@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include 'head/header.html' %}
+
+</head>
+<body>
+    <!-- start preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+            <div class="indicator"> 
+                {% comment %} <svg width="16px" height="12px">
+                    <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                </svg> {% endcomment %}
+            </div>
+        </div>
+    </div> 
+     <!-- end preloader -->
+
+    <header class="header">
+        {% include 'menu/navbar.html' with province_list=province_list %}
+    </header>
+
+    <section class="slider">
+        {% include 'menu/slide.html' with province_image=province_image %}
+    </section>
+
+<div class="container">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">ពត័មាន</button>
+        </li>
+        <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">ផែនទី</button>
+        </li>
+        <li class="nav-item" role="presentation">
+        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">រូបភាព</button>
+        </li>
+        <li class="nav-item" role="presentation">
+        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">អ្នកស្មូន</button>
+        </li>
+    </ul>
+
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <!-- Information-Province -->
+        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            {% for pro in pro_text %}
+            <h2 class="h2">{{ pro.name }}</h2>
+            <div>
+                <p>{{ pro.description | safe }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Map-Province -->
+        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52454.0398697546!2d104.64876389649491!3d12.270607697106529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310e8d2df9b3e573%3A0x747469cff8434056!2z4Z6A4Z-S4Z6a4Z674Z6E4Z6A4Z-G4Z6W4Z6E4Z-L4Z6G4Z-S4Z6T4Z624Z-G4Z6E!5e0!3m2!1skm!2skh!4v1709182136040!5m2!1skm!2skh" width="1200" height="700" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <!-- Image-Province -->
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+            <div class="row">
+                {% for img in province_image %}
+                <div class="col-6 col-md-4">
+                    <img  src="{{ img.image.url }}" alt="province image">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Potter-List -->
+        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                <!-- Start Potter Area -->
+                <section class="blog section" id="blog" style="padding: 20px 0 !important;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                        <div class="section-title" style="margin-bottom: 10px !important;">
+                            <h2 style="margin: 0px !important;">Potter</h2>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                        {% for potter in potter_list %}
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- potter Blog -->
+                            <div class="single-news">
+                                <!-- slide in card -->
+                                <div id="carouselExampleControls{{ potter.id }}" class="carousel slide" data-ride="carousel">
+                                    <!-- enable auto slide delete data-interval="false" -->
+                                    <div class="carousel-inner">
+                                        {% for img in potter.image_set.all %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">              
+                                            <img class="d-block w-55" src="{{ img.image.url }}" alt="slide {{ forloop.counter }}">
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleControls{{ potter.id }}" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls{{ potter.id }}" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                                
+                                
+                                <!-- end slide in card -->
+                                <div class="news-body">
+                                    <div class="news-content">
+                                        <div class="date">{{ potter.created_at }}</div>
+                                        <h2>{{ potter.full_name }}</h2>
+                                        <p class="text">{{ potter.description }}</p>
+                                        <button id="toggleButton" class="btn-click-inf"><a href="/potterdetail/{{ potter.id }}" class="text-decoration-none">ពត័មាន</a></button>
+                                        <button id="toggleButton-vid" class="btn-click-vid">វីដេអូ</a></button>
+                                        <button id="toggleButton-img" class="btn-click-img">រូបភាព</a></button>
+                                    </div>
+                                </div> 
+                            </div>
+                            <!-- End potter Blog -->
+                            <div id="popupContainer-vid" class="popup-container">
+                                <div class="popup-content">
+                                    <span class="close" id="closeButton-video">&times;</span>
+                                    <!-- <iframe width="560" height="315" src="{{ potter.youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+                                    <!-- <iframe width="560" height="315" src="{{ potter.youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+                                </div>
+                            </div> 
+                        </div> 
+                        {% endfor %}            
+                </div>
+            </div>
+        </section>
+        <!-- End potter Area -->
+        </div>
+    </div>
+</div>
+
+
+
+<footer id="footer" class="footer ">
+{% include 'footer/footer.html' %}
+</footer>
+    
+{% include 'footer/load-js.html' %}
+
+</body>
+</html>
