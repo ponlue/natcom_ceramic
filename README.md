@@ -1,1 +1,0 @@
-# natcom_ceramic
