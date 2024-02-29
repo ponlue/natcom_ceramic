@@ -144,6 +144,8 @@ class PotterForm(forms.ModelForm):
         self.fields['village_of_address'].required = False
 
         self.fields['describe'].required = False
+        self.fields['amount_of_pottery'].required = False
+
 
     class Meta:
         model = Potter

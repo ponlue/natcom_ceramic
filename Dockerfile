@@ -7,7 +7,6 @@ WORKDIR /ceramic
 RUN pip install --upgrade pip
 RUN pip install django==4.2
 RUN pip install mysql-connector-python==8.3.0
-RUN pip install djangoajax
 RUN pip install django-simple-captcha 
 RUN pip install django-multi-captcha-admin
 RUN pip install django-ckeditor-5
