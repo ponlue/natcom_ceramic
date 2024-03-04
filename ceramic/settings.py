@@ -18,9 +18,6 @@ ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com']
 
 # Application definition
 INSTALLED_APPS = [
-    
-    'multi_captcha_admin',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -28,13 +25,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    'captcha',
     'django_ckeditor_5',
+    'django_recaptcha',
 ]
 
-MULTI_CAPTCHA_ADMIN = {
-    'engine': 'simple-captcha',
-}
+# MULTI_CAPTCHA_ADMIN = {
+#     'engine': 'recaptcha',
+# }
 
 
 MIDDLEWARE = [
@@ -75,21 +72,12 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
-
         'ENGINE': 'mysql.connector.django',
-        # 'NAME': 'db_ceramic_testing',
         'NAME': 'db_ceramic_production',
         'USER': 'db_user_ceramic',
         'PASSWORD': 'C#293()239#@AbB',
         'HOST': 'database.krissna.com',
         'PORT': '211',
-
-        # 'ENGINE': 'mysql.connector.django',
-        # 'NAME': 'ceramic_db',
-        # 'USER': 'nadotdev',
-        # 'PASSWORD': 'Tana@321',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '3306',
     }
 }
 
@@ -238,3 +226,9 @@ CKEDITOR_5_CONFIGS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Django recaptcha key
+RECAPTCHA_PUBLIC_KEY = '6LcEu4UpAAAAAJSDaKbF2oNv66dbBQSmrQiJwu_o'
+RECAPTCHA_PRIVATE_KEY = '6LcEu4UpAAAAAM4yI9GVb-uzbl8DrmnfNyR2Ar9G'

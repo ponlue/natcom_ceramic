@@ -1,5 +1,5 @@
-sudo docker container stop sothatna-ceramic-container
-sudo docker container rm sothatna-ceramic-container
-sudo docker image rm sothatna-ceramic-img:2024
-sudo docker build . -t sothatna-ceramic-img:2024
-sudo docker run -it -d -p 5063:8000 --name sothatna-ceramic-container --mount type=bind,source="$(pwd)",target=/ceramic sothatna-ceramic-img:2024
+sudo docker container stop ceramic-container-testing-v2
+sudo docker container rm ceramic-container-testing-v2
+sudo docker image rm ceramic-img-v2:2024
+sudo docker build . -t ceramic-img-v2:2024
+sudo docker run -it -d -p 2304:8000 --name ceramic-container-testing-v2 --mount type=bind,source="$(pwd)",target=/ceramic ceramic-img-v2:2024

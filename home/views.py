@@ -4,7 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from django.forms import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
+from home.forms import PotterForm, RecaptchaForm, ImageForm
 from home.models import Potter, Image, TechniqueMakingPottery
 from django.contrib import messages
 
@@ -22,7 +22,7 @@ def potter(request):
     if request.method == 'POST':
         potter_form = PotterForm(request.POST)
         formset = image_formset(request.POST, request.FILES, instance=Potter())
-        # captcha_form = SimpleCaptchaForm(request.POST)
+        recaptcha_form = RecaptchaForm(request.POST)
 
         """
             Getting technique of making pottery as list
@@ -32,7 +32,7 @@ def potter(request):
         descriptions = request.POST.getlist('description[]')
         images = request.FILES.getlist('image[]')
 
-        if potter_form.is_valid() and formset.is_valid():
+        if recaptcha_form.is_valid() and potter_form.is_valid() and formset.is_valid() :
             technique_list = []
             for title, description, image in zip(titles, descriptions, images):
                     # Generate a unique identifier for technique image 
@@ -89,12 +89,12 @@ def potter(request):
     else:
         potter_form = PotterForm()
         formset = image_formset(instance=Potter())
-        # captcha_form = SimpleCaptchaForm()
+        recaptcha_form = RecaptchaForm()
 
     context = {
         'potter_form': potter_form,
         'formset': formset,
-        # 'captcha_form': captcha_form
+        'recaptcha_form': recaptcha_form
     }
 
     return render(request, "ceramic/index.html", context)
