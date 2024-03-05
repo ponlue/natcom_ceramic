@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 {% include 'head/header.html' %}
-
 </head>
 <body>
     <!-- start preloader -->
@@ -50,7 +49,7 @@
     <div class="tab-content">
         <!-- Information-Province -->
         <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            {% for pro in pro_text %}
+            {% for pro in province %}
             <h2 class="h2">{{ pro.name }}</h2>
             <div>
                 <p>{{ pro.description | safe }}</p>
@@ -59,7 +58,9 @@
         </div>
         <!-- Map-Province -->
         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52454.0398697546!2d104.64876389649491!3d12.270607697106529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310e8d2df9b3e573%3A0x747469cff8434056!2z4Z6A4Z-S4Z6a4Z674Z6E4Z6A4Z-G4Z6W4Z6E4Z-L4Z6G4Z-S4Z6T4Z624Z-G4Z6E!5e0!3m2!1skm!2skh!4v1709182136040!5m2!1skm!2skh" width="1200" height="700" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            {% for province in province %}
+            <iframe src="{{ province.google_map_url }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            {% endfor %}
         </div>
         <!-- Image-Province -->
         <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
@@ -93,8 +94,8 @@
                                 <div id="carouselExampleControls{{ potter.id }}" class="carousel slide" data-ride="carousel">
                                     <!-- enable auto slide delete data-interval="false" -->
                                     <div class="carousel-inner">
-                                        {% for img in potter.image_set.all %}
-                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">              
+                                        {% for img in potter.image_set.all|slice:":3" %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">          
                                             <img class="d-block w-55" src="{{ img.image.url }}" alt="slide {{ forloop.counter }}">
                                         </div>
                                         {% endfor %}
@@ -108,28 +109,25 @@
                                         <span class="sr-only">Next</span>
                                     </a>
                                 </div>
-                                
-                                
                                 <!-- end slide in card -->
                                 <div class="news-body">
                                     <div class="news-content">
                                         <div class="date">{{ potter.created_at }}</div>
                                         <h2>{{ potter.full_name }}</h2>
-                                        <p class="text">{{ potter.description }}</p>
-                                        <button id="toggleButton" class="btn-click-inf"><a href="/potterdetail/{{ potter.id }}" class="text-decoration-none">ពត័មាន</a></button>
-                                        <button id="toggleButton-vid" class="btn-click-vid">វីដេអូ</a></button>
-                                        <button id="toggleButton-img" class="btn-click-img">រូបភាព</a></button>
+                                        <p class="text">{{ potter.short_description }}</p>
                                     </div>
+                                    <button type="button" class="btn btn-primary"><a href="/potterdetail/{{ potter.id }}" class="text-decoration-none">ពត័មាន</a></button>
+                                    <!-- Button trigger modal Image -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalImage">
+                                        រូបភាព
+                                    </button>
+                                    <!-- Button trigger modal Video -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalVideo">
+                                        វីដេអូរ
+                                    </button>
                                 </div> 
                             </div>
-                            <!-- End potter Blog -->
-                            <div id="popupContainer-vid" class="popup-container">
-                                <div class="popup-content">
-                                    <span class="close" id="closeButton-video">&times;</span>
-                                    <!-- <iframe width="560" height="315" src="{{ potter.youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
-                                    <!-- <iframe width="560" height="315" src="{{ potter.youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
-                                </div>
-                            </div> 
+                            <!-- End potter Blog --> 
                         </div> 
                         {% endfor %}            
                 </div>
@@ -139,6 +137,50 @@
         </div>
     </div>
 </div>
+
+<!-- Modal​​ Image Potter -->
+<div class="modal fade" id="ModalImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                {% for image in imgpotter_list %}
+                <div class="col-6 col-md-4">
+                    <img src="{{ image.image.url }}" alt="">
+                </div>
+                {% endfor %}
+              </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- End Modal​​ Image -->
+
+<!-- Modal​​ Video Potter -->
+<div class="modal fade" id="ModalVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Video</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            {% for video in potter_list %}
+            <iframe width="560" height="315" src="{{ video.youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</div>
+<!-- End Modal​​ Video -->
 
 
 

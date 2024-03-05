@@ -59,9 +59,6 @@ class PotterAdmin(admin.ModelAdmin):
         'type_of_pottery',
         'province_of_address',
         'province_of_pob',
-        'url_google_map',
-        'x_coordinate',
-        'y_coordinate',
         'created_at',
         # 'description'
     )

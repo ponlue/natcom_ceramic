@@ -53,10 +53,11 @@ def all_province(request):
 
 def all_Potter(request, id ):
     province_list = Province.objects.all()
-    pro_text = Province.objects.all().filter(id=id)
+    province = Province.objects.all().filter(id=id)
     potter_list = Potter.objects.all().filter(province_of_address=id)
     img_list = ProvinceImage.objects.all().filter(province=id).all().order_by('-id')[:3]
     imgpotter = Image.objects.filter(potter=id).order_by('-id')[:3]
+    imgpotter_list = Image.objects.all()
     potter_b =Potter.objects.all().filter(id=id)
     province_image = ProvinceImage.objects.all().filter(province=id)
     return render(request, "potter/potter.html",{
@@ -65,8 +66,9 @@ def all_Potter(request, id ):
         'potter_list':potter_list,
         'imgpotter':imgpotter,
         'potter_b':potter_b,
-        'pro_text':pro_text,
+        'province':province,
         'province_image':province_image,
+        'imgpotter_list':imgpotter_list,
         })
 
 def all_post(request, id):
