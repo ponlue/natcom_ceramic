@@ -7,10 +7,13 @@ from django.shortcuts import redirect, render
 from home.forms import PotterForm, RecaptchaForm, ImageForm
 from home.models import Potter, Image, TechniqueMakingPottery
 from django.contrib import messages
+from django.views.decorators.http import require_http_methods
 
 def home(request):
     return render(request, 'index.html')
 
+
+@require_http_methods(['GET', 'POST']) # Allow only http request GET & POST 
 def potter(request):
     image_formset = inlineformset_factory(
         Potter,
@@ -32,6 +35,13 @@ def potter(request):
         descriptions = request.POST.getlist('description[]')
         images = request.FILES.getlist('image[]')
 
+
+
+        """
+            - check if recaptcha_form, potter_form and formset is input correctly from
+                user and save potter form to database.
+            - if not return error otherwise.
+        """
         if recaptcha_form.is_valid() and potter_form.is_valid() and formset.is_valid() :
             technique_list = []
             for title, description, image in zip(titles, descriptions, images):
@@ -52,7 +62,7 @@ def potter(request):
                     # Get the URL of the saved file
                 file_url = fs.url(filename)
 
-                    # Create a dictionary with the data including the file path
+                # Create a dictionary with the data including the file path
                 technique_list.append({
                     'title': title,
                     'description': description,
