@@ -1,20 +1,17 @@
-import json
+import uuid
+from django.core import serializers
 from django.core.files.storage import FileSystemStorage
-from django.core.serializers import serialize
 from django.forms import inlineformset_factory
-from django.http import HttpResponse, HttpResponseServerError
-from django.shortcuts import render
-from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
-from home.models import Potter, Image, TechniqueMakingPottery
-
+from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-
-from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
-from home.models import Potter, Image, Province, Post, Category
+from django.contrib import messages
+from django.views.decorators.http import require_http_methods
+from home.forms import PotterForm, PotterForm, ImageForm, RecaptchaForm
+from home.models import *
 
 
 
@@ -22,14 +19,22 @@ def HomePageView(request):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
     img_list = Image.objects.all()
-    internal_list = Post.objects.all().filter(category=1)
-    external_list = Post.objects.filter(category=2).all()
+    internal_list = PotterPost.objects.all().filter(category=1)
+    external_list = PotterPost.objects.filter(category=2).all()
     return render(request, "index.html", {
         'province_list':province_list,
         'img_list':img_list,
         'potter_list':potter_list,
         'internal_list':internal_list,
         'external_list':external_list,
+        })
+
+def PotterdetailView(request, id):
+    province_list = Province.objects.all()
+    potterbody = get_object_or_404(Potter, id=id)
+    return render(request,"potter/potterdetail.html", {
+        'potterbody':potterbody,
+        'province_list':province_list,
         })
     
 
@@ -40,25 +45,36 @@ def all_province(request):
     return render(request, "menu/navbar.html", {
         'province_list':province_list,
         'img_list':img_list,
-        'potter_list':potter_list})
+        'potter_list':potter_list,
+        })
 
-def all_Potter(request):
+def all_Potter(request, id ):
     province_list = Province.objects.all()
-    potter_list = Potter.objects.all()
-    img_list = Image.objects.all()
-    return render(request, "potter.html",{
+    province = Province.objects.all().filter(id=id)
+    potter_list = Potter.objects.all().filter(province_of_address=id)
+    img_list = ProvinceImage.objects.all().filter(province=id).all().order_by('-id')[:3]
+    imgpotter = Image.objects.filter(potter=id).order_by('-id')[:3]
+    imgpotter_list = Image.objects.all()
+    potter_b =Potter.objects.all().filter(id=id)
+    province_image = ProvinceImage.objects.all().filter(province=id)
+    return render(request, "potter/potter.html",{
         'province_list':province_list,
         'img_list':img_list,
-        'potter_list':potter_list
+        'potter_list':potter_list,
+        'imgpotter':imgpotter,
+        'potter_b':potter_b,
+        'province':province,
+        'province_image':province_image,
+        'imgpotter_list':imgpotter_list,
         })
 
 def all_post(request, id):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
     img_list = Image.objects.all()
-    internal_list = Post.objects.all().filter(category=1)
-    external_list = Post.objects.all().filter(category=2)
-    post_list = get_object_or_404(Post, id=id)
+    internal_list = PotterPost.objects.all().filter(category=1)
+    external_list = PotterPost.objects.all().filter(category=2)
+    post_list = get_object_or_404(PotterPost, id=id)
     return render(request, "post/postbody.html", {
         'province_list':province_list,
         'img_list':img_list,
@@ -72,6 +88,7 @@ def home(request):
     return render(request, 'index.html')
 
 
+@require_http_methods(['GET', 'POST']) # Allow only http request GET & POST 
 def potter(request):
     image_formset = inlineformset_factory(
         Potter,
@@ -81,66 +98,120 @@ def potter(request):
         can_delete=False,
     )
     if request.method == 'POST':
-        forms = PotterForm(request.POST)
+        potter_form = PotterForm(request.POST)
         formset = image_formset(request.POST, request.FILES, instance=Potter())
-        captcha_form = SimpleCaptchaForm(request.POST)
-        if forms.is_valid() and formset.is_valid():
-            # Getting technique of making pottery as list
-            titles = request.POST.getlist('title[]')
-            descriptions = request.POST.getlist('description[]')
-            images = request.FILES.getlist('image[]')
+        recaptcha_form = RecaptchaForm(request.POST)
 
-            # Create a folder to store the uploaded images
-            fs = FileSystemStorage(location='media/')
+        """
+            Getting technique of making pottery as list
 
-            data_dict = {}
+        """
+        titles = request.POST.getlist('title[]')
+        descriptions = request.POST.getlist('description[]')
+        images = request.FILES.getlist('image[]')
+
+
+
+        """
+            - check if recaptcha_form, potter_form and formset is input correctly from
+                user and save potter form to database.
+            - if not return error otherwise.
+        """
+        if recaptcha_form.is_valid() and potter_form.is_valid() and formset.is_valid() :
+            technique_list = []
             for title, description, image in zip(titles, descriptions, images):
-                # Create a unique filename for each image
-                filename = fs.save(title + ".png", image)
+                    # Generate a unique identifier for technique image 
+                unique_id = uuid.uuid4().hex
 
-                # Get the URL of the saved file
+                    # Extract file extension
+                file_extension = image.name.split('.')[-1]
+
+                    # Create unique filename with the unique identifier
+                unique_filename = f"{unique_id}.{file_extension}"
+
+                fs = FileSystemStorage(location='media/')
+
+                    # Save the image with the unique filename
+                filename = fs.save(unique_filename, image)
+
+                    # Get the URL of the saved file
                 file_url = fs.url(filename)
 
                 # Create a dictionary with the data including the file path
-                data_dict = {
+                technique_list.append({
                     'title': title,
                     'description': description,
                     'image_url': file_url
-                }
+                })
 
-            """
-                Getting potter id what TechniqueMakingPottery is belong to potter.
-            """
-            formset.instance = forms.save()
-            formset.save()
-            technique_instance = TechniqueMakingPottery(json_data=data_dict, potter=forms.instance)
-            technique_instance.save()
+                """
+                    Getting potter id what TechniqueMakingPottery is belong to potter.
+                """
 
-            if HttpResponse.status_code == 200:
-                return HttpResponse('Data received, images saved, and converted to JSON successfully!')
-            else:
-                return HttpResponse('An errors occurred while upload!')
-        # else:
-        #     return HttpResponse('Form invalid!')
+                # Save Potter form data
+                potter_instance = potter_form.save()
+
+                # Save the formset with the Potter instance
+                formset.instance = potter_instance
+                formset.save()
+
+                technique_instance = TechniqueMakingPottery(json_data=technique_list, potter=potter_instance)
+                technique_instance.save()
+
+                if HttpResponse.status_code == 200:
+                    return redirect('/success-submitted')
+                else:
+                    messages.error(
+                        request, 
+                        'An errors occured while submit the potter application'
+                    )
+        else:
+            messages.error(
+                request, 
+                'បញ្ចូលទិន្នន័យមិនបានត្រឹមត្រូវ'
+            )
+
     else:
-        forms = PotterForm()
+        potter_form = PotterForm()
         formset = image_formset(instance=Potter())
-        captcha_form = SimpleCaptchaForm()
+        recaptcha_form = RecaptchaForm()
 
     context = {
-        'forms': forms,
+        'potter_form': potter_form,
         'formset': formset,
-        'captcha_form': captcha_form
+        'recaptcha_form': recaptcha_form
     }
 
     return render(request, "ceramic/index.html", context)
 
 
 def technique_making_potter_list(req):
-    queryset = TechniqueMakingPottery.objects.all()
-    serialized_data = json.loads(serialize('json', queryset))
+    # data = list(TechniqueMakingPottery.objects.all().values())
+    # print(data)
 
     context = {
         'json_data': serialized_data,
     }
     return render(req, 'ceramic/technique.html', context)
+
+    query_set = TechniqueMakingPottery.objects.all()
+    qs_json = serializers.serialize('json', query_set)
+
+
+    # json_data = json.dumps(data_object)
+    # print(len(json_data))
+    # # serialized_data = json.loads(serialize('json', queryset))
+
+    # context = {
+    #     # 'json_data': serialized_data,
+    # }
+    # return render(req, 'ceramic/technique.html')
+    
+    # return JsonResponse({'data': data})    
+
+    return HttpResponse(qs_json, content_type='application/json')
+
+
+def success_submitted_potter_form(request):
+    return render(request, 'ceramic/success.html')
+

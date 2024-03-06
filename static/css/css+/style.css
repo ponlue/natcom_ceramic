@@ -6,6 +6,10 @@
     --dark: #152440;
 }
 
+a {
+    text-decoration: none;
+  }
+
 h1,
 h2,
 .font-weight-bold {
@@ -253,3 +257,63 @@ h6,
     transform: scale(1.1);
 }
 
+
+/* Button click card */
+.btn-click-inf, .btn-click-vid, .btn-click-img {
+    display: inline-block;
+    padding: 10px 10px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: white; /* Green */
+    color: black;
+}
+.btn-click-inf:hover, .btn-click-vid:hover, .btn-click-img:hover {
+    background-color: orange; /* Darker green */
+    color: white;
+}
+
+.btn-click-inf:active, .btn-click-vid:active, .btn-click-img:active {
+    background-color: #3e8e41;
+    transform: translateY(1px);
+}
+
+/* Button Click Card */
+
+.popup-container {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* End Button Click Card */

@@ -14,11 +14,11 @@ SECRET_KEY = 'django-insecure-mo(&zi(59@72&aar-$-o&q7w%%!_om=ai(x3_daykmeqeu3jtt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com']
+ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com','natcom.krissna.com']
 
 # Application definition
 INSTALLED_APPS = [
-    'multi_captcha_admin',
+    # 'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -26,13 +26,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    'captcha',
+    'ckeditor',
+    'django_recaptcha',
     'django_ckeditor_5',
+    'ckeditor_uploader',
 ]
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 MULTI_CAPTCHA_ADMIN = {
     'engine': 'simple-captcha',
 }
+
 
 
 MIDDLEWARE = [
@@ -72,17 +78,16 @@ WSGI_APPLICATION = 'ceramic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'mysql.connector.django',
-        'NAME': 'db_ceramic_testing',
+        #'NAME': 'db_ceramic_testing',
+        'NAME':'db_ceramic_production',
+        'NAME': 'db_ceramic_production',
         'USER': 'db_user_ceramic',
         'PASSWORD': 'C#293()239#@AbB',
         'HOST': 'database.krissna.com',
         'PORT': '211',
-
-        # 'ENGINE': 'mysql.connector.django',
         # 'NAME': 'ceramic_db',
         # 'USER': 'nadotdev',
         # 'PASSWORD': 'Tana@321',
@@ -236,3 +241,9 @@ CKEDITOR_5_CONFIGS = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Django recaptcha key
+RECAPTCHA_PUBLIC_KEY = '6LcEu4UpAAAAAJSDaKbF2oNv66dbBQSmrQiJwu_o'
+RECAPTCHA_PRIVATE_KEY = '6LcEu4UpAAAAAM4yI9GVb-uzbl8DrmnfNyR2Ar9G'

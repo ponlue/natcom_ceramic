@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head/header.html' %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&family=Content:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Preloader -->
+ 		<div class="preloader">
+            <div class="loader">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+
+                <div class="indicator"> 
+                    {% comment %} <svg width="16px" height="12px">
+                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg> {% endcomment %}
+                </div>
+            </div>
+        </div>       
+        <!-- End Preloader -->
+
+        <header class="header">
+            {% include 'menu/navbar.html' with province_list=province_list %}
+        </header>
+
+        <div class="container">
+            <div>
+                <h2 class="h2">{{ potterbody.full_name }}</h2>
+            </div>
+            <div>
+                <p style="font-family: 'Content', sans-serif;">
+                    {{ potterbody.describe | safe }}
+                </p>
+            </div>
+        </div>
+        
+
+        <!-- Footer Area -->
+		<footer id="footer" class="footer ">
+			{% include 'footer/footer.html' %}
+		</footer>
+		<!--/ End Footer Area -->
+		
+		{% include 'footer/load-js.html' %}
+</body>
+</html>

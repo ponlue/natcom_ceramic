@@ -4,7 +4,7 @@ from .models import *
 from django.utils.safestring import mark_safe
 
 admin.site.site_header = 'Ceramic Administration'
-
+admin.site.index_title = 'Ceramic Features'
 
 class ProvinceImageInline(admin.TabularInline):
     model = ProvinceImage
@@ -27,6 +27,7 @@ class ProvinceAdmin(admin.ModelAdmin):
         'display_images',
         'google_map_url',
         'youtube_url',
+        'description'
     )
 
 
@@ -59,9 +60,6 @@ class PotterAdmin(admin.ModelAdmin):
         'type_of_pottery',
         'province_of_address',
         'province_of_pob',
-        'url_google_map',
-        'x_coordinate',
-        'y_coordinate',
         'created_at',
         # 'description'
     )
@@ -91,8 +89,8 @@ class showPostAdmin(admin.ModelAdmin):
     def category_name(self, instance):
         return instance.category.title
 
-admin.site.register(Category, showCategoryAdmin)
-admin.site.register(Post, showPostAdmin)
+admin.site.register(Categories, showCategoryAdmin)
+admin.site.register(PotterPost, showPostAdmin)
 admin.site.register(Potter, PotterAdmin)
 admin.site.register(Image, ImageAdmin)
 admin.site.register(TypePottery)

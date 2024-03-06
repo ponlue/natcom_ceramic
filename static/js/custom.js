@@ -8,7 +8,6 @@ function getYear() {
 getYear();
 
 
-
 // owl carousel slider js
 var owl = $('.project_carousel').owlCarousel({
     loop: false,
@@ -113,4 +112,3 @@ function closeLightbox() {
     lightbox.style.display = 'none';
 }
 
-// End image preview

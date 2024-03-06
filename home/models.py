@@ -1,31 +1,37 @@
 from django.db import models
 from datetime import datetime
 from django.utils.safestring import mark_safe
+from ckeditor.fields import RichTextField
+from django.db.models import CharField
 from django_ckeditor_5.fields import CKEditor5Field
+from ckeditor_uploader.fields import RichTextUploadingField
 
-class Category(models.Model):
+
+
+class Categories(models.Model):
     title = models.CharField(max_length=50, unique=True)
     create_at = models.DateTimeField(default=datetime.now)
     description = models.CharField(max_length=300)
+    
+    def __str__(self):
+        return self.title
 
-class Post(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+class PotterPost(models.Model):
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE,null=True,blank=True)
     title = models.CharField(max_length=50, unique=True)
-    body = CKEditor5Field(blank=True, null=True)
+    body = RichTextField(blank=True, null=True)
     image = models.ImageField(upload_to='uploads/')
     create_at = models.DateTimeField(default=datetime.now)
     description = models.CharField(null=True, blank=True, max_length=500)
+
+    
     def post_photo(self):
         return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
     post_photo.short_description = 'image'
     post_photo.allow_tags = True
     
     
-
-from django.db.models import CharField
-from django_ckeditor_5.fields import CKEditor5Field
-
-
+    
 class TypePottery(models.Model):
     title = models.CharField(max_length=25, unique=True)
     # images = models.ManyToManyField(Image)
@@ -41,9 +47,11 @@ class TypePottery(models.Model):
 class Province(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=50, unique=True)
-    google_map_url = models.URLField(default=None, blank=False, null=True)
+    google_map_url = models.URLField()
     youtube_url = models.URLField(default=None, blank=False, null=True)
-
+    description = CKEditor5Field('Province Description', config_name='default', default=None)
+    # testing
+    description = RichTextUploadingField(default=None, blank=False, null=True)
     def __str__(self):
         return self.name
 
@@ -89,7 +97,7 @@ class Potter(models.Model):
         ('O', 'Other'),
     ]
 
-    inventory_number = models.IntegerField(unique=True)
+    inventory_number = models.CharField(max_length=255, unique=True)
     created_at = models.DateTimeField(default=datetime.now)
     full_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
@@ -115,8 +123,9 @@ class Potter(models.Model):
 
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
+    describe = RichTextUploadingField('Potter Description', config_name='extends', default=None)
+    #short_description = models.CharField(max_length=255, default=None, null=True, blank=True)
 
-    describe = CKEditor5Field('Potter Description', config_name='extends', default=None)
 
 
 class TechniqueMakingPottery(models.Model):
