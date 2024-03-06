@@ -10,27 +10,17 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
-from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
-<<<<<<< HEAD
+from home.forms import PotterForm, PotterForm, ImageForm
 from home.models import *
-=======
-from home.models import Potter, Image, Province, Post, ProvinceImage
 
->>>>>>> potter-app-testing
 
 
 def HomePageView(request):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
-<<<<<<< HEAD
     img_list = Image.objects.all()
     internal_list = PotterPost.objects.all().filter(category=1)
     external_list = PotterPost.objects.filter(category=2).all()
-=======
-    img_list = Post.objects.all()
-    internal_list = Post.objects.all().filter(category=1)
-    external_list = Post.objects.filter(category=2).all()
->>>>>>> potter-app-testing
     return render(request, "index.html", {
         'province_list':province_list,
         'img_list':img_list,
@@ -81,17 +71,10 @@ def all_Potter(request, id ):
 def all_post(request, id):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
-<<<<<<< HEAD
     img_list = Image.objects.all()
     internal_list = PotterPost.objects.all().filter(category=1)
     external_list = PotterPost.objects.all().filter(category=2)
     post_list = get_object_or_404(PotterPost, id=id)
-=======
-    img_list = Image.objects.all().order_by('-id')[:3]
-    internal_list = Post.objects.all().filter(category=1)
-    external_list = Post.objects.all().filter(category=2)
-    post_list = get_object_or_404(Post, id=id)
->>>>>>> potter-app-testing
     return render(request, "post/postbody.html", {
         'province_list':province_list,
         'img_list':img_list,

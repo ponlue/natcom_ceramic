@@ -28,9 +28,7 @@ INSTALLED_APPS = [
     'home',
     'ckeditor',
     'django_recaptcha',
-    'captcha',
     'django_ckeditor_5',
-    'ckeditor',
     'ckeditor_uploader',
 ]
 
