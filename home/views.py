@@ -2,18 +2,14 @@ import uuid
 from django.core import serializers
 from django.core.files.storage import FileSystemStorage
 from django.forms import inlineformset_factory
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
-from home.models import Potter, Image, TechniqueMakingPottery
-<<<<<<< HEAD
-
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
-
+from django.contrib import messages
+from django.views.decorators.http import require_http_methods
 from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
 from home.models import *
 
@@ -67,13 +63,12 @@ def all_post(request, id):
         'external_list':external_list,
         'post_list':post_list,
         })
-=======
-from django.contrib import messages
->>>>>>> testing-v1
 
 def home(request):
     return render(request, 'index.html')
 
+
+@require_http_methods(['GET', 'POST']) # Allow only http request GET & POST 
 def potter(request):
     image_formset = inlineformset_factory(
         Potter,
@@ -85,7 +80,7 @@ def potter(request):
     if request.method == 'POST':
         potter_form = PotterForm(request.POST)
         formset = image_formset(request.POST, request.FILES, instance=Potter())
-        # captcha_form = SimpleCaptchaForm(request.POST)
+        recaptcha_form = RecaptchaForm(request.POST)
 
         """
             Getting technique of making pottery as list
@@ -95,7 +90,14 @@ def potter(request):
         descriptions = request.POST.getlist('description[]')
         images = request.FILES.getlist('image[]')
 
-        if potter_form.is_valid() and formset.is_valid():
+
+
+        """
+            - check if recaptcha_form, potter_form and formset is input correctly from
+                user and save potter form to database.
+            - if not return error otherwise.
+        """
+        if recaptcha_form.is_valid() and potter_form.is_valid() and formset.is_valid() :
             technique_list = []
             for title, description, image in zip(titles, descriptions, images):
                     # Generate a unique identifier for technique image 
@@ -115,7 +117,7 @@ def potter(request):
                     # Get the URL of the saved file
                 file_url = fs.url(filename)
 
-                    # Create a dictionary with the data including the file path
+                # Create a dictionary with the data including the file path
                 technique_list.append({
                     'title': title,
                     'description': description,
@@ -152,12 +154,12 @@ def potter(request):
     else:
         potter_form = PotterForm()
         formset = image_formset(instance=Potter())
-        # captcha_form = SimpleCaptchaForm()
+        recaptcha_form = RecaptchaForm()
 
     context = {
         'potter_form': potter_form,
         'formset': formset,
-        # 'captcha_form': captcha_form
+        'recaptcha_form': recaptcha_form
     }
 
     return render(request, "ceramic/index.html", context)
