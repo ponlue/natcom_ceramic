@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Ignore compiled files
 *.pyc
 .gitignore
+=======
+*.pyc
+>>>>>>> testing-v1
 home/migrations/*

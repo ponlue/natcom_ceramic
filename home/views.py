@@ -1,4 +1,3 @@
-import json
 import uuid
 from django.core import serializers
 from django.core.files.storage import FileSystemStorage
@@ -7,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from home.forms import PotterForm, SimpleCaptchaForm, ImageForm
 from home.models import Potter, Image, TechniqueMakingPottery
+<<<<<<< HEAD
 
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
@@ -67,10 +67,12 @@ def all_post(request, id):
         'external_list':external_list,
         'post_list':post_list,
         })
+=======
+from django.contrib import messages
+>>>>>>> testing-v1
 
 def home(request):
     return render(request, 'index.html')
-
 
 def potter(request):
     image_formset = inlineformset_factory(
@@ -83,7 +85,7 @@ def potter(request):
     if request.method == 'POST':
         potter_form = PotterForm(request.POST)
         formset = image_formset(request.POST, request.FILES, instance=Potter())
-        captcha_form = SimpleCaptchaForm(request.POST)
+        # captcha_form = SimpleCaptchaForm(request.POST)
 
         """
             Getting technique of making pottery as list
@@ -93,62 +95,69 @@ def potter(request):
         descriptions = request.POST.getlist('description[]')
         images = request.FILES.getlist('image[]')
 
-        if potter_form.is_valid() and formset.is_valid() and captcha_form.is_valid():
-            # Create empty dict for store technique data
+        if potter_form.is_valid() and formset.is_valid():
             technique_list = []
-
             for title, description, image in zip(titles, descriptions, images):
-                # Generate a unique identifier for technique image 
+                    # Generate a unique identifier for technique image 
                 unique_id = uuid.uuid4().hex
 
-                # Extract file extension
+                    # Extract file extension
                 file_extension = image.name.split('.')[-1]
 
-                # Create unique filename with the unique identifier
+                    # Create unique filename with the unique identifier
                 unique_filename = f"{unique_id}.{file_extension}"
 
                 fs = FileSystemStorage(location='media/')
 
-                # Save the image with the unique filename
+                    # Save the image with the unique filename
                 filename = fs.save(unique_filename, image)
 
-                # Get the URL of the saved file
+                    # Get the URL of the saved file
                 file_url = fs.url(filename)
 
-                # Create a dictionary with the data including the file path
+                    # Create a dictionary with the data including the file path
                 technique_list.append({
                     'title': title,
                     'description': description,
                     'image_url': file_url
                 })
 
-            """
-                Getting potter id what TechniqueMakingPottery is belong to potter.
-            """
+                """
+                    Getting potter id what TechniqueMakingPottery is belong to potter.
+                """
 
-            # Save Potter form data
-            potter_instance = potter_form.save()
+                # Save Potter form data
+                potter_instance = potter_form.save()
 
-            # Save the formset with the Potter instance
-            formset.instance = potter_instance
-            formset.save()
+                # Save the formset with the Potter instance
+                formset.instance = potter_instance
+                formset.save()
 
-            technique_instance = TechniqueMakingPottery(json_data=technique_list, potter=potter_instance)
-            technique_instance.save()
+                technique_instance = TechniqueMakingPottery(json_data=technique_list, potter=potter_instance)
+                technique_instance.save()
 
-            if HttpResponse.status_code == 200:
-                return redirect('/success-submitted')
-            else:
-                return HttpResponse('An errors occurred while submit!')
+                if HttpResponse.status_code == 200:
+                    return redirect('/success-submitted')
+                else:
+                    messages.error(
+                        request, 
+                        'An errors occured while submit the potter application'
+                    )
+        else:
+            messages.error(
+                request, 
+                'បញ្ចូលទិន្នន័យមិនបានត្រឹមត្រូវ'
+            )
+
     else:
         potter_form = PotterForm()
         formset = image_formset(instance=Potter())
-        captcha_form = SimpleCaptchaForm()
+        # captcha_form = SimpleCaptchaForm()
 
     context = {
         'potter_form': potter_form,
         'formset': formset,
-        'captcha_form': captcha_form
+        # 'captcha_form': captcha_form
     }
 
     return render(request, "ceramic/index.html", context)
