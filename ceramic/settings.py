@@ -29,11 +29,6 @@ INSTALLED_APPS = [
     'django_recaptcha',
 ]
 
-# MULTI_CAPTCHA_ADMIN = {
-#     'engine': 'recaptcha',
-# }
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
