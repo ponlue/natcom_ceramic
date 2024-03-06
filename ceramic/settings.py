@@ -18,7 +18,7 @@ ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com','natcom.krissna.com']
 
 # Application definition
 INSTALLED_APPS = [
-    'multi_captcha_admin',
+    # 'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -26,14 +26,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    'django_ckeditor_5',
     'ckeditor',
     'django_recaptcha',
+    'captcha',
+    'django_ckeditor_5',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
-# MULTI_CAPTCHA_ADMIN = {
-#     'engine': 'recaptcha',
-# }
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
+
 
 
 MIDDLEWARE = [
