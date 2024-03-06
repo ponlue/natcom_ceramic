@@ -41,7 +41,7 @@ class TypePottery(models.Model):
 class Province(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=50, unique=True)
-    google_map_url = models.URLField(default=None, blank=False, null=True)
+    google_map_url = models.URLField()
     youtube_url = models.URLField(default=None, blank=False, null=True)
     description = RichTextUploadingField(default=None, blank=False, null=True)
     def __str__(self):
