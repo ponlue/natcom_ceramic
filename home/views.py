@@ -10,7 +10,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
-from home.forms import PotterForm, PotterForm, ImageForm
+from home.forms import PotterForm, PotterForm, ImageForm, RecaptchaForm
 from home.models import *
 
 

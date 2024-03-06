@@ -124,7 +124,7 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
     describe = RichTextUploadingField('Potter Description', config_name='extends', default=None)
-    short_description = models.CharField(max_length=255, default=None, null=True, blank=True)
+    #short_description = models.CharField(max_length=255, default=None, null=True, blank=True)
 
 
 
