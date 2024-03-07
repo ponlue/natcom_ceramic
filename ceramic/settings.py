@@ -29,16 +29,13 @@ INSTALLED_APPS = [
     'ckeditor',
     'django_recaptcha',
     'django_ckeditor_5',
-    'ckeditor_uploader',
+    'ckeditor_uploader', 
+    'home_slideshow'
+
 ]
 
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-
-MULTI_CAPTCHA_ADMIN = {
-    'engine': 'simple-captcha',
-}
-
 
 
 MIDDLEWARE = [
