@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'django_ckeditor_5',
     'ckeditor_uploader', 
     'home_slideshow'
-
+    'slideshow'
 ]
 
 
