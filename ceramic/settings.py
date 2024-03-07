@@ -27,12 +27,8 @@ INSTALLED_APPS = [
     'home',
     'django_ckeditor_5',
     'django_recaptcha',
+    'home_slideshow'
 ]
-
-# MULTI_CAPTCHA_ADMIN = {
-#     'engine': 'recaptcha',
-# }
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
