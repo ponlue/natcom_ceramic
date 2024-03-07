@@ -18,7 +18,7 @@ from home.models import *
 def HomePageView(request):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
-    img_list = Image.objects.all()
+    img_list = PotterPost.objects.all()
     internal_list = PotterPost.objects.all().filter(category=1)
     external_list = PotterPost.objects.filter(category=2).all()
     return render(request, "index.html", {
@@ -72,8 +72,8 @@ def all_post(request, id):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
     img_list = Image.objects.all()
-    internal_list = PotterPost.objects.all().filter(category=1)
-    external_list = PotterPost.objects.all().filter(category=2)
+    internal_list = PotterPost.objects.all().filter(category=1).order_by('-create_at')
+    external_list = PotterPost.objects.all().filter(category=2).order_by('-create_at')
     post_list = get_object_or_404(PotterPost, id=id)
     return render(request, "post/postbody.html", {
         'province_list':province_list,

@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
 {% include 'head/header.html' %}
+<style>
+    a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
 </head>
 <body>
     <!-- start preloader -->
@@ -26,6 +32,8 @@
     <section class="slider">
         {% include 'menu/slide.html' with province_image=province_image %}
     </section>
+
+    <br>
 
 <div class="container">
     <!-- Nav tabs -->
@@ -114,7 +122,7 @@
                                     <div class="news-content">
                                         <div class="date">{{ potter.created_at }}</div>
                                         <h2>{{ potter.full_name }}</h2>
-                                        <p class="text">{{ potter.short_description }}</p>
+                                        <p class="text">{{ potter.describe | safe }}</p>
                                     </div>
                                     <button type="button" class="btn btn-primary"><a href="/potterdetail/{{ potter.id }}" class="text-decoration-none">ពត័មាន</a></button>
                                     <!-- Button trigger modal Image -->
