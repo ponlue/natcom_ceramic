@@ -1,4 +1,3 @@
-import json
 from django.contrib import admin
 from .models import *
 from django.utils.safestring import mark_safe
@@ -30,6 +29,20 @@ class ProvinceAdmin(admin.ModelAdmin):
         'description'
     )
 
+
+
+class ImageGalleryInline(admin.TabularInline):
+    model = ImageGallery
+
+
+
+class ImageGalleryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'province_image_gallery', 'image')
+
+class ProvinceImageGalleryAdmin(admin.ModelAdmin):
+    inlines = [ImageGalleryInline]
+    list_display = ('id', 'province', 'title')
+    list_display_links = ('id', 'province', 'title', )
 
 class ProvinceImageAdmin(admin.ModelAdmin):
     list_display = (
@@ -84,6 +97,8 @@ admin.site.register(Potter, PotterAdmin)
 admin.site.register(Image)
 admin.site.register(TypePottery)
 admin.site.register(ProvinceImage, ProvinceImageAdmin)
+admin.site.register(ImageGallery, ImageGalleryAdmin)
+admin.site.register(ProvinceImageGallery, ProvinceImageGalleryAdmin)
 admin.site.register(District)
 admin.site.register(Commune)
 admin.site.register(Village)
