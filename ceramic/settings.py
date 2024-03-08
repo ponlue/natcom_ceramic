@@ -30,7 +30,9 @@ INSTALLED_APPS = [
     'django_recaptcha',
     'django_ckeditor_5',
     'ckeditor_uploader',
-    'home_slideshow'
+    #'home_slideshow'
+    'slideshow',
+    'qrcode'
 ]
 
 

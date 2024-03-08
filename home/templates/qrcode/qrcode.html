@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCC | Generate QRCode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&family=Content:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Content', sans-serif;
+        }
+        .wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #header-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input[type='url'] {
+            padding: 16px;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+        input[type='url']:focus {
+            outline: none;
+            border: 1px solid #333;
+        }
+        #btn-generate {
+            margin-top: 20px;
+            margin-top: 20px;
+            border: none;
+            padding: 10px 20px;
+            background: #4ecdf3;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        #generate-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="header-logo">
+            <img src="{% static 'img/qr-code.png' %}" alt="kcc qrcode" width="130px">
+            <div>
+                <h1>បង្កើតកូដ QR</h1>
+                <p style="margin-top: -30px; text-align: center;"> Generate QR code</p>
+
+            </div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <label for="url">តំណភ្ជាប់ / URL: </label>
+            <input 
+                type="url" 
+                name="url" id="url" 
+                placeholder="បញ្ចូលតំណភ្ជាប់ / Insert URL" autocomplete="off"
+                required
+                />
+            <div id="generate-wrapper">
+                <input type="submit" id="btn-generate" value="បង្កើត / Generate">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
