@@ -49,7 +49,8 @@
 			{% include 'menu/slide.html' with slider=slider %}
 		</section>
 		<!--/ End Slider Area -->
-		<!-- Start Internal News Area -->
+
+		<!-- start upcoming events -->
 		<hr>
 			<section class="blog section" id="blog" style="padding: 20px 0 !important;">
 				<div class="container">
@@ -74,7 +75,11 @@
 										<div class="date">{{ inlist.create_at }}</div>
 										<h2><a href="post/{{ inlist.id }}" class="text-decoration-none">{{ inlist.title }}</a></h2>
 										
-										<div class="text-description"><p>{{ inlist.body | safe }}</p></div>
+										<div class="text-description">
+											<p>
+												{{ inlist.body | safe }}
+											</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -88,6 +93,11 @@
 				
 				</div>
 			</section>
+			<!-- end upcoming event -->
+		
+
+		<!-- Start Internal News Area -->
+		
 		<hr>
 			<section class="blog section" id="blog" style="padding: 20px 0 !important;">
 				<div class="container">
@@ -99,24 +109,26 @@
 						</div>
 					</div>
 					<div class="row" >
-						{% for inlist in internal_list %}
+						{% for internal in internal_list %}
 						<div class="col-lg-4 col-md-6 col-12">
 							
 							<!-- Single Blog -->
-							<div class="single-news">
-								<div class="news-head">
-									<img src="{{ inlist.image.url }}" alt="#">
-								</div>
-								<div class="news-body">
-									<div class="news-content">
-										<div class="date">{{ inlist.create_at }}</div>
-										<h2><a href="post/{{ inlist.id }}" class="text-decoration-none">{{ inlist.title }}</a></h2>
-										<div class="text-description">
-											<p class="text">{{ inlist.body | safe }}</p>
+							<a href="post/{{ internal.id }}" class="text-decoration-none">
+								<div class="single-news">
+									<div class="news-head">
+										<img src="{{ internal.image.url }}" alt="#">
+									</div>
+									<div class="news-body">
+										<div class="news-content">
+											<div class="date">{{ internal.create_at }}</div>
+											<h2>{{ internal.title }}</h2>
+											<div class="text-description">
+												<p class="text">{{ internal.body | safe }}</p>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</a>
 							<!-- End Single Blog -->
 							<br>
 						</div>
@@ -146,20 +158,22 @@
 							{% for external in external_list %}
 							<div class="col-lg-4 col-md-6 col-12">
 								<!-- Single Blog -->
-								<div class="single-news">
-									<div class="news-head">
-										<img src="{{ external.image.url }}" alt="#">
-									</div>
-									<div class="news-body">
-										<div class="news-content">
-											<div class="date">{{ external.create_at }}</div>
-											<h2><a href="post/{{ external.id }}" class="text-decoration-none">{{ external.title }}</a></h2>
-											<div class="text-description">
-												<p class="text-description">{{ external.body | safe }}</p>
+								<a href="post/{{ external.id }}" class="text-decoration-none">
+									<div class="single-news">
+											<div class="news-head">
+												<img src="{{ external.image.url }}" alt="#">
 											</div>
-										</div>
+											<div class="news-body">
+												<div class="news-content">
+													<div class="date">{{ external.create_at }}</div>
+													<h2>{{ external.title }}</h2>
+													<div class="text-description">
+														<p class="text-description">{{ external.body | safe }}</p>
+													</div>
+												</div>
+											</div>
 									</div>
-								</div>
+								</a>
 								<!-- End Single Blog -->
 								<br>
 							</div>
