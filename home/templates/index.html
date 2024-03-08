@@ -2,12 +2,26 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
-		
         {% include 'head/header.html' %}
-		
+		<style>
+			.section-title{
+				text-align: left;
+				margin-bottom: 10px;
+				padding: 0 10px !important;
+			}
+
+			.text-description{
+				overflow: hidden;
+				display: -webkit-box;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				line-clamp: 3;
+				max-height: calc(1.2em * 3);
+			}
+		</style>
     </head>
     <body>
-	
 		<!-- Preloader -->
  		<div class="preloader">
             <div class="loader">
@@ -32,26 +46,21 @@
 
 		<!-- Slider Area -->
 		<section class="slider">
-			{% include 'menu/slide.html' with img_list=img_list %}
+			{% include 'menu/slide.html' with slider=slider %}
 		</section>
 		<!--/ End Slider Area -->
 		<!-- Start Internal News Area -->
-
-			<section 
-				class="blog section" 
-				id="blog" 
-				style="padding: 20px 0 !important;">
+		<hr>
+			<section class="blog section" id="blog" style="padding: 20px 0 !important;">
 				<div class="container">
-					
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="section-title" style="margin-bottom: 10px !important;">
-								<h2 style="margin: 0px !important;">Internal News</h2>
+					<div class="row" style="justify-content: left !important;">
+						<div class="col-lg-12" >
+							<div class="section-title" style="background: #027461; align-items: center; justify-content: left; display: flex; height: 60px;">
+								<h2 style="color: white;">Upcoming Events</h2>
 							</div>
 						</div>
 					</div>
-					<hr>
-					<div class="row">
+					<div class="row" >
 						{% for inlist in internal_list %}
 						<div class="col-lg-4 col-md-6 col-12">
 							
@@ -64,12 +73,13 @@
 									<div class="news-content">
 										<div class="date">{{ inlist.create_at }}</div>
 										<h2><a href="post/{{ inlist.id }}" class="text-decoration-none">{{ inlist.title }}</a></h2>
-										<p class="text">{{ inlist.description }}</p>
+										
+										<div class="text-description"><p>{{ inlist.body | safe }}</p></div>
 									</div>
 								</div>
 							</div>
 							<!-- End Single Blog -->
-							
+							<br>
 						</div>
 						{% endfor %}
 					</div>
@@ -78,21 +88,60 @@
 				
 				</div>
 			</section>
-
+		<hr>
+			<section class="blog section" id="blog" style="padding: 20px 0 !important;">
+				<div class="container">
+					<div class="row" >
+						<div class="col-lg-12">
+							<div class="section-title" style="background: #027461; align-items: center; justify-content: center; display: flex; height: 60px;">
+								<h2 style="color: white;">Internal News</h2>
+							</div>
+						</div>
+					</div>
+					<div class="row" >
+						{% for inlist in internal_list %}
+						<div class="col-lg-4 col-md-6 col-12">
+							
+							<!-- Single Blog -->
+							<div class="single-news">
+								<div class="news-head">
+									<img src="{{ inlist.image.url }}" alt="#">
+								</div>
+								<div class="news-body">
+									<div class="news-content">
+										<div class="date">{{ inlist.create_at }}</div>
+										<h2><a href="post/{{ inlist.id }}" class="text-decoration-none">{{ inlist.title }}</a></h2>
+										<div class="text-description">
+											<p class="text">{{ inlist.body | safe }}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Single Blog -->
+							<br>
+						</div>
+						{% endfor %}
+					</div>
+						
+					
+				
+				</div>
+			</section>
+		<hr>
 		<!-- End Internal News Area -->
 		<!-- Start External News Area -->	
 			<section class="blog section" id="blog" style="padding: 20px 0 !important;">
 					<div class="container">
-						<div class="row">
+						<div class="row" >
 							<div class="col-lg-12">
-								<div class="section-title" style="margin-bottom: 10px !important;">
-									<h2 style="margin: 0px !important;">External News</h2>
+								<div class="section-title" style="background: #027461; align-items: center; justify-content: center; display: flex; height: 60px;">
+									<h2 style="color: white !important;">External News</h2>
 									<!--<img src="{% static 'img/g5.jpg' %}" alt="#">
 									<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>-->
 								</div>
 							</div>
 						</div>
-					<hr>
+
 						<div class="row">
 							{% for external in external_list %}
 							<div class="col-lg-4 col-md-6 col-12">
@@ -105,16 +154,19 @@
 										<div class="news-content">
 											<div class="date">{{ external.create_at }}</div>
 											<h2><a href="post/{{ external.id }}" class="text-decoration-none">{{ external.title }}</a></h2>
-											<p class="text">{{ external.description }}</p>
+											<div class="text-description">
+												<p class="text-description">{{ external.body | safe }}</p>
+											</div>
 										</div>
 									</div>
 								</div>
 								<!-- End Single Blog -->
+								<br>
 							</div>
 							{% endfor %}
 						</div>
 					</div>
-				</section>	
+			</section>	
 		<!-- End External News Area -->	
 		
 		<!-- Footer Area -->

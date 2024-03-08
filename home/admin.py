@@ -91,8 +91,10 @@ class showPostAdmin(admin.ModelAdmin):
 
 admin.site.register(Categories, showCategoryAdmin)
 admin.site.register(PotterPost, showPostAdmin)
+
 admin.site.register(Potter, PotterAdmin)
 admin.site.register(Image, ImageAdmin)
+
 admin.site.register(TypePottery)
 admin.site.register(ProvinceImage, ProvinceImageAdmin)
 admin.site.register(District)
