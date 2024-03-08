@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
 {% include 'head/header.html' %}
+<style>
+    a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
 </head>
 <body>
     <!-- start preloader -->
@@ -27,20 +33,22 @@
         {% include 'menu/slide.html' with province_image=province_image %}
     </section>
 
+    <br>
+
 <div class="container">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">ពត័មាន</button>
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">ពត័មាន</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">ផែនទី</button>
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">ផែនទី</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">រូបភាព</button>
+        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">រូបភាព</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">អ្នកស្មូន</button>
+        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">អ្នកស្មូន</button>
         </li>
     </ul>
 
@@ -114,7 +122,9 @@
                                     <div class="news-content">
                                         <div class="date">{{ potter.created_at }}</div>
                                         <h2>{{ potter.full_name }}</h2>
-                                        <p class="text">{{ potter.short_description }}</p>
+                                        <div class="text-description">
+                                            <p>{{ potter.describe | safe }}</p>
+                                        </div>
                                     </div>
                                     <button type="button" class="btn btn-primary"><a href="/potterdetail/{{ potter.id }}" class="text-decoration-none">ពត័មាន</a></button>
                                     <!-- Button trigger modal Image -->

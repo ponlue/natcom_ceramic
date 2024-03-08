@@ -10,11 +10,11 @@ Version:	1.1
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 /* Header Sticky */
 .section{
-	padding:70px 0px;
+	padding:35px 0px;
 }
 .section-title {
 	margin-bottom: 35px;
-	padding: 0px 80px;
+	/* padding: 0px 0px; */
 }
 .section-title h2 {
 	font-size: 25px;
@@ -525,20 +525,7 @@ Version:	1.1
 	margin: 0;
 	padding: 0;
 }
-.section{
-	padding:50px 0px;
-}
-.section-title {
-	margin-bottom: 30px;
-	padding: 0px 20px;
-}
-.section-title h2 {
-	font-size: 22px;
-	margin-bottom: 10px;
-}
-.section-title p {
-	font-size: 13px;
-}
+
 
 .breadcrumbs {
 	padding: 60px 0;
