@@ -89,11 +89,28 @@ class Village(models.Model):
         return self.name    
     
 
+""" Province Image Gallery or Collection Model"""
+class ProvinceImageGallery(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.CASCADE, default=None)
+    title = models.CharField(max_length=255, null=False, blank=False, default='Untitle')
+    
+    def __str__(self) -> str:
+        return self.province.name
+
+class ImageGallery(models.Model):
+    province_image_gallery = models.ForeignKey(ProvinceImageGallery, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    image = models.ImageField(upload_to = 'image_gallery', null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.image.url
+
+"""Ended Province Image Gallery or Collection Model"""
+
+
 # Store images of Province
 class ProvinceImage(models.Model):
     province = models.ForeignKey(Province, on_delete=models.CASCADE, default=None, blank=True, null=True)
     image = models.ImageField(upload_to = 'province_images/', null=True, blank=True)
-    
 
 class Potter(models.Model):
 
