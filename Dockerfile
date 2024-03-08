@@ -9,6 +9,12 @@ RUN pip install mysql-connector-python==8.3.0
 RUN pip install django-multi-captcha-admin
 RUN pip install django-recaptcha==4.0.0
 RUN pip install django-ckeditor-5
+
+# QR code gerator module
+RUN pip install pyqrcode
+RUN pip install pypng
+# 
+
 RUN apt-get update -y
 RUN apt install vim -y
 COPY . /ceramic/

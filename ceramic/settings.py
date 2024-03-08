@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'home',
     'django_ckeditor_5',
     'django_recaptcha',
-    'home_slideshow'
+    'slideshow',
+    'qrcode'
 ]
 
 MIDDLEWARE = [
