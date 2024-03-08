@@ -46,7 +46,7 @@
 
 		<!-- Slider Area -->
 		<section class="slider">
-			{% include 'menu/slide.html' with slidehome=slidehome %}
+			{% include 'menu/slide.html' with slider=slider %}
 		</section>
 		<!--/ End Slider Area -->
 		<!-- Start Internal News Area -->
@@ -111,7 +111,9 @@
 									<div class="news-content">
 										<div class="date">{{ inlist.create_at }}</div>
 										<h2><a href="post/{{ inlist.id }}" class="text-decoration-none">{{ inlist.title }}</a></h2>
-										<p class="text">{{ inlist.body | safe }}</p>
+										<div class="text-description">
+											<p class="text">{{ inlist.body | safe }}</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -152,7 +154,9 @@
 										<div class="news-content">
 											<div class="date">{{ external.create_at }}</div>
 											<h2><a href="post/{{ external.id }}" class="text-decoration-none">{{ external.title }}</a></h2>
-											<p class="text-description">{{ external.body | safe }}</p>
+											<div class="text-description">
+												<p class="text-description">{{ external.body | safe }}</p>
+											</div>
 										</div>
 									</div>
 								</div>
