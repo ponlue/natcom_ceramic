@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Ignore compiled files
 *.pyc
-.gitignore
-=======
-*.pyc
->>>>>>> testing-v1
 home/migrations/*
-=======
-# Ignore compiled files
-*.pyc
-home/migrate/*
-migrations/*
->>>>>>> potter-app-testing
+.DS_Store
