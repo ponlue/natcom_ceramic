@@ -80,7 +80,10 @@
             <div class="row">
                 {% for img in provinceimage.imagegallery_set.all %}
                 <div class="col-12 col-md-6 col-lg-4" style="padding: 10px;">
-                    <img src="{{ img.image.url }}" alt="Image">
+                    
+                    <a href="{{ img.image.url }}" data-lightbox="image-1" data-title="My caption">
+                        <img class="example-image" src="{{ img.image.url }}" alt="Image">
+                    </a>
                 </div>
                 {% endfor %}
             </div>
