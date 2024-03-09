@@ -30,10 +30,6 @@ class PotterPost(models.Model):
     post_photo.short_description = 'image'
     post_photo.allow_tags = True
     
-# class PostSlideImage(models.Model):
-#     post = models.ForeignKey(PotterPost, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to='post_slide_image/')
-    
 class TypePottery(models.Model):
     title = models.CharField(max_length=25, unique=True)
     # images = models.ManyToManyField(Image)
@@ -56,10 +52,6 @@ class Province(models.Model):
     description = RichTextUploadingField(default=None, blank=False, null=True)
     def __str__(self):
         return self.name
-    
-# class ProvinceSlideImage(models.Model):
-#     province = models.ForeignKey(Province, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to = 'province_slide_images/', null=True, blank=True)
 
 
 class District(models.Model):
@@ -89,11 +81,29 @@ class Village(models.Model):
         return self.name    
     
 
+""" Province Image Gallery or Collection Model"""
+class ProvinceImageGallery(models.Model):
+    province = models.ForeignKey(Province, on_delete=models.CASCADE, default=None)
+    title = models.CharField(max_length=255, null=False, blank=False, default='Untitle')
+    
+    def __str__(self) -> str:
+        return self.province.name
+
+class ImageGallery(models.Model):
+    province_image_gallery = models.ForeignKey(ProvinceImageGallery, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    image = models.ImageField(upload_to = 'image_gallery/', null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.image.url
+    
+
+"""Ended Province Image Gallery or Collection Model"""
+
+
 # Store images of Province
 class ProvinceImage(models.Model):
     province = models.ForeignKey(Province, on_delete=models.CASCADE, default=None, blank=True, null=True)
     image = models.ImageField(upload_to = 'province_images/', null=True, blank=True)
-    
 
 class Potter(models.Model):
 

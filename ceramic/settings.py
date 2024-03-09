@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader', 
     # 'home_slideshow',
     'slideshow',
+    'qrcode'
 ]
 
 

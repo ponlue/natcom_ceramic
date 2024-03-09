@@ -7,6 +7,7 @@
         text-decoration: none;
         color: white;
     }
+
 </style>
 </head>
 <body>
@@ -37,21 +38,22 @@
 
 <div class="container">
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs" id="myTab" role="tablist" style="max-width: none; display: flex">
         <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">ពត័មាន</button>
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">ពត័មាន/Information</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">ផែនទី</button>
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">ផែនទី/Map</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">រូបភាព</button>
+        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">រូបភាព/Photo</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">អ្នកស្មូន</button>
+        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false" style="font-family: Noto Sans Khmer, sans-serif; color: royalblue;">អ្នកស្មូន/Potter</button>
         </li>
     </ul>
 
+    <br>
 
     <!-- Tab panes -->
     <div class="tab-content">
@@ -60,7 +62,7 @@
             {% for pro in province %}
             <h2 class="h2">{{ pro.name }}</h2>
             <div>
-                <p>{{ pro.description | safe }}</p>
+                <p >{{ pro.description | safe }}</p>
             </div>
             {% endfor %}
         </div>
@@ -72,13 +74,15 @@
         </div>
         <!-- Image-Province -->
         <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+            {% for provinceimage in image_gallery %}
             <div class="row">
-                {% for img in province_image %}
-                <div class="col-6 col-md-4">
-                    <img  src="{{ img.image.url }}" alt="province image">
+                {% for img in provinceimage.imagegallery_set.all %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    <img  src="{{ img.image.url }}" alt="Image">
                 </div>
                 {% endfor %}
             </div>
+            {% endfor %}
         </div>
         <!-- Potter-List -->
         <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">

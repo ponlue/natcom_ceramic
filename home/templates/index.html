@@ -19,6 +19,9 @@
 				line-clamp: 3;
 				max-height: calc(1.2em * 3);
 			}
+			a{
+				color: black;
+			}
 		</style>
     </head>
     <body>
@@ -62,31 +65,51 @@
 						</div>
 					</div>
 					<div class="row" >
-						{% for inlist in internal_list %}
-						<div class="col-lg-4 col-md-6 col-12">
+						<div class="col-lg-4 col-md-12 col-12">
 							
 							<!-- Single Blog -->
 							<div class="single-news">
 								<div class="news-head">
-									<img src="{{ inlist.image.url }}" alt="#">
+									<a href="post/{{ upcoming_event.id }}"><img src="{{ upcoming_event.image.url }}" alt="#"></a>
 								</div>
 								<div class="news-body">
 									<div class="news-content">
-										<div class="date">{{ inlist.create_at }}</div>
-										<h2><a href="post/{{ inlist.id }}" class="text-decoration-none">{{ inlist.title }}</a></h2>
+										<div class="date">{{ upcoming_event.create_at }}</div>
+										<h2><a href="post/{{ upcoming_event.id }}" class="text-decoration-none">{{ upcoming_event.title }}</a></h2>
 										
 										<div class="text-description">
 											<p>
-												{{ inlist.body | safe }}
+												{{ upcoming_event.body | safe }}
 											</p>
 										</div>
 									</div>
 								</div>
 							</div>
 							<!-- End Single Blog -->
-							<br>
 						</div>
-						{% endfor %}
+
+						<div class="col-lg-4 col-md-12 col-12">
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/m26Fj489e2g?si=5Lp4Z10DVmtLKw4S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+						</div>
+						<div class="col-lg-4 col-md-12 col-12">
+							<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+								<div class="carousel-inner">
+									{% for imageslide in event_slider %}
+									<div class="carousel-item {% if forloop.first %}active{% endif %}">
+										<img class="d-block w-80" src="{{ imageslide.image.url }}" alt="First slide">
+									</div>
+								  	{% endfor %}
+								</div>
+								<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+								  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								  <span class="sr-only">Previous</span>
+								</a>
+								<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+								  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+								  <span class="sr-only">Next</span>
+								</a>
+							  </div>
+						</div>
 					</div>
 						
 					
@@ -104,13 +127,13 @@
 					<div class="row" >
 						<div class="col-lg-12">
 							<div class="section-title" style="background: #027461; align-items: center; justify-content: center; display: flex; height: 60px;">
-								<h2 style="color: white;">Internal News</h2>
+								<h2 style="color: white;">News</h2>
 							</div>
 						</div>
 					</div>
 					<div class="row" >
 						{% for internal in internal_list %}
-						<div class="col-lg-4 col-md-6 col-12">
+						<div class="col-lg-3 col-md-6 col-12">
 							
 							<!-- Single Blog -->
 							<a href="post/{{ internal.id }}" class="text-decoration-none">
@@ -156,7 +179,7 @@
 
 						<div class="row">
 							{% for external in external_list %}
-							<div class="col-lg-4 col-md-6 col-12">
+							<div class="col-lg-3 col-md-6 col-12">
 								<!-- Single Blog -->
 								<a href="post/{{ external.id }}" class="text-decoration-none">
 									<div class="single-news">
