@@ -5,7 +5,7 @@ from django.forms import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from home.forms import PotterForm, RecaptchaForm, ImageForm
-from home.models import Potter, Image, TechniqueMakingPottery
+from home.models import ImageGallery, Potter, Image, TechniqueMakingPottery
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 
@@ -134,3 +134,11 @@ def technique_making_potter_list(req):
 
 def success_submitted_potter_form(request):
     return render(request, 'ceramic/success.html')
+
+
+
+def image_collection(request):
+    img_object = ImageGallery.objects.filter(province_image_gallery=1).values()
+    print(img_object)
+
+    return render(request, 'img-collection.html')

@@ -1,2 +1,4 @@
 *.pyc
 home/migrations/*
+.DS_Store
+
