@@ -75,10 +75,12 @@
         <!-- Image-Province -->
         <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
             {% for provinceimage in image_gallery %}
+            <hr>
+            <h3 style="display: flex;justify-content: center;font-family: Noto Sans Khmer, sans-serif;padding-bottom: 10px;">{{ provinceimage.title }}</h3>
             <div class="row">
                 {% for img in provinceimage.imagegallery_set.all %}
-                <div class="col-12 col-md-6 col-lg-4">
-                    <img  src="{{ img.image.url }}" alt="Image">
+                <div class="col-12 col-md-6 col-lg-4" style="padding: 10px;">
+                    <img src="{{ img.image.url }}" alt="Image">
                 </div>
                 {% endfor %}
             </div>
