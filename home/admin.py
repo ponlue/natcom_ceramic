@@ -30,7 +30,6 @@ class ProvinceAdmin(admin.ModelAdmin):
     )
 
 
-
 class ImageGalleryInline(admin.TabularInline):
     model = ImageGallery
 
@@ -59,7 +58,62 @@ class ImageAdmin(admin.ModelAdmin):
     )
 
 
+class PotterImageInline(admin.TabularInline):
+    model = Image
+
+class ImageAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('រូបភាព / Photos', {
+            'fields': (
+                'image',
+            ),
+        }),
+    ]
+
 class PotterAdmin(admin.ModelAdmin):
+    inlines = [PotterImageInline]
+
+    fieldsets = [
+        ('បញ្ជីសារពើភណ្ឌអ្នកផលិតកុលាលភាជន៍ក្នុងប្រទេសកម្ពុជា', {
+            'fields': ('inventory_number', 'created_at')
+        }),
+        ('I.ព័ត៍មានទូទៅរបស់ស្មូន / General information', {
+            'fields': (
+                'full_name', 
+                'gender', 
+                'dob', 
+                'duration', 
+                'amount_of_pottery', 
+                'inheritance',
+                'type_of_pottery',
+            )
+        }),
+        ('ទីកន្លែងកំណើត / Place of Birth', {
+            'fields': (
+                'province_of_pob',
+                'district_of_pob',
+                'commune_of_pob',
+                'village_of_pob',
+            ),
+        }),
+        ('លំនៅឋានបច្ចុបន្ន / Current Address', {
+            'fields': (
+                'province_of_address',
+                'district_of_address',
+                'commune_of_address',
+                'village_of_address',
+            ),
+        }),
+        ('និយាមការផ្ទះ / Coordinate', {
+            'fields': (
+                'x_coordinate',
+                'y_coordinate',
+                'url_google_map',
+                'youtube_url',
+                'describe'
+            ),
+        }),
+    ]
 
     list_display = (
         'id',
@@ -74,11 +128,10 @@ class PotterAdmin(admin.ModelAdmin):
         'province_of_address',
         'province_of_pob',
         'created_at',
-        # 'description'
     )
     search_fields = ("inventory_number", "full_name")
     list_display_links = ('id', 'inventory_number', 'full_name')
-
+    list_per_page = 10
 
 class TechniqueMakingPotteryAdmin(admin.ModelAdmin):
     list_display = ('potter_name', 'json_data')

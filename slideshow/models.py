@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from django_ckeditor_5.fields import CKEditor5Field
+
 
 class Category(models.Model):
     STATUS_CHOICES = [
@@ -17,11 +19,11 @@ class Category(models.Model):
 class SlideShow(models.Model):
     """
         For create, update, delete, and display slideshow 
-        in ceramic homepage.
+        in ceramic homepage.-
     """
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=None)
     title = models.CharField(max_length=255, null=False, blank=False, default='No title')
-    description = models.TextField(null=True, blank=True)
+    description = CKEditor5Field('Slideshow description', blank=True, null=True, config_name='extends')
 
 
     def __str__(self) -> str:
