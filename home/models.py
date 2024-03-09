@@ -19,7 +19,7 @@ class Categories(models.Model):
 class PotterPost(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.CASCADE,null=True,blank=True)
     title = models.CharField(max_length=50, unique=True)
-    body = RichTextField(blank=True, null=True)
+    body = RichTextUploadingField(blank=True, null=True)
     image = models.ImageField(upload_to='uploads/')
     create_at = models.DateTimeField(default=datetime.now)
     description = models.CharField(null=True, blank=True, max_length=500)
