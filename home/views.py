@@ -20,9 +20,11 @@ def HomePageView(request):
     province_list = Province.objects.all()
     potter_list = Potter.objects.all()
     img_list = PotterPost.objects.all()
-    internal_list = PotterPost.objects.all().filter(category=1)
-    external_list = PotterPost.objects.filter(category=2).all()
+    internal_list = PotterPost.objects.all().filter(category=1).order_by('-id')
+    external_list = PotterPost.objects.all().filter(category=2).order_by('-id')
+    upcoming_event = PotterPost.objects.filter(category=3).order_by('-id').first
     slider = SlideImage.objects.all().filter(slideshow=1)[:5]
+    event_slider = SlideImage.objects.all().filter(slideshow=2)
     return render(request, "index.html", {
         'province_list':province_list,
         'img_list':img_list,
@@ -30,6 +32,8 @@ def HomePageView(request):
         'internal_list':internal_list,
         'external_list':external_list,
         'slider':slider,
+        'upcoming_event':upcoming_event,
+        'event_slider':event_slider,
         })
 
 def PotterdetailView(request, id):
@@ -59,8 +63,9 @@ def all_Potter(request, id ):
     imgpotter = Image.objects.filter(potter=id).order_by('-id')[:3]
     imgpotter_list = Image.objects.all()
     potter_b =Potter.objects.all().filter(id=id)
-    province_image = ProvinceImage.objects.all().filter(province=id)
     slider = ProvinceImage.objects.all().filter(province=id).order_by('-id')[:5]
+    image_gallery = ProvinceImageGallery.objects.filter(province=id).all()
+    print(image_gallery)
     return render(request, "potter/potter.html",{
         'province_list':province_list,
         'img_list':img_list,
@@ -68,7 +73,7 @@ def all_Potter(request, id ):
         'imgpotter':imgpotter,
         'potter_b':potter_b,
         'province':province,
-        'province_image':province_image,
+        'image_gallery':image_gallery,
         'imgpotter_list':imgpotter_list,
         'slider':slider,
         })
