@@ -21,13 +21,16 @@ class ProvinceAdmin(admin.ModelAdmin):
     display_images.short_description = 'Images'
 
     list_display = (
+        'id',
         'name',
         'code',
         'display_images',
-        'google_map_url',
-        'youtube_url',
-        'description'
+        # 'google_map_url',
+        # 'youtube_url',
+        # 'description'
     )
+
+    list_per_page = 10
 
 
 class ImageGalleryInline(admin.TabularInline):
