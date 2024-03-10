@@ -149,7 +149,6 @@ class Migration(migrations.Migration):
                 ('body', ckeditor_uploader.fields.RichTextUploadingField(blank=True, null=True)),
                 ('image', models.ImageField(upload_to='uploads/')),
                 ('create_at', models.DateTimeField(default=datetime.datetime.now)),
-                ('youtube_url', models.URLField()),
                 ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='home.categories')),
             ],
         ),
