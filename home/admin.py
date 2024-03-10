@@ -21,13 +21,10 @@ class ProvinceAdmin(admin.ModelAdmin):
         'code',
         'display_images',
     )
-<<<<<<< HEAD
-=======
 
     list_per_page = 10
 
 
->>>>>>> cd6fcf34b6f07da6b76b945d2d93919221d2fd80
 class ImageGalleryInline(admin.TabularInline):
     model = ImageGallery
 
