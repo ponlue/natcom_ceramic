@@ -25,9 +25,6 @@ class ProvinceAdmin(admin.ModelAdmin):
         'name',
         'code',
         'display_images',
-        # 'google_map_url',
-        # 'youtube_url',
-        # 'description'
     )
 
     list_per_page = 10
@@ -148,12 +145,12 @@ class TechniqueMakingPotteryAdmin(admin.ModelAdmin):
 admin.site.register(TechniqueMakingPottery, TechniqueMakingPotteryAdmin)
 admin.site.register(Province, ProvinceAdmin)
 class showCategoryAdmin(admin.ModelAdmin):
-    fields = ['title','create_at','description']
-    list_display=('title', 'create_at', 'description')
+    fields = ['title','create_at']
+    list_display=('title', 'create_at')
 
 class showPostAdmin(admin.ModelAdmin):
-    fields = ('category','title','description','body','image','post_photo','create_at')
-    list_display=('category_name','title', 'image','post_photo', 'create_at')
+    # fields = ('category','title','body','image','post_photo','create_at', 'youtube_url')
+    list_display=('category_name','title', 'image','post_photo', 'create_at', 'youtube_url')
     readonly_fields = ['post_photo']
     def category_name(self, instance):
         return instance.category.title
