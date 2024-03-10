@@ -6,8 +6,15 @@
 		<style>
 			.section-title{
 				text-align: left;
-				margin-bottom: 10px;
-				padding: 0 10px !important;
+				margin-bottom: 20px !important;
+			}
+
+			h2{
+				margin-bottom: 0px !important;
+			}
+
+			.event-title-h2:hover{
+				color: dodgerblue;
 			}
 
 			.text-description{
@@ -19,8 +26,51 @@
 				line-clamp: 3;
 				max-height: calc(1.2em * 3);
 			}
+			.text-description-5{
+				overflow: hidden;
+				display: -webkit-box;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 7;
+				-webkit-box-orient: vertical;
+				line-clamp: 7;
+				max-height: calc(1.2em * 6.6);
+			}
 			a{
 				color: black;
+				text-decoration: none;
+			}
+			.date{
+				display: inline-block;
+				border: 1px solid black;
+				border-radius: 10px;
+				color: white;
+				margin-bottom: 5px;
+				padding: 2px 5px !important;
+				font-size: 12px;
+			}
+			.btn-detail-event-post{
+				padding: 5px 20px;
+				border: 1px solid black;
+				border-radius: 10px;
+				color: white;
+				font-weight: 500;
+				margin-top: 10px;
+				background: transparent;
+			}
+			.btn-detail-event-post:hover{
+				background:#02382f;
+				padding: 7px 28px;
+			}
+			@media only screen and (max-width: 768px){
+				.text-description-5{
+					overflow: hidden;
+					display: -webkit-box;
+					text-overflow: ellipsis;
+					-webkit-line-clamp: 3;
+					-webkit-box-orient: vertical;
+					line-clamp: 3;
+					max-height: calc(1.2em * 4.5);
+				}
 			}
 		</style>
     </head>
@@ -59,22 +109,22 @@
 				<div class="container">
 					<div class="row" style="justify-content: left !important;">
 						<div class="col-lg-12" >
-							<div class="section-title" style="background: #027461; align-items: center; justify-content: left; display: flex; height: 60px;">
+							<div class="section-title" style="background: #027461; align-items: center; justify-content: left; display: flex; height: 40px;border-radius: 10px;">
 								<h2 style="color: white;">Upcoming Events</h2>
 							</div>
 						</div>
 					</div>
-					<div class="row" >
+					<div class="row" style="background: #027461;margin: 0px;padding: 10px 0px;border-radius: 10px;">
 						<div class="col-lg-4 col-md-12 col-12">
-							
+							{% comment %}
 							<!-- Single Blog -->
 							<div class="single-news">
 								<div class="news-head">
 									<a href="post/{{ upcoming_event.id }}"><img src="{{ upcoming_event.image.url }}" alt="#"></a>
 								</div>
 								<div class="news-body">
-									<div class="news-content">
-										<div class="date">{{ upcoming_event.create_at }}</div>
+									<div class="news-content" style="padding: 5px 15px 15px 15px !important;">
+										<div class="date" style="padding: 2px !important; font-size: 11px !important;margin-bottom: 2 !important;">{{ upcoming_event.create_at }}</div>
 										<h2><a href="post/{{ upcoming_event.id }}" class="text-decoration-none">{{ upcoming_event.title }}</a></h2>
 										<div class="text-description">
 											<p>
@@ -85,16 +135,32 @@
 								</div>
 							</div>
 							<!-- End Single Blog -->
+							{% endcomment %}
+							<a href="post/{{ upcoming_event.id }}"><img src="{{ upcoming_event.image.url }}" class="img-thumbnail" alt="..."></a>
 						</div>
-						
-						<div class="col-lg-4 col-md-12 col-12">
+						<div class="col-lg-8 col-md-12 col-12">
+							<div class="date" >{{ upcoming_event.create_at }}</div>
+							<h2 class="event-title-h2"><a href="post/{{ upcoming_event.id }}" class="text-decoration-none">{{ upcoming_event.title }}</a></h2>
+							<div class="text-description-5">
+								<p>
+									{{ upcoming_event.body | safe }}
+								</p>
+							</div>
+							<button class="btn-detail-event-post">
+								<a href="post/{{ upcoming_event.id }}">Detail</a>
+							</button>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-lg-6 col-md-12 col-12" style="margin-bottom: 10px;">
 							<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 								<div class="carousel-inner">
 									{% for imageslide in event_slider %}
 									<div class="carousel-item {% if forloop.first %}active{% endif %}">
 										<img class="d-block w-80" src="{{ imageslide.image.url }}" alt="First slide">
 									</div>
-									  {% endfor %}
+									{% endfor %}
 								</div>
 								<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 								  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -104,12 +170,10 @@
 								  <span class="carousel-control-next-icon" aria-hidden="true"></span>
 								  <span class="sr-only">Next</span>
 								</a>
-							  </div>
+							</div>
 						</div>
-
-						<div class="col-lg-4 col-md-12 col-12">
-							<iframe width="560" height="315" src="https://www.youtube.com/embed/yU_lY4XLEkI?si=jfmjt3vEmbTwshcb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-							<iframe width="560" height="315" src="https://www.youtube.com/embed/62H4MoKWxOw?si=QTORY3gPj6L23gI8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+						<div class="col-lg-6 col-md-12 col-12">
+							<iframe width="1920" height="425" src="{{ upcoming_event.youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 						</div>
 					</div>
 						
@@ -127,7 +191,7 @@
 				<div class="container">
 					<div class="row" >
 						<div class="col-lg-12">
-							<div class="section-title" style="background: #027461; align-items: center; justify-content: center; display: flex; height: 60px;">
+							<div class="section-title" style="background: #027461; align-items: center; justify-content: center; display: flex; height: 40px;border-radius: 10px;">
 								<h2 style="color: white;">News</h2>
 							</div>
 						</div>
@@ -170,7 +234,7 @@
 					<div class="container">
 						<div class="row" >
 							<div class="col-lg-12">
-								<div class="section-title" style="background: #027461; align-items: center; justify-content: center; display: flex; height: 60px;">
+								<div class="section-title" style="background: #027461; align-items: center; justify-content: center; display: flex; height: 40px;border-radius: 10px;">
 									<h2 style="color: white !important;">External News</h2>
 									<!--<img src="{% static 'img/g5.jpg' %}" alt="#">
 									<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>-->

@@ -21,13 +21,10 @@ class ProvinceAdmin(admin.ModelAdmin):
         'code',
         'display_images',
     )
-<<<<<<< HEAD
-=======
 
     list_per_page = 10
 
 
->>>>>>> cd6fcf34b6f07da6b76b945d2d93919221d2fd80
 class ImageGalleryInline(admin.TabularInline):
     model = ImageGallery
 
@@ -145,7 +142,7 @@ class showCategoryAdmin(admin.ModelAdmin):
     list_display=('title', 'create_at')
 
 class showPostAdmin(admin.ModelAdmin):
-    # fields = ('category','title','body','image','post_photo','create_at', 'youtube_url')
+    fields = ('category','title','body','image','post_photo','create_at', 'youtube_url')
     list_display=('category_name','title', 'image','post_photo', 'create_at', 'youtube_url')
     readonly_fields = ['post_photo']
     def category_name(self, instance):
