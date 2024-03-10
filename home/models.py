@@ -19,10 +19,10 @@ class Categories(models.Model):
 class PotterPost(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.CASCADE,null=True,blank=True)
     title = models.CharField(max_length=50, unique=True)
-    body = RichTextField(blank=True, null=True)
+    body = RichTextUploadingField(blank=True, null=True)
     image = models.ImageField(upload_to='uploads/')
     create_at = models.DateTimeField(default=datetime.now)
-    description = models.CharField(null=True, blank=True, max_length=500)
+    youtube_url = models.URLField()
 
     
     def post_photo(self):
@@ -85,9 +85,17 @@ class Village(models.Model):
 class ProvinceImageGallery(models.Model):
     province = models.ForeignKey(Province, on_delete=models.CASCADE, default=None)
     title = models.CharField(max_length=255, null=False, blank=False, default='Untitle')
-    
+
+
+
+    class Meta:
+        verbose_name = 'Province-Image-Gallery'
+        verbose_name_plural = "Province-Image-Galleries"
+
+
     def __str__(self) -> str:
         return self.province.name
+    
 
 class ImageGallery(models.Model):
     province_image_gallery = models.ForeignKey(ProvinceImageGallery, on_delete=models.CASCADE, default=None, blank=True, null=True)
@@ -142,6 +150,14 @@ class Potter(models.Model):
     describe = RichTextUploadingField('Potter Description', config_name='extends', default=None)
     #short_description = models.CharField(max_length=255, default=None, null=True, blank=True)
 
+    url_google_map = models.URLField(default=None, blank=True, null=True)
+    youtube_url = models.URLField(default=None, blank=True, null=True)
+
+    describe = CKEditor5Field('Potter Description', config_name='default', default='', blank=True)
+
+
+    class Meta:
+        verbose_name = 'Potter'
 
 
 class TechniqueMakingPottery(models.Model):

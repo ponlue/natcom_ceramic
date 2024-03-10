@@ -8,6 +8,8 @@ from django.shortcuts import get_list_or_404, get_object_or_404, redirect, rende
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
+from home.forms import PotterForm, RecaptchaForm, ImageForm
+from home.models import ImageGallery, Potter, Image, TechniqueMakingPottery
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 from home.forms import PotterForm, PotterForm, ImageForm, RecaptchaForm
@@ -225,3 +227,8 @@ def technique_making_potter_list(req):
 def success_submitted_potter_form(request):
     return render(request, 'ceramic/success.html')
 
+def image_collection(request):
+    img_object = ImageGallery.objects.filter(province_image_gallery=1).values()
+    print(img_object)
+
+    return render(request, 'img-collection.html')
