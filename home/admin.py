@@ -142,7 +142,7 @@ class showCategoryAdmin(admin.ModelAdmin):
     list_display=('title', 'create_at')
 
 class showPostAdmin(admin.ModelAdmin):
-    # fields = ('category','title','body','image','post_photo','create_at', 'youtube_url')
+    fields = ('category','title','body','image','post_photo','create_at', 'youtube_url')
     list_display=('category_name','title', 'image','post_photo', 'create_at', 'youtube_url')
     readonly_fields = ['post_photo']
     def category_name(self, instance):
