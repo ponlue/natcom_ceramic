@@ -7,11 +7,16 @@ from django_ckeditor_5.fields import CKEditor5Field
 
 class TypePottery(models.Model):
     title = models.CharField(max_length=25, unique=True)
-    # images = models.ManyToManyField(Image)
-    diameter = models.DecimalField(max_digits=5, decimal_places=2)
-    height = models.DecimalField(max_digits=5, decimal_places=2)
-    thickness = models.DecimalField(max_digits=5, decimal_places=2)
-    color = models.CharField(max_length=20)
+    diameter = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    height = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    thickness = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
+    color = models.CharField(max_length=20, blank=True)
+    
+
+    class Meta:
+        verbose_name = 'ប្រភេទកុលាភាជន៍ / Type of Pottery'
+        verbose_name_plural = 'ប្រភេទកុលាភាជន៍ / Type of Pottery'
+    
 
     def __str__(self) -> CharField:
         return self.title
@@ -23,7 +28,10 @@ class Province(models.Model):
     google_map_url = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
     description = CKEditor5Field('Province Description', config_name='default', default=None)
-    # testing
+    
+    class Meta:
+        verbose_name = 'Province'
+        verbose_name_plural = "Province"
 
     def __str__(self):
         return self.name
@@ -62,10 +70,9 @@ class ProvinceImageGallery(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False, default='Untitle')
 
 
-
     class Meta:
-        verbose_name = 'Province-Image-Gallery'
-        verbose_name_plural = "Province-Image-Galleries"
+        verbose_name = 'Province Image Collection'
+        verbose_name_plural = "Province Image Collection"
 
 
     def __str__(self) -> str:
@@ -87,6 +94,10 @@ class ProvinceImage(models.Model):
     province = models.ForeignKey(Province, on_delete=models.CASCADE, default=None, blank=True, null=True)
     image = models.ImageField(upload_to = 'province_images/', null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'រូបភាពនៃខេត្ត / Province Image'
+        verbose_name_plural = "Province Image"
+
 class Potter(models.Model):
 
     GENDER_CHOICES = [
@@ -100,7 +111,13 @@ class Potter(models.Model):
     full_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     dob = models.DateField()
-    duration = models.CharField(max_length=255, blank=False, null=True)
+    # duration = models.CharField(max_length=255, blank=False, null=True)
+    
+    # duration
+    started_date = models.DateField(default=datetime.now)
+    ended_date = models.DateField(default=datetime.now)
+
+
     amount_of_pottery = models.PositiveIntegerField()
     inheritance = models.CharField(max_length=255, blank=False, null=True)
 
@@ -124,23 +141,43 @@ class Potter(models.Model):
 
     describe = CKEditor5Field('Potter Description', config_name='default', default='', blank=True)
 
-
     class Meta:
-        verbose_name = 'Potter'
+        verbose_name = 'ស្មូន / Potter'
+        verbose_name_plural = 'ស្មូន / Potter'
 
+
+# class TechniqueMakingPottery(models.Model):
+#     objects = None
+#     json_data = models.JSONField(default="No data", blank=True)
+#     potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="potter")
+
+#     def __str__(self):
+#         return str('របៀបផលិតរបស់: ' + self.potter.full_name)
+        
 
 class TechniqueMakingPottery(models.Model):
-    objects = None
-    json_data = models.JSONField(default=None, null=True, blank=True)
-    potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None, blank=True, null=True, related_name="potter")
+    potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None, blank=False, null=False, related_name="potter")
+    title = models.CharField(max_length=200, null=False, blank=False, default=None)
+    description = CKEditor5Field('Description', config_name='default', default='', blank=True) 
+    image = models.ImageField(upload_to='technique_image/', default='', blank=True)
 
-    def __str__(self):
-        return str('របៀបផលិតរបស់: ' + self.potter.full_name)
+    class Meta:
+        verbose_name = "របៀបនៃការផលិត / Technique"
+        verbose_name_plural = "របៀបនៃការផលិត / Technique"
+
+    def __str__(self) -> str:
+        return  self.potter.full_name
+    
 
 
 class Image(models.Model):
     potter = models.ForeignKey(Potter, on_delete=models.CASCADE, default=None)
     image = models.ImageField(upload_to='uploads/')
+
+    class Meta: 
+        verbose_name = 'រូបភាពស្មូន / Potter Image'
+        verbose_name_plural = 'រូបភាពស្មូន / Potter Image'
+
 
 
 class ToolPottery(models.Model):

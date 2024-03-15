@@ -1,0 +1,133 @@
+{% load static %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&family=Content:wght@400;700&display=swap" rel="stylesheet">
+    
+    <title>New Potter Application</title>
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'potter2/style.css' %}">
+    {% endcompress %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Content', sans-serif;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-logo" style="text-align: center;">
+            <img src="{% static 'img/potter_logo/logo-2.png' %}" alt="" width="80px">
+            <img src="{% static 'img/potter_logo/logo-7.png' %}" alt="" width="140px">
+            <img src="{% static 'img/potter_logo/waseda.png' %}" alt="" width="170px">
+            <img src="{% static 'img/potter_logo/rufa_logo.png' %}" alt="" width="80px">
+            <div class="title">
+                <h4 id="inventory-pottery-title" style="font-family: 'Moul' !important; text-align: center; font-size: 18px; color: #333238;">បញ្ជីសារពើភណ្ឌអ្នកផលិតកុលាលភាជន៍ក្នុងប្រទេសកម្ពុជា</h4>
+                <p style="font-size: 14px; text-transform: uppercase; text-align: center; color: #333238;" class="mb-3">Inventory of Pottery Maker in Cambodia</p>
+            </div>
+        </div>
+        <br>
+        <div class="form-wrapper">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {% for field in potter2_form %}
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% if field.name == 'created_at' %}
+                        <div class="section-title">I. ព័ត៍មានទូទៅរបស់ស្មូន / General information</div>
+                    {% endif %}
+                    {% if field.name == 'dob' %}
+                        <div class="section-title">រយៈពេលនៃការផលិតកុលាលភាជន៍ / Duration</div>
+                    {% endif %}
+                    {% if field.name == 'type_of_pottery' %}
+                        <div class="section-title">ទីកន្លែងកំណើត / Place of birth</div>
+                    {% endif %}
+                    {% if field.name == 'village_of_pob' %}
+                        <div class="section-title">លំនៅឋានបច្ចុបន្ន / Current address</div>
+                    {% endif %}
+                    {% if field.name == 'village_of_address' %}
+                        <div class="section-title">និយាមការផ្ទះ / Coordinate</div>
+                    {% endif %}
+                    {% if field.name == 'describe' %}
+                        <div class="section-title">រូបភាព / Photos</div>
+                    {% endif %}
+                {% endfor %}
+
+
+                <!-- ImageFormset -->
+                <input type="hidden" name="form-TOTAL_FORMS" id="id_form-TOTAL_FORMS" value="{{ formset.total_forms }}">
+                {{ formset.management_form }}
+                <div id="image-form-container">
+                    {% for image_form in image_formset %}
+                        <div class="image-form">
+                            {{ image_form.as_table }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="image-form-actions">
+                    <a class="plus-formset-btn-icon">&#x2B;</a>
+                    <a id="add-image-form-btn" class="add-form-btn">បន្ថែមរូបស្មូន / Add another potter image</a>
+                </div>
+                <!-- End ImageFormset-->
+                <br>
+
+
+                <div class="section-title">II. របៀបនៃការផលិត / Technique</div>
+                <!-- Technique Making Pottery formset -->
+                <input type="hidden" name="potter-TOTAL_FORMS" value="" id="id_potter-TOTAL_FORMS" autocomplete="off">
+                <div id="technique-form-container">
+                    {% for technique_form in technique_making_pottery_formset %}
+                        <div class="technique-form">
+                            {{ technique_form.as_table }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="technique-form-actions">
+                    <a class="plus-formset-btn-icon">&#x2B;</a>
+                    <a id="add-technique-form-btn" class="add-form-btn">បន្ថែមរបៀបផលិត / Add another step</a>
+                </div>
+                <!-- End Technique Making Pottery formset -->
+
+                <br>
+                <!-- Google recaptcha -->
+                {{ recaptcha_form }}
+                {{ recaptcha_form.errors }}
+
+
+                <!-- End Google recaptcha -->
+
+                
+                <input type="submit" value="រក្សាទុក | Save" style="margin: 30px 0;"/>
+           
+            </form>
+        </div>
+
+        {% compress js %}
+            <script src="{% static 'potter2/image_inlines.js' %}"></script>   
+            <script src="{% static 'potter2/technique_inlines.js' %}"></script>     
+            <script>
+
+</script> 
+        {% endcompress %}       
+    </div>
+</body>
+</html>

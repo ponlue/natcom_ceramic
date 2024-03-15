@@ -97,7 +97,7 @@
                 <form id="" action="potter" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ potter_form.media }}
-                   {% for field in potter_form %}
+                    {% for field in potter_form %}
                         <div class="row mb-4">
                            <div class="col-md-12">
                                 {{ field.label_tag }}
