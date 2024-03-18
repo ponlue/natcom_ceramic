@@ -2,6 +2,7 @@ from django import forms
 from home.models import Potter, Image, TypePottery, TechniqueMakingPottery
 from django.forms.models import inlineformset_factory
 from django_recaptcha.fields import ReCaptchaField
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 
 
@@ -29,7 +30,7 @@ class PotterForm2(forms.ModelForm):
 
     started_date = forms.DateField(
         widget=forms.DateInput(attrs={'class': '', 'type': 'date'}),
-        label='ថ្ងៃចាប់ផ្ដើម / Stared date'
+        label='ថ្ងៃចាប់ផ្ដើម / Started date'
     )
 
     ended_date = forms.DateField(
@@ -109,7 +110,6 @@ class TechniqueMakingPotteryForm(forms.ModelForm):
 
         -   And for using in techniqe inline formset.
     """
-
     
     class Meta:
         model = TechniqueMakingPottery
@@ -120,7 +120,15 @@ class TechniqueMakingPotteryForm(forms.ModelForm):
             'image': 'រូបនៃការផលិត / Photo'
             
         }
+    
 
+    def __init__(self, *args, **kwargs):
+        super(TechniqueMakingPotteryForm, self).__init__(*args, **kwargs)
+
+        self.fields['description'].widget.attrs.update({
+            'resize': 'vertical',
+            'rows': 8
+        })
 
 TechniqueMakingPotteryFormSet = inlineformset_factory(
     Potter,

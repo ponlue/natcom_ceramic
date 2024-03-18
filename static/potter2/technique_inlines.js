@@ -23,9 +23,15 @@ document.addEventListener('DOMContentLoaded', function() {
             field.name = newName  // Update input name
         })
 
+        formTemplate.querySelectorAll('label').forEach(function(label) {
+            let newFor = label.getAttribute('for').replace(/-\d+-/, `-${formNum}-`)
+            label.setAttribute('for', newFor)  // Update label 'for' attribute
+            label.innerHTML = label.innerHTML.replace(/#\d+/g, `#${formNum}`) // Update label text
+        })
+
         container.appendChild(formTemplate)
 
         formNum++;  // Increment form number
-        totalForms.value = formNum;  // Update the total forms value forms value
+        totalForms.value = formNum;  // Update the total forms value
     }
 });
