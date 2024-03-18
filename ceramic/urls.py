@@ -8,6 +8,8 @@ urlpatterns = [
     path("", include("home.urls")),
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
     path('qr/', include("qrcode.urls")),
+    path('potter2/', include("potter2.urls")),
+
 
 ]
 

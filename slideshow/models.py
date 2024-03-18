@@ -10,7 +10,12 @@ class Category(models.Model):
     ]
     name = models.CharField(max_length=255, null=False, blank=False)
     description = models.TextField(null=True, blank=True)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default=1)
+
+
+    class Meta:
+        verbose_name = 'SlideShow Category'
+        verbose_name_plural = 'SlideShow Category'
 
     def __str__(self) -> str:
         return self.name
@@ -25,6 +30,9 @@ class SlideShow(models.Model):
     title = models.CharField(max_length=255, null=False, blank=False, default='No title')
     description = CKEditor5Field('Slideshow description', blank=True, null=True, config_name='extends')
 
+    class Meta:
+        verbose_name = 'SlideShow'
+        verbose_name_plural = 'SlideShow'
 
     def __str__(self) -> str:
         return self.title
