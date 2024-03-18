@@ -139,7 +139,7 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=True, null=True)
     youtube_url = models.URLField(default=None, blank=True, null=True)
 
-    describe = CKEditor5Field('Potter Description', config_name='default', default='', blank=True)
+    describe = CKEditor5Field('ពិពណ៌នា / Description:', config_name='default', default='', blank=True)
 
     class Meta:
         verbose_name = 'ស្មូន / Potter'

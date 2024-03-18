@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" oncontextmenu="return false">
         <div class="header-logo" style="text-align: center;">
             <img src="{% static 'img/potter_logo/logo-2.png' %}" alt="" width="80px">
             <img src="{% static 'img/potter_logo/logo-7.png' %}" alt="" width="140px">
@@ -114,7 +114,7 @@
 
                 <div class="section-title">II. របៀបនៃការផលិត / Technique</div>
                 <!-- Technique Making Pottery formset -->
-                <!-- <input type="hidden" name="potter-TOTAL_FORMS" value="" id="id_potter-TOTAL_FORMS" autocomplete="off">
+                {{ technique_making_pottery_formset.management_form }}
                 <div id="technique-form-container">
                     {% for technique_form in technique_making_pottery_formset %}
                         <div class="technique-form">
@@ -125,7 +125,7 @@
                 <div class="technique-form-actions">
                     <a class="plus-formset-btn-icon">&#x2B;</a>
                     <a id="add-technique-form-btn" class="add-form-btn">បន្ថែមរបៀបផលិត / Add another step</a>
-                </div> -->
+                </div>
                 <!-- End Technique Making Pottery formset -->
 
                 <br>

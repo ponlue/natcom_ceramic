@@ -41,9 +41,8 @@ class PotterForm2(forms.ModelForm):
     type_of_pottery = forms.ModelMultipleChoiceField(
         queryset=TypePottery.objects.all(),
         widget=forms.CheckboxSelectMultiple(),
-        label='ប្រភេទកុលាភាជន៍ / Type of pottery'
+        label='ប្រភេទកុលាភាជន៍ / Type of pottery',
     )
-
 
 
     def __init__(self, *args, **kwargs):
@@ -63,6 +62,11 @@ class PotterForm2(forms.ModelForm):
 
         self.fields['type_of_pottery'].widget.attrs.update({
             'multiple': True
+        })
+
+        self.fields['describe'].widget.attrs.update({
+            'resize': 'vertical',
+            'rows': 8
         })
 
 
