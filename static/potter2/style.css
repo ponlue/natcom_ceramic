@@ -79,3 +79,11 @@ input[type='submit']:focus {
     padding: 10px;
     margin-bottom: 5px;
 }
+
+.form-wrapper .messages .success {
+    background: #cbf0c2;
+    padding: 13px;
+    color: #000;
+    list-style: none;
+    margin-bottom: 10px;
+}

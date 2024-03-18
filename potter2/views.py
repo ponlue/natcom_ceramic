@@ -9,32 +9,33 @@ from django.contrib import messages
 def potter2(request):
 
     if request.method == 'POST':
-        print(request.POST)
         potter2_form = PotterForm2(request.POST)
-        # image_formset = ImageFormSet(request.POST, request.FILES, instance=Potter())
-        # technique_making_pottery_form = TechniqueMakingPotteryFormSet(request.POST, request.FILES, instance=Potter())
+        image_formset = ImageFormSet(request.POST, request.FILES, instance=Potter())
         recaptcha_form = RecaptchaForm(request.POST)
 
-        if potter2_form.is_valid() and recaptcha_form.is_valid():
-            print(potter2_form)
-            potter2_form.save()
+        if potter2_form.is_valid() and image_formset.is_valid() and recaptcha_form.is_valid():
+            p_instance = potter2_form.save()
+            image_formset.instance = p_instance 
+            image_formset.save()
+       
             if HttpResponse.status_code == 200:
-                    return redirect('/success-submitted')
-            else:
-                messages.error(
-                        request, 
-                        'An errors occured while submit the potter application'
+                messages.success(
+                    request,
+                    'ព័ត៍មានបានរក្សាទុកបានជោគជ័យ / Data have been saved successfully!'
                 )
+                return redirect('/potter2/')
 
+        else:
+            potter2_form = PotterForm2()
+            image_formset = ImageFormSet(instance=Potter())
+            recaptcha_form = RecaptchaForm()
     else:
         potter2_form = PotterForm2()
-        # image_formset = ImageFormSet(instance=Potter())
-        # technique_making_pottery_formset = TechniqueMakingPotteryFormSet(instance=Potter())
+        image_formset = ImageFormSet(instance=Potter())
         recaptcha_form = RecaptchaForm()
-
     context = {
         'potter2_form': potter2_form,
-        # 'image_formset': image_formset,
+        'image_formset': image_formset,
         # 'technique_making_pottery_formset': technique_making_pottery_formset,
         'recaptcha_form': recaptcha_form
 

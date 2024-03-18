@@ -45,8 +45,21 @@
         </div>
         <br>
         <div class="form-wrapper">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
             <form method="post" enctype="multipart/form-data" action="/potter2/">
                 {% csrf_token %}
+                <!-- {{ potter2_form.media }} -->
+
                 
                 {% for field in potter2_form %}
                     {{ field.label_tag }}
@@ -83,8 +96,7 @@
 
 
                 <!-- ImageFormset -->
-                <!-- <input type="hidden" name="form-TOTAL_FORMS" id="id_form-TOTAL_FORMS" value="{{ formset.total_forms }}">
-                {{ formset.management_form }}
+                {{ image_formset.management_form }}
                 <div id="image-form-container">
                     {% for image_form in image_formset %}
                         <div class="image-form">
@@ -95,7 +107,7 @@
                 <div class="image-form-actions">
                     <a class="plus-formset-btn-icon">&#x2B;</a>
                     <a id="add-image-form-btn" class="add-form-btn">បន្ថែមរូបស្មូន / Add another potter image</a>
-                </div> -->
+                </div>
                 <!-- End ImageFormset-->
                 <br>
 
