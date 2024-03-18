@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from .models import *
 from django.utils.safestring import mark_safe
@@ -78,9 +79,23 @@ class ImageAdmin(admin.ModelAdmin):
     ]
 
 
+class PotterAdminForm(forms.ModelForm):
+    class Meta:
+        model = Potter
+        fields = '__all__'
+    
+    type_of_pottery = forms.ModelMultipleChoiceField(
+        queryset=TypePottery.objects.all(),
+        widget=forms.CheckboxSelectMultiple(),  # Customize the widget here
+        label='ប្រភេទកុលាភាជន៍ / Type of pottery'
+    )
+
+
+
 class PotterAdmin(admin.ModelAdmin):
     inlines = [PotterImageInline, TechniqueMakingPotteryInline]
     empty_value_display = 'No data'
+    form = PotterAdminForm
 
     fieldsets = [
         ('បញ្ជីសារពើភណ្ឌអ្នកផលិតកុលាលភាជន៍ក្នុងប្រទេសកម្ពុជា', {
@@ -142,9 +157,9 @@ class PotterAdmin(admin.ModelAdmin):
         'full_name',
         'gender', 
         'dob', 
+        'types_of_pottery',
         'amount_of_pottery',
         'inheritance',
-        'type_of_pottery',
         'province_of_address',
         'province_of_pob',
         'url_google_map',
@@ -155,6 +170,9 @@ class PotterAdmin(admin.ModelAdmin):
     search_fields = ("inventory_number", "full_name")
     list_display_links = ('id', 'inventory_number', 'full_name')
     list_per_page = 10
+
+    def types_of_pottery(self, obj):
+        return ", ".join([type.title for type in obj.type_of_pottery.all()])
 
 # class TechniqueCreatePottery(admin.ModelAdmin):
 #     list_display = ('potter_name', 'json_data')

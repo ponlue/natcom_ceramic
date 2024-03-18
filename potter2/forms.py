@@ -38,7 +38,7 @@ class PotterForm2(forms.ModelForm):
         label='ថ្ងៃបញ្ចប់/ Ended date'
     )
 
-    type_of_pottery = forms.ModelChoiceField(
+    type_of_pottery = forms.ModelMultipleChoiceField(
         queryset=TypePottery.objects.all(),
         widget=forms.CheckboxSelectMultiple(),
         label='ប្រភេទកុលាភាជន៍ / Type of pottery'
@@ -146,4 +146,4 @@ class RecaptchaForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['captcha'].label = "Please verify me!"
+        self.fields['captcha'].label = "Check to verify me!"

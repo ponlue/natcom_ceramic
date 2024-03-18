@@ -45,12 +45,21 @@
         </div>
         <br>
         <div class="form-wrapper">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" action="/potter2/">
                 {% csrf_token %}
                 
                 {% for field in potter2_form %}
                     {{ field.label_tag }}
                     {{ field }}
+
+
+                    {% if potter2_form.errors %}
+                        {% for error in field.errors %}
+                            <ul class="errorlist mt-3" style="color: rgba(196, 71, 71, 0.855);">
+                                <li>{{ error }}</li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
 
                     {% if field.name == 'created_at' %}
                         <div class="section-title">I. ព័ត៍មានទូទៅរបស់ស្មូន / General information</div>
@@ -74,7 +83,7 @@
 
 
                 <!-- ImageFormset -->
-                <input type="hidden" name="form-TOTAL_FORMS" id="id_form-TOTAL_FORMS" value="{{ formset.total_forms }}">
+                <!-- <input type="hidden" name="form-TOTAL_FORMS" id="id_form-TOTAL_FORMS" value="{{ formset.total_forms }}">
                 {{ formset.management_form }}
                 <div id="image-form-container">
                     {% for image_form in image_formset %}
@@ -86,14 +95,14 @@
                 <div class="image-form-actions">
                     <a class="plus-formset-btn-icon">&#x2B;</a>
                     <a id="add-image-form-btn" class="add-form-btn">បន្ថែមរូបស្មូន / Add another potter image</a>
-                </div>
+                </div> -->
                 <!-- End ImageFormset-->
                 <br>
 
 
                 <div class="section-title">II. របៀបនៃការផលិត / Technique</div>
                 <!-- Technique Making Pottery formset -->
-                <input type="hidden" name="potter-TOTAL_FORMS" value="" id="id_potter-TOTAL_FORMS" autocomplete="off">
+                <!-- <input type="hidden" name="potter-TOTAL_FORMS" value="" id="id_potter-TOTAL_FORMS" autocomplete="off">
                 <div id="technique-form-container">
                     {% for technique_form in technique_making_pottery_formset %}
                         <div class="technique-form">
@@ -104,7 +113,7 @@
                 <div class="technique-form-actions">
                     <a class="plus-formset-btn-icon">&#x2B;</a>
                     <a id="add-technique-form-btn" class="add-form-btn">បន្ថែមរបៀបផលិត / Add another step</a>
-                </div>
+                </div> -->
                 <!-- End Technique Making Pottery formset -->
 
                 <br>
