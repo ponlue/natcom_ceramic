@@ -2,5 +2,5 @@ from django.urls import path
 from facebook_live import views
 
 urlpatterns = [
-    path('', views.fb_live, name='fb-live')
+    path('', views.live, name='fb-live')
 ]
