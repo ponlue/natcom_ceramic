@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'slideshow',
     'qrcode',
     'potter2',
-    'compressor'
+    'compressor',
+    'facebook_live',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,98 @@
+{% load static %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCC | Facebook Live</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Content:wght@400;700&display=swap" rel="stylesheet">
+    
+    {% compress css %}
+    <style> 
+        * {
+            box-sizing: border-box;
+            font-family: "Content", system-ui;
+        }
+        .content-regular {
+            font-family: "Content", system-ui;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .content-bold {
+            font-family: "Content", system-ui;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .container .live-events-card {
+            width: 40%;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        .live-events-card {
+            margin-right: 5px;
+        }
+        .fb-embed-wrap {
+            width: 60%;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        hr {
+            border: 1px solid #ddd;
+        }
+        .container .live-events-card .card img {
+                width: 100%;
+                box-shadow: 0 0 10px #333333a0;
+                margin-top: 10px;
+        }
+        @media only screen and (max-width: 550px) {
+            .container {
+                display: block;
+            }
+            .container .live-events-card  {
+                width: 100%;
+                padding: 20px;
+                border: 1px solid #ddd;
+            }
+            .live-events-card {
+                margin-bottom: 5px;
+            }
+            .fb-embed-wrap {
+                width: 100%;
+                padding: 20px;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+    {% endcompress %}
+
+</head>
+<body>
+    <div class="container">
+        <div class="live-events-card">
+            <div class="card">
+                <h3>ព្រឹត្តិការណ៍  / Events</h3>
+                <hr>
+                <img src="{% static 'img/events/live-events-001.jpg' %}" alt="" width="100%">
+            </div>
+        </div>
+
+        <div class="fb-embed-wrap">
+            <h3>ការផ្សាយផ្ទាល់ / Facebook live</h3>
+            <hr>
+            <div class="fb-embed-wrapper">
+                <p>Ooops, Live currently unavailable.</p>
+            </div>
+           
+        </div>
+    </div>
+</body>
+</html>
