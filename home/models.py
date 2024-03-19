@@ -121,7 +121,7 @@ class Potter(models.Model):
     amount_of_pottery = models.PositiveIntegerField()
     inheritance = models.CharField(max_length=255, blank=False, null=True)
 
-    type_of_pottery = models.ForeignKey(TypePottery, on_delete=models.CASCADE, default=1)
+    type_of_pottery = models.ManyToManyField(TypePottery, default=1)
 
     province_of_pob = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='province_of_pob', null=True, blank=True)
     district_of_pob = models.ForeignKey(District, on_delete=models.CASCADE, related_name='district_of_pob', null=True, blank=True)
@@ -139,7 +139,7 @@ class Potter(models.Model):
     url_google_map = models.URLField(default=None, blank=True, null=True)
     youtube_url = models.URLField(default=None, blank=True, null=True)
 
-    describe = CKEditor5Field('Potter Description', config_name='default', default='', blank=True)
+    describe = CKEditor5Field('ពិពណ៌នា / Description:', config_name='default', default='', blank=True)
 
     class Meta:
         verbose_name = 'ស្មូន / Potter'

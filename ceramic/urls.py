@@ -9,8 +9,7 @@ urlpatterns = [
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
     path('qr/', include("qrcode.urls")),
     path('potter2/', include("potter2.urls")),
-
-
+    path('fb-live-embed/', include("facebook_live.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
