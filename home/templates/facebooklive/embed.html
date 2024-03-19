@@ -93,10 +93,15 @@
             <h3>ការផ្សាយផ្ទាល់ / Live</h3>
             <hr>
             <div class="fb-embed-wrapper">
-                {% if content.embed_code %}
+                {% if content %}
                     {{ content.embed_code|safe }}
-                    <h4>Description</h4>
-                    {{ content.description|safe }}
+                    <h5>Description</h5>
+                    <hr>
+                    {% if content.description %}
+                        {{ content.description|safe }}
+                    {% else %}
+                        <p>No description</p>
+                    {% endif %}
 
                 {% else %}
                     <p>Ooops, Live currently unavailable.</p>
