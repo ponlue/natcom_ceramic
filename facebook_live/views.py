@@ -4,6 +4,6 @@ from .models import EmbedLive
 
 
 @require_GET
-def live(request):
+def fb_live(request):
     content = EmbedLive.objects.filter(status='0').get
     return render(request, 'facebooklive/embed.html' , {'content': content})
