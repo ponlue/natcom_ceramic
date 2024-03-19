@@ -81,15 +81,24 @@
             <div class="card">
                 <h3>ព្រឹត្តិការណ៍  / Events</h3>
                 <hr>
-                <img src="{% static 'img/events/live-events-001.jpg' %}" alt="" width="100%">
+                {% if content.event_image %}
+                    <img src="/media/{{ content.event_image }}" alt="" width="100%">
+                {% else %}
+                    <p>No event image.</p>
+                {% endif%}
             </div>
         </div>
 
         <div class="fb-embed-wrap">
-            <h3>ការផ្សាយផ្ទាល់ / Facebook live</h3>
+            <h3>ការផ្សាយផ្ទាល់ / Live</h3>
             <hr>
             <div class="fb-embed-wrapper">
-                <p>Ooops, Live currently unavailable.</p>
+                {% if content.embed_code %}
+                    {{ content.embed_code|safe }}
+                {% else %}
+                    <p>Ooops, Live currently unavailable.</p>
+                {% endif%}
+
             </div>
            
         </div>
