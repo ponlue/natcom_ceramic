@@ -95,6 +95,9 @@
             <div class="fb-embed-wrapper">
                 {% if content.embed_code %}
                     {{ content.embed_code|safe }}
+                    <h4>Description</h4>
+                    {{ content.description|safe }}
+
                 {% else %}
                     <p>Ooops, Live currently unavailable.</p>
                 {% endif%}
