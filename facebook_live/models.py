@@ -11,7 +11,7 @@ class EmbedLive(models.Model):
     ]
     status = models.CharField(max_length=2, choices=STATUS_CHOICES)
     event_image = models.ImageField(upload_to='live-events', blank=True, null=True)
-    embed_code = models.TextField()
+    embed_code = models.TextField(blank=True, null=True)
     description = CKEditor5Field('Live Description', config_name='default', default='', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
