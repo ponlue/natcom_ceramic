@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from django.views.decorators.http import require_GET
+from .models import EmbedLive
 
-def fb_live(request):
-    return render(request, 'facebooklive/embed.html')
+
+@require_GET
+def live(request):
+    content = EmbedLive.objects.filter(status='0').get
+    return render(request, 'facebooklive/embed.html' , {'content': content})
