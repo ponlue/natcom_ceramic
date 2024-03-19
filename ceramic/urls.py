@@ -11,6 +11,8 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
     path('qr/', include("qrcode.urls")),
+    path('potter2/', include("potter2.urls")),
+    path('fb-live-embed/', include("facebook_live.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

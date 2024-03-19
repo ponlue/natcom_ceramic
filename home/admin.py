@@ -1,8 +1,9 @@
+from django import forms
 from django.contrib import admin
 from .models import *
 from django.utils.safestring import mark_safe
 
-admin.site.site_header = 'Ceramic Administration'
+admin.site.site_header = 'NATCOM-CERAMIC Admininstration'
 admin.site.index_title = 'Ceramic Features'
 
 class ProvinceImageInline(admin.TabularInline):
@@ -58,36 +59,68 @@ class ImageAdmin(admin.ModelAdmin):
     )
 
 
+class TechniqueMakingPotteryInline(admin.TabularInline):
+    model = TechniqueMakingPottery
+    extra = 1
+
+
 class PotterImageInline(admin.TabularInline):
     model = Image
+    extra = 1
+
 
 class ImageAdmin(admin.ModelAdmin):
     fieldsets = [
         ('រូបភាព / Photos', {
             'fields': (
+                'potter',
                 'image',
             ),
         }),
     ]
 
+
+class PotterAdminForm(forms.ModelForm):
+    class Meta:
+        model = Potter
+        fields = '__all__'
+    
+    type_of_pottery = forms.ModelMultipleChoiceField(
+        queryset=TypePottery.objects.all(),
+        widget=forms.CheckboxSelectMultiple(),  # Customize the widget here
+        label='ប្រភេទកុលាភាជន៍ / Type of pottery'
+    )
+
+
+
 class PotterAdmin(admin.ModelAdmin):
-    inlines = [PotterImageInline]
+    inlines = [PotterImageInline, TechniqueMakingPotteryInline]
+    empty_value_display = 'No data'
+    form = PotterAdminForm
 
     fieldsets = [
         ('បញ្ជីសារពើភណ្ឌអ្នកផលិតកុលាលភាជន៍ក្នុងប្រទេសកម្ពុជា', {
             'fields': ('inventory_number', 'created_at')
         }),
+        
         ('I.ព័ត៍មានទូទៅរបស់ស្មូន / General information', {
             'fields': (
                 'full_name', 
                 'gender', 
-                'dob', 
-                'duration', 
+                'dob',
                 'amount_of_pottery', 
                 'inheritance',
                 'type_of_pottery',
-            )
+            ),
         }),
+
+        ('រយៈពេលនៃការផលិតកុលាលភាជន៍ / Duration:', {
+            'fields': (
+                'started_date' ,
+                'ended_date' ,
+            ),
+        }),
+
         ('ទីកន្លែងកំណើត / Place of Birth', {
             'fields': (
                 'province_of_pob',
@@ -95,6 +128,8 @@ class PotterAdmin(admin.ModelAdmin):
                 'commune_of_pob',
                 'village_of_pob',
             ),
+            # 'classes': ('collapse',),
+
         }),
         ('លំនៅឋានបច្ចុបន្ន / Current Address', {
             'fields': (
@@ -103,6 +138,8 @@ class PotterAdmin(admin.ModelAdmin):
                 'commune_of_address',
                 'village_of_address',
             ),
+            # 'classes': ('collapse',),
+
         }),
         ('និយាមការផ្ទះ / Coordinate', {
             'fields': (
@@ -121,10 +158,9 @@ class PotterAdmin(admin.ModelAdmin):
         'full_name',
         'gender', 
         'dob', 
-        'duration',
+        'types_of_pottery',
         'amount_of_pottery',
         'inheritance',
-        'type_of_pottery',
         'province_of_address',
         'province_of_pob',
         'created_at',
@@ -133,16 +169,19 @@ class PotterAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'inventory_number', 'full_name')
     list_per_page = 10
 
-class TechniqueMakingPotteryAdmin(admin.ModelAdmin):
-    list_display = ('potter_name', 'json_data')
-    list_display_links = ('potter_name', 'json_data')
+    def types_of_pottery(self, obj):
+        return ", ".join([type.title for type in obj.type_of_pottery.all()])
 
-    def potter_name(self, potter_object):
-        return potter_object.potter.full_name
-    potter_name.short_description = 'Potter fullname'
+# class TechniqueCreatePottery(admin.ModelAdmin):
+#     list_display = ('potter_name', 'json_data')
+#     list_display_links = ('potter_name', 'json_data')
+
+#     def potter_name(self, potter_object):
+#         return potter_object.potter.full_name
+#     potter_name.short_description = 'Potter fullname'
 
 
-admin.site.register(TechniqueMakingPottery, TechniqueMakingPotteryAdmin)
+admin.site.register(TechniqueMakingPottery)
 admin.site.register(Province, ProvinceAdmin)
 class showCategoryAdmin(admin.ModelAdmin):
     fields = ['title','create_at','description']

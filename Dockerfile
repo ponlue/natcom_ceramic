@@ -16,6 +16,10 @@ RUN pip install pyqrcode
 RUN pip install pypng
 # 
 
+# start js and css compressor module
+RUN pip install django-compressor==4.4
+# end of js and css compressor module
+
 RUN apt-get update -y
 RUN apt install vim -y
 COPY . .

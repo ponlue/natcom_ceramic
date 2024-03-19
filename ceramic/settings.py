@@ -31,7 +31,10 @@ INSTALLED_APPS = [
     'django_ckeditor_5',
     'ckeditor_uploader',
     'slideshow',
-    'qrcode'
+    'qrcode',
+    'potter2',
+    'compressor',
+    'facebook_live',
 ]
 
 
@@ -78,9 +81,13 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'mysql.connector.django',
+<<<<<<< HEAD
         #'NAME': 'db_ceramic_testing',
         'NAME':'db_ceramic_production',
         'NAME': 'db_ceramic_production',
+=======
+        'NAME': 'db_sothatna_testing',
+>>>>>>> 35e2861950fa29a298796b7b95905009af42159b
         'USER': 'db_user_ceramic',
         'PASSWORD': 'C#293()239#@AbB',
         'HOST': 'database.krissna.com',
@@ -129,6 +136,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [ BASE_DIR / "static"]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 
 MEDIA_URL = '/media/'  # URL to serve media files
@@ -244,3 +253,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Django recaptcha key
 RECAPTCHA_PUBLIC_KEY = '6LcEu4UpAAAAAJSDaKbF2oNv66dbBQSmrQiJwu_o'
 RECAPTCHA_PRIVATE_KEY = '6LcEu4UpAAAAAM4yI9GVb-uzbl8DrmnfNyR2Ar9G'
+
+
+
+COMPRESS_ENABLED = True
+
+# Optionally, configure settings for JS minification
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
