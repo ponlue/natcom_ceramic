@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&family=Content:wght@400;700&display=swap" rel="stylesheet">
     
-    <title>New Potter Application</title>
+    <title>Potter Inventory</title>
 
     {% compress css %}
     <link rel="stylesheet" href="{% static 'potter2/style.css' %}">
@@ -58,9 +58,6 @@
 
             <form method="post" enctype="multipart/form-data" action="/potter2/">
                 {% csrf_token %}
-                <!-- {{ potter2_form.media }} -->
-
-                
                 {% for field in potter2_form %}
                     {{ field.label_tag }}
                     {{ field }}

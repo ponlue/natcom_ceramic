@@ -82,6 +82,7 @@
             }
         }
     </style>
+    <link href="{% static 'lb2/dist/css/lightbox.css' %}" rel="stylesheet" />
     {% endcompress %}
 
 </head>
@@ -117,12 +118,27 @@
                 <h3>ព្រឹត្តិការណ៍  / Events</h3>
                 <hr>
                 {% if content.event_image %}
-                    <img src="/media/{{ content.event_image }}" alt="" width="100%">
+                <a href="/media/{{ content.event_image }}" data-lightbox="image-1" data-title="Events Image Preview">
+                    <img src="/media/{{ content.event_image }}" alt="Events Image @KCC">
+                </a>
                 {% else %}
                     <p>No event image.</p>
-                {% endif%}
+                {% endif%}                
             </div>
         </div>
     </div>
+
+
+
+    {% compress js%}
+    <script src="{% static 'lb2/dist/js/lightbox-plus-jquery.js' %}"></script>
+    <script>
+        lightbox.option({
+          'resizeDuration': 200,
+          'wrapAround': true,
+          'fadeDuration': 200
+        })
+    </script>
+    {% endcompress%}
 </body>
 </html>
