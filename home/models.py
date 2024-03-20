@@ -22,7 +22,7 @@ class PotterPost(models.Model):
     body = RichTextUploadingField(blank=True, null=True)
     image = models.ImageField(upload_to='uploads/')
     create_at = models.DateTimeField(default=datetime.now)
-    description = models.CharField(null=True, blank=True, max_length=500)
+    youtube_url = models.URLField(blank=True)
 
     
     def post_photo(self):
