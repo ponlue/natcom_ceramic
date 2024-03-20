@@ -79,6 +79,9 @@
             }
             #sub-title-no-live {
                 font-size: 12px;
+            } 
+            p {
+                font-size: 14px;
             }
         }
     </style>
@@ -94,12 +97,12 @@
             <div class="fb-embed-wrapper">
                 {% if not content.embed_code == '' %}
                     {{ content.embed_code|safe }}
-                    <h5>Description</h5>
+                    <h4>ការពិពណ៌នា / Description</h4>
                     <hr>
                     {% if content.description %}
                         {{ content.description|safe }}
                     {% else %}
-                        <p>No description</p>
+                    <p>គ្មានការពិពណ៌នា / No description</p>
                     {% endif %}
 
                 {% else %}
@@ -108,8 +111,13 @@
                         <p id="sub-title-no-live">មិនទាន់មានការផ្សាយផ្ទាល់ / Live currently is unavailable!</p>
 
                    </div>
-
-
+                   <h4>ការពិពណ៌នា / Description</h4>
+                   <hr>
+                   {% if content.description %}
+                       {{ content.description|safe }}
+                   {% else %}
+                       <p class="desc">គ្មានការពិពណ៌នា / No description</p>
+                   {% endif %}
                 {% endif%}
             </div>
         </div>
