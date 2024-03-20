@@ -27,12 +27,6 @@ def potter2(request):
                     'ព័ត៍មានបានរក្សាទុកបានជោគជ័យ / Data have been saved successfully!'
                 )
                 return redirect('/potter2/')
-
-        else:
-            potter2_form = PotterForm2()
-            image_formset = ImageFormSet(instance=Potter())
-            technique_making_pottery_formset = TechniqueMakingPotteryFormSet(instance=Potter())
-            recaptcha_form = RecaptchaForm()
     else:
         potter2_form = PotterForm2()
         image_formset = ImageFormSet(instance=Potter())
