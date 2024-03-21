@@ -19,11 +19,10 @@ class Categories(models.Model):
 class PotterPost(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.CASCADE,null=True,blank=True)
     title = models.CharField(max_length=50, unique=True)
-    body = RichTextUploadingField(blank=True, null=True)
+    body = CKEditor5Field('Post Description', default=None, config_name='extends')
     image = models.ImageField(upload_to='uploads/')
     create_at = models.DateTimeField(default=datetime.now)
-    youtube_url = models.URLField(blank=True)
-
+    youtube_url = models.URLField(default=None, blank=True, null=True)
     
     def post_photo(self):
         return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
@@ -53,14 +52,11 @@ class Province(models.Model):
     google_map_url = models.TextField(blank=True, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
     description = CKEditor5Field('Province Description', config_name='default', default=None)
-
-    # testing
-    description = RichTextUploadingField(default=None, blank=False, null=True)
-    
     class Meta:
         verbose_name = 'Province'
         verbose_name_plural = "Province"
-
+        description = CKEditor5Field('Province Description', default=None, config_name='extends')
+    # description = RichTextUploadingField(default=None, blank=False, null=True)
     def __str__(self):
         return self.name
 
@@ -167,7 +163,7 @@ class Potter(models.Model):
 
     url_google_map = models.URLField(default=None, blank=False, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
-    describe = RichTextUploadingField('Potter Description', config_name='extends', default=None)
+    # describe = CKEditor5Field('Province Description', config_name='default', default=None, config_name='extends')
     #short_description = models.CharField(max_length=255, default=None, null=True, blank=True)
     url_google_map = models.URLField(default=None, blank=True, null=True)
     youtube_url = models.URLField(default=None, blank=True, null=True)

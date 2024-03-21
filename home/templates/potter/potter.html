@@ -68,9 +68,7 @@
         </div>
         <!-- Map-Province -->
         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            {% for province in province %}
-            <iframe src="{{ province.google_map_url }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            {% endfor %}
+            {{ province.google_map_url }}
         </div>
         <!-- Image-Province -->
         <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">

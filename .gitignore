@@ -5,4 +5,5 @@ home/migrations/*
 potter2/migrations/*
 qrcode/migrations/*
 slideshow/migrations/*
-
+.dockerignore
+media/*
