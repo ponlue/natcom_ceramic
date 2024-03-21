@@ -1,4 +1,8 @@
 *.pyc
 home/migrations/*
 .DS_Store
-home/migrations/
+home/migrations/*
+potter2/migrations/*
+qrcode/migrations/*
+slideshow/migrations/*
+

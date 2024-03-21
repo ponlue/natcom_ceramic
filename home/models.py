@@ -50,7 +50,7 @@ class TypePottery(models.Model):
 class Province(models.Model):
     name = models.CharField(max_length=255, unique=True)
     code = models.CharField(max_length=50, unique=True)
-    google_map_url = models.URLField()
+    google_map_url = models.TextField(blank=True, null=True)
     youtube_url = models.URLField(default=None, blank=False, null=True)
     description = CKEditor5Field('Province Description', config_name='default', default=None)
 
