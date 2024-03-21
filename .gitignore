@@ -1,2 +1,6 @@
 *.pyc
-home/migrations/
+home/migrations/*
+qrcode/migrations/*
+slideshow/migrations/*
+.dockerignore
+media/*
