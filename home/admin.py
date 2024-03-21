@@ -4,20 +4,15 @@ from django.utils.safestring import mark_safe
 
 admin.site.site_header = 'Ceramic Administration'
 admin.site.index_title = 'Ceramic Features'
-
 class ProvinceImageInline(admin.TabularInline):
     model = ProvinceImage
-
-
 class ProvinceAdmin(admin.ModelAdmin):
     inlines = [ProvinceImageInline]
-
     def display_images(self, obj):
         first_image = obj.provinceimage_set.first()
         if first_image:
             return mark_safe(f'<img src="{first_image.image.url}" width="80" height="80" />')
         return "No Image"
-
     display_images.short_description = 'Images'
 
     list_display = (
@@ -32,8 +27,6 @@ class ProvinceAdmin(admin.ModelAdmin):
 
 class ImageGalleryInline(admin.TabularInline):
     model = ImageGallery
-
-
 
 class ImageGalleryAdmin(admin.ModelAdmin):
     list_display = ('id', 'province_image_gallery', 'image')
@@ -157,10 +150,8 @@ class showPostAdmin(admin.ModelAdmin):
 
 admin.site.register(Categories, showCategoryAdmin)
 admin.site.register(PotterPost, showPostAdmin)
-
 admin.site.register(Potter, PotterAdmin)
 admin.site.register(Image, ImageAdmin)
-
 admin.site.register(TypePottery)
 admin.site.register(ProvinceImage, ProvinceImageAdmin)
 admin.site.register(ImageGallery, ImageGalleryAdmin)
