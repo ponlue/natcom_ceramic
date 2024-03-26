@@ -19,15 +19,21 @@
 
     {% compress css %}
     <link rel="stylesheet" href="{% static 'potter2/style.css' %}">
+ 
     {% endcompress %}
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Moul&display=swap');
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Content', sans-serif;
             font-size: 14px;
+        }
+        #inventory-pottery-title {
+            font-family: "Moul", serif !important;
+            text-align: center; font-size: 18px; color: #333238;
         }
     </style>
 </head>
@@ -39,7 +45,7 @@
             <img src="{% static 'img/potter_logo/waseda.png' %}" alt="" width="170px">
             <img src="{% static 'img/potter_logo/rufa_logo.png' %}" alt="" width="80px">
             <div class="title">
-                <h4 id="inventory-pottery-title" style="font-family: 'Moul' !important; text-align: center; font-size: 18px; color: #333238;">បញ្ជីសារពើភណ្ឌអ្នកផលិតកុលាលភាជន៍ក្នុងប្រទេសកម្ពុជា</h4>
+                <h4 id="inventory-pottery-title">បញ្ជីសារពើភណ្ឌអ្នកផលិតកុលាលភាជន៍ក្នុងប្រទេសកម្ពុជា</h4>
                 <p style="font-size: 14px; text-transform: uppercase; text-align: center; color: #333238;" class="mb-3">Inventory of Pottery Maker in Cambodia</p>
             </div>
         </div>

@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mo(&zi(59@72&aar-$-o&q7w%%!_om=ai(x3_daykmeqeu3jtt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com','natcom.krissna.com']
 
@@ -43,6 +43,8 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -82,16 +84,10 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'mysql.connector.django',
         'NAME': 'db_ceramic_production',
-        #'NAME': 'db_sothatna_testing',
         'USER': 'db_user_ceramic',
         'PASSWORD': 'C#293()239#@AbB',
         'HOST': 'database.krissna.com',
         'PORT': '211',
-        # 'NAME': 'ceramic_db',
-        # 'USER': 'nadotdev',
-        # 'PASSWORD': 'Tana@321',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': '3306',
     }
 }
 

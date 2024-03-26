@@ -10,6 +10,8 @@ RUN pip install django-multi-captcha-admin
 RUN pip install django-ckeditor
 RUN pip install django-recaptcha==4.0.0
 RUN pip install django-ckeditor-5
+RUN pip install whitenoise
+
 
 # QR code gerator module
 RUN pip install pyqrcode

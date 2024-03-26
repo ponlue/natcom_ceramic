@@ -55,7 +55,7 @@ class Province(models.Model):
     class Meta:
         verbose_name = 'Province'
         verbose_name_plural = "Province"
-        description = CKEditor5Field('Province Description', default=None, config_name='extends')
+        #description = CKEditor5Field('Province Description', default=None, config_name='extends')
     # description = RichTextUploadingField(default=None, blank=False, null=True)
     def __str__(self):
         return self.name
