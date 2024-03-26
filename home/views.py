@@ -15,6 +15,7 @@ from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 from home.forms import PotterForm, PotterForm, ImageForm, RecaptchaForm
 from home.models import *
+from slideshow.models import Image as SlideImage
 
 
 
@@ -37,6 +38,9 @@ def HomePageView(request):
         'potter_list':potter_list,
         'internal_list':internal_list,
         'external_list':external_list,
+        'upcoming_event':upcoming_event,
+        'event_slider':event_slider,
+        'slider':slider,
         })
 
 def PotterdetailView(request, id):
@@ -67,6 +71,7 @@ def all_Potter(request, id ):
     imgpotter_list = Image.objects.all()
     potter_b =Potter.objects.all().filter(id=id)
     province_image = ProvinceImage.objects.all().filter(province=id)
+    slider = ProvinceImage.objects.all().filter(province=id)
     return render(request, "potter/potter.html",{
         'province_list':province_list,
         'img_list':img_list,
@@ -76,6 +81,7 @@ def all_Potter(request, id ):
         'province':province,
         'province_image':province_image,
         'imgpotter_list':imgpotter_list,
+        'slider':slider,
         })
 
 def all_post(request, id):
