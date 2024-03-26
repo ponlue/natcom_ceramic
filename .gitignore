@@ -1,4 +1,5 @@
 *.pyc
+<<<<<<< HEAD
 home/migrations/*
 .DS_Store
 home/migrations/*
@@ -7,3 +8,6 @@ qrcode/migrations/*
 slideshow/migrations/*
 .dockerignore
 media/*
+=======
+home/migrations/
+>>>>>>> ceramic-post-test-v2

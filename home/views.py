@@ -24,6 +24,13 @@ def HomePageView(request):
     img_list = Image.objects.all()
     internal_list = PotterPost.objects.all().filter(category=1)
     external_list = PotterPost.objects.filter(category=2).all()
+    img_list = PotterPost.objects.all()
+    internal_list = PotterPost.objects.all().filter(category=1).order_by('-id')
+    external_list = PotterPost.objects.all().filter(category=2).order_by('-id')
+    upcoming_event = PotterPost.objects.filter(category=3).order_by('-id').first
+    slider = SlideImage.objects.all().filter(slideshow=6)[:5]
+    event_slider = SlideImage.objects.all().filter(slideshow=7)
+    print(slider)
     return render(request, "index.html", {
         'province_list':province_list,
         'img_list':img_list,
@@ -77,6 +84,8 @@ def all_post(request, id):
     img_list = Image.objects.all()
     internal_list = PotterPost.objects.all().filter(category=1)
     external_list = PotterPost.objects.all().filter(category=2)
+    internal_list = PotterPost.objects.all().filter(category=1).order_by('-id')
+    external_list = PotterPost.objects.all().filter(category=2).order_by('-id')
     post_list = get_object_or_404(PotterPost, id=id)
     return render(request, "post/postbody.html", {
         'province_list':province_list,

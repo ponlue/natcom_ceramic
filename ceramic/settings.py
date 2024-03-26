@@ -84,6 +84,7 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'mysql.connector.django',
         'NAME': 'db_ceramic_production',
+        #'NAME': 'db_ceramic_testing',
         'USER': 'db_user_ceramic',
         'PASSWORD': 'C#293()239#@AbB',
         'HOST': 'database.krissna.com',

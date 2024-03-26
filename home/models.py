@@ -141,8 +141,6 @@ class Potter(models.Model):
     # duration
     started_date = models.DateField(default=datetime.now)
     ended_date = models.DateField(default=datetime.now)
-
-
     amount_of_pottery = models.PositiveIntegerField()
     inheritance = models.CharField(max_length=255, blank=False, null=True)
 
