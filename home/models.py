@@ -125,7 +125,6 @@ class Potter(models.Model):
     full_name = models.CharField(max_length=255)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES)
     dob = models.DateField()
-    duration = models.CharField(max_length=255, blank=False, null=True)
     amount_of_pottery = models.PositiveIntegerField()
     inheritance = models.CharField(max_length=255, blank=False, null=True)
 
