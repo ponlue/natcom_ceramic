@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mo(&zi(59@72&aar-$-o&q7w%%!_om=ai(x3_daykmeqeu3jtt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'ceramic.krissna.com','natcom.krissna.com']
 

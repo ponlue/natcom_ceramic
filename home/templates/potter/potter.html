@@ -135,11 +135,11 @@
                                     </div>
                                     <button type="button" class="btn btn-primary"><a href="/potterdetail/{{ potter.id }}" class="text-decoration-none">ពត័មាន</a></button>
                                     <!-- Button trigger modal Image -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalImage">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalImage{{ potter.id }}">
                                         រូបភាព
                                     </button>
                                     <!-- Button trigger modal Video -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalVideo">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalVideo{{ potter.id }}">
                                         វីដេអូរ
                                     </button>
                                 </div> 
@@ -156,50 +156,48 @@
 </div>
 
 <!-- Modal​​ Image Potter -->
-<div class="modal fade" id="ModalImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+{% for potter in potter_list %}
+<div class="modal fade" id="ModalImage{{ potter.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Image</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         <div class="modal-body">
             <div class="row">
-                {% for image in imgpotter_list %}
+                {% for img in potter.image_set.all %}
                 <div class="col-6 col-md-4">
-                    <img src="{{ image.image.url }}" alt="">
+                    <img src="{{ img.image.url }}" alt="">
                 </div>
                 {% endfor %}
-              </div>
+            </div>
         </div>
     </div>
-    </div>
+</div>
 </div>
 <!-- End Modal​​ Image -->
 
 <!-- Modal​​ Video Potter -->
-<div class="modal fade" id="ModalVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="ModalVideo{{ potter.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Video</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Video</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <iframe width="560" height="315" src="{{ potter.youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
-        <div class="modal-body">
-            {% for video in potter_list %}
-            <iframe width="560" height="315" src="{{ video.youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            {% endfor %}
-        </div>
-    </div>
     </div>
 </div>
+</div>
+{% endfor %}
 <!-- End Modal​​ Video -->
-
-
 
 <footer id="footer" class="footer ">
 {% include 'footer/footer.html' %}
