@@ -13,6 +13,10 @@
 				margin-bottom: 0px !important;
 			}
 
+			.event-title-h2{
+				color: white;
+			}
+
 			.event-title-h2:hover{
 				color: dodgerblue;
 			}
@@ -34,9 +38,9 @@
 				-webkit-box-orient: vertical;
 				line-clamp: 3;
 				max-height: calc(1.2em * 6.6);
+				color: white !important;
 			}
 			a{
-				color: black;
 				text-decoration: none;
 			}
 			.date{
@@ -55,11 +59,13 @@
 				color: white;
 				font-weight: 500;
 				margin-top: 10px;
+				margin-bottom: 10px;
 				background: transparent;
 			}
 			.btn-detail-event-post:hover{
 				background:#02382f;
-				padding: 7px 28px;
+				font-size: larger;
+				font-weight: 700;
 			}
 			@media only screen and (max-width: 768px){
 				.text-description-5{
@@ -141,10 +147,8 @@
 						<div class="col-lg-8 col-md-12 col-12">
 							<div class="date" >{{ upcoming_event.create_at }}</div>
 							<h2 class="event-title-h2"><a href="post/{{ upcoming_event.id }}" class="text-decoration-none">{{ upcoming_event.title }}</a></h2>
-							<div class="text-description-5">
-								<p>
-									{{ upcoming_event.body | safe }}
-								</p>
+							<div class="text-description-5" style="color: white !important;">
+								{{ upcoming_event.body | safe }}
 							</div>
 							<button class="btn-detail-event-post">
 								<a href="post/{{ upcoming_event.id }}">Detail</a>

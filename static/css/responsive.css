@@ -151,7 +151,7 @@ Version:	1.1
 	top:0;
 	height:100%;
 	width:100%;
-	background:#fff;
+	background:none;
 	opacity:0.5;
 }
 .slider .single-slider h1 {
@@ -578,16 +578,6 @@ Version:	1.1
 }
 .slider .single-slider{
 	position:relative;
-}
-.slider .single-slider:before{
-	position:absolute;
-	content:"";
-	left:0;
-	top:0;
-	height:100%;
-	width:100%;
-	background:#fff;
-	opacity:0.5;
 }
 .slider .single-slider h1 {
 	font-size: 28px;
@@ -1066,16 +1056,6 @@ Version:	1.1
 }
 .slider .single-slider{
 	position:relative;
-}
-.slider .single-slider:before{
-	position:absolute;
-	content:"";
-	left:0;
-	top:0;
-	height:100%;
-	width:100%;
-	background:#fff;
-	opacity:0.5;
 }
 .slider .single-slider h1 {
 	font-size: 20px;
